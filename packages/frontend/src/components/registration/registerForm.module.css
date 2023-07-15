@@ -1,0 +1,11 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    min-width:320px;
+    max-width:500px;
+    width:100%;
+    background-color: aqua;
+}
