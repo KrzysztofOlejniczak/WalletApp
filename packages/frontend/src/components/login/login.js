@@ -1,9 +1,13 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 import css from "../registration/registerForm.module.css";
 import validationSchema from "../../validations/validateForm";
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
@@ -13,6 +17,15 @@ export const LoginForm = () => {
 
   const handleSubmit = (e) => {
     // e.preventDefault();
+    console.log(e);
+    const form = e.currentTarget;
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
   };
 
   return (
