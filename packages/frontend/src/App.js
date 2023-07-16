@@ -1,13 +1,19 @@
-import { LoginForm } from "./components/login/login";
-import { RegisterForm } from "./components/registration/registerForm";
+import Routing from "./routing";
+import React, { useEffect } from "react";
 
-function App() {
-  return (
-    <div>
-      <RegisterForm/>
-      <LoginForm />
-    </div>
-  );
-}
+import useAuth from "./hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { refreshUser } from "./redux/auth/operations";
+
+const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return <>{isRefreshing ? <b>Refreshing user...</b> : <Routing />}</>;
+};
 
 export default App;

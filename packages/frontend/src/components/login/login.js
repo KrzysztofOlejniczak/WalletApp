@@ -1,4 +1,5 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
+import { NavLink } from "react-router-dom";
 import css from "../registration/registerForm.module.css";
 import validationSchema from "../../validations/validateForm";
 
@@ -21,6 +22,7 @@ export const LoginForm = () => {
 
         return (
           <div>
+            <img className='' src='' alt='wallet icon'></img>
             <h1>Wallet</h1>
             <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
               <label htmlFor='email'>
@@ -43,10 +45,12 @@ export const LoginForm = () => {
                   placeholder='Password'
                   value={values.password}
                   autoComplete='off'
-                />{" "}
+                />
               </label>
-              <button type='submit'>Register</button>
-              <button type='button'>Login</button>
+              <button type='submit'>Login</button>
+              <NavLink className={css.link} to='/register'>
+                Register
+              </NavLink>
             </Form>
           </div>
         );
