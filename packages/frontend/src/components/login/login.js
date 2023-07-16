@@ -45,8 +45,8 @@ export const LoginForm = () => {
                   autoComplete='off'
                 />{" "}
               </label>
-              <button type='submit'>Register</button>
-              <button type='button'>Login</button>
+              <button type='submit'>Login</button>
+              <button type='button'>Register</button>
             </Form>
           </div>
         );
