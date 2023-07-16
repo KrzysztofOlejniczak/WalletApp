@@ -1,5 +1,13 @@
+import { LoginForm } from "./components/login/login";
+import { RegisterForm } from "./components/registration/registerForm";
+
 function App() {
-  return <div>Some test text</div>;
+  return (
+    <div>
+      <RegisterForm/>
+      <LoginForm />
+    </div>
+  );
 }
 
 export default App;

@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  width: 280px;
+  background-color: aqua;
+}
+
+.formError {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  width: inherit;
+  color: red;
+}
