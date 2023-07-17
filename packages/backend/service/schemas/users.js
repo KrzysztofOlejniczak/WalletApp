@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
-const bCrypt = require("bcryptjs");
+const mongoose = require('mongoose');
+const bCrypt = require('bcryptjs');
 
 const Schema = mongoose.Schema;
 
 const users = new Schema({
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, 'Email is required'],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, 'Password is required'],
   },
   name: {
     type: String,
-    required: [true, "Name is required"],
+    default: null,
   },
   token: {
     type: String,
@@ -35,6 +35,6 @@ users.methods.setToken = function (token) {
   this.token = token;
 };
 
-const User = mongoose.model("user", users);
+const User = mongoose.model('user', users);
 
 module.exports = User;

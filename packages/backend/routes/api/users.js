@@ -1,4 +1,6 @@
-const express = require("express");
+const express = require('express');
+const ctrlUsers = require('../../controller/users');
+
 const router = express.Router();
 
 /**
@@ -10,37 +12,66 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/users:
- *   get:
- *     summary: Pobierz listę użytkowników
- *     description: Pobiera listę wszystkich użytkowników.
+ * /api/users/signup:
+ *   post:
  *     tags:
  *       - Users
+ *     summary: Register new user
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: e-mail
+ *               password:
+ *                 type: string
+ *                 description: password
+ *               name:
+ *                 type: string
+ *                 description: name
+ *             example:
+ *               email: noreply@mail.com
+ *               password: UserPassword
+ *               name: John
+ *       required: true
  *     responses:
- *       200:
- *         description: Sukces
- *       500:
- *         description: Błąd serwera
+ *        '201':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  data:
+ *                    type: object
+ *                    properties:
+ *                      token:
+ *                        type: string
+ *                        description: JWT token
+ *                      user:
+ *                        type: object
+ *                        properties:
+ *                          email:
+ *                            type: string
+ *                            description: e-mail
+ *                          name:
+ *                            type: string
+ *                            description: name
+ *                example:
+ *                  data:
+ *                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                    user:
+ *                      email: noreply@mail.com
+ *                      name: John
+ *        '400':
+ *          description: Invalid input
+ *        '409':
+ *          description: Email in use
  */
 
-router.get("/", async (req, res, next) => {
-  res.json({ message: "template test message" });
-});
-
-router.get("/:contactId", async (req, res, next) => {
-  res.json({ message: "template 2test message" });
-});
-
-router.post("/", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
-
-router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
-
-router.put("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
+router.post('/signup', ctrlUsers.signup);
 
 module.exports = router;
