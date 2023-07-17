@@ -2,7 +2,7 @@ const User = require('../../service/schemas/users');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const secret = process.env.SECRET;
+const SECRET = process.env.SECRET;
 
 const validationUserSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -45,7 +45,7 @@ const signup = async (req, res, next) => {
           id: newUser.id,
         };
 
-        const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+        const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
         newUser.setToken(token);
 
         await newUser.save();
