@@ -1,8 +1,8 @@
 const User = require('../../service/schemas/users');
 const Joi = require('joi');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
-// const secret = process.env.SECRET;
+const secret = process.env.SECRET;
 
 const validationUserSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -12,6 +12,7 @@ const validationUserSchema = Joi.object({
       'password'
     )
     .required(),
+  name: Joi.string().min(1).max(12),
 });
 
 // const validationEmail = Joi.object({
@@ -34,7 +35,7 @@ const signup = async (req, res, next) => {
       const user = await User.findOne({ email });
       if (user) {
         return res.status(409).json({
-          status: 'Confilct',
+          status: 'Conflict',
           code: 409,
           message: 'Email in use',
           data: null,
@@ -43,15 +44,24 @@ const signup = async (req, res, next) => {
       try {
         const newUser = new User({ email, name });
         newUser.setPassword(password);
+
+        const payload = {
+          id: newUser.id,
+        };
+
+        const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+        newUser.setToken(token);
+
         await newUser.save();
 
         res.status(201).json({
           status: 'Created',
           code: 201,
           data: {
+            token: newUser.token,
             user: {
               email: newUser.email,
-              subscription: newUser.subscription,
+              name: newUser.name,
             },
           },
         });

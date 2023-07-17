@@ -25,6 +25,6 @@ const router = express.Router();
  *         description: Błąd serwera
  */
 
-router.post('/users/signup', ctrlUsers.signup);
+router.post('/signup', ctrlUsers.signup);
 
 module.exports = router;
