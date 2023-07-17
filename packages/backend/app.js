@@ -1,9 +1,22 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "WalletApp API",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/api/*.js"],
+};
 
 const app = express();
 
@@ -23,6 +36,8 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(express.json());
 
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerOptions)));
+
 app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
 
@@ -36,14 +51,12 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res
-    .status(500)
-    .json({
-      status: "Internal server error",
-      code: 500,
-      data: null,
-      message: err.message,
-    });
+  res.status(500).json({
+    status: "Internal server error",
+    code: 500,
+    data: null,
+    message: err.message,
+  });
 });
 
 module.exports = app;
