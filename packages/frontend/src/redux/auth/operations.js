@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = "https://wallet-app-backend-3z9p.onrender.com/api/";
 
 // Utility to add JWT
 const setAuthHeader = (token) => {
@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/wallet/register", credentials);
+      const res = await axios.post("/users/register", credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;
@@ -40,7 +40,7 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/wallet/login", credentials);
+      const res = await axios.post("/users/login", credentials);
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;

@@ -9,8 +9,8 @@ const LoginPage = lazy(() => import("./pages/login/loginPage"));
 const RegistrationPage = lazy(() =>
   import("./pages/registration/registrationPage")
 );
-const TransactionsPage = lazy(() =>
-  import("./pages/transactions/transactionsPage")
+const DashboardPage = lazy(() =>
+  import("./pages/dashboardPage/dashboardPage")
 );
 
 const Routing = () => {
@@ -22,7 +22,7 @@ const Routing = () => {
           path='/register'
           element={
             <RestrictedRoute
-              redirectTo='/transactions'
+              redirectTo='/home'
               component={<RegistrationPage />}
             />
           }
@@ -31,17 +31,17 @@ const Routing = () => {
           path='/login'
           element={
             <RestrictedRoute
-              redirectTo='/transactions'
+              redirectTo='/home'
               component={<LoginPage />}
             />
           }
         />
         <Route
-          path='/transactions'
+          path='/home'
           element={
             <PrivateRoute
               redirectTo='/login'
-              component={<TransactionsPage />}
+              component={<DashboardPage />}
             />
           }
         />
