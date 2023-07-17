@@ -1,8 +1,13 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 import css from "../registration/registerForm.module.css";
 import validationSchema from "../../validations/validateForm";
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
@@ -12,6 +17,15 @@ export const LoginForm = () => {
 
   const handleSubmit = (e) => {
     // e.preventDefault();
+    console.log(e);
+    const form = e.currentTarget;
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
   };
 
   return (
@@ -21,32 +35,35 @@ export const LoginForm = () => {
 
         return (
           <div>
+            <img className="" src="" alt="wallet icon"></img>
             <h1>Wallet</h1>
             <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
-              <label htmlFor='email'>
+              <label htmlFor="email">
                 <Field
-                  id='emailLog'
-                  name='email'
-                  type='email'
-                  placeholder='E-mail'
+                  id="emailLog"
+                  name="email"
+                  type="email"
+                  placeholder="E-mail"
                   value={values.email}
                 />
-                <ErrorMessage name='email'>
+                <ErrorMessage name="email">
                   {(error) => <p className={css.formError}>{error}</p>}
                 </ErrorMessage>
               </label>
-              <label htmlFor='password'>
+              <label htmlFor="password">
                 <Field
-                  id='passwordLog'
-                  name='password'
-                  type='password'
-                  placeholder='Password'
+                  id="passwordLog"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
                   value={values.password}
-                  autoComplete='off'
-                />{" "}
+                  autoComplete="off"
+                />
               </label>
-              <button type='submit'>Login</button>
-              <button type='button'>Register</button>
+              <button type="submit">Login</button>
+              <NavLink className={css.link} to="/register">
+                Register
+              </NavLink>
             </Form>
           </div>
         );
