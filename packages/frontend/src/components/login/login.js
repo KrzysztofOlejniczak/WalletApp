@@ -35,33 +35,33 @@ export const LoginForm = () => {
 
         return (
           <div>
-            <img className='' src='' alt='wallet icon'></img>
+            <img className="" src="" alt="wallet icon"></img>
             <h1>Wallet</h1>
             <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
-              <label htmlFor='email'>
+              <label htmlFor="email">
                 <Field
-                  id='emailLog'
-                  name='email'
-                  type='email'
-                  placeholder='E-mail'
+                  id="emailLog"
+                  name="email"
+                  type="email"
+                  placeholder="E-mail"
                   value={values.email}
                 />
-                <ErrorMessage name='email'>
+                <ErrorMessage name="email">
                   {(error) => <p className={css.formError}>{error}</p>}
                 </ErrorMessage>
               </label>
-              <label htmlFor='password'>
+              <label htmlFor="password">
                 <Field
-                  id='passwordLog'
-                  name='password'
-                  type='password'
-                  placeholder='Password'
+                  id="passwordLog"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
                   value={values.password}
-                  autoComplete='off'
+                  autoComplete="off"
                 />
               </label>
-              <button type='submit'>Login</button>
-              <NavLink className={css.link} to='/register'>
+              <button type="submit">Login</button>
+              <NavLink className={css.link} to="/register">
                 Register
               </NavLink>
             </Form>
