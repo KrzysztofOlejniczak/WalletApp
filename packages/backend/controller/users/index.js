@@ -15,10 +15,6 @@ const validationUserSchema = Joi.object({
   name: Joi.string().min(1).max(12),
 });
 
-// const validationEmail = Joi.object({
-//   email: Joi.string().email().required(),
-// });
-
 const signup = async (req, res, next) => {
   const { email, password, name } = req.body;
 
