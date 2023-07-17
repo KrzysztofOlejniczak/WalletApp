@@ -1,4 +1,6 @@
-const express = require("express");
+const express = require('express');
+const ctrlUsers = require('../../controller/users');
+
 const router = express.Router();
 
 /**
@@ -23,24 +25,6 @@ const router = express.Router();
  *         description: Błąd serwera
  */
 
-router.get("/", async (req, res, next) => {
-  res.json({ message: "template test message" });
-});
-
-router.get("/:contactId", async (req, res, next) => {
-  res.json({ message: "template 2test message" });
-});
-
-router.post("/", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
-
-router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
-
-router.put("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
+router.post('/users/signup', ctrlUsers.signup);
 
 module.exports = router;
