@@ -24,8 +24,8 @@ const signup = async (req, res, next) => {
       return res.status(400).json({
         status: 'Bad request',
         code: 400,
-        message: error.message,
         data: null,
+        message: error.message,
       });
     } else {
       const user = await User.findOne({ email });
@@ -33,8 +33,8 @@ const signup = async (req, res, next) => {
         return res.status(409).json({
           status: 'Conflict',
           code: 409,
-          message: 'Email in use',
           data: null,
+          message: 'Email in use',
         });
       }
       try {
@@ -60,6 +60,7 @@ const signup = async (req, res, next) => {
               name: newUser.name,
             },
           },
+          message: null,
         });
       } catch (error) {
         next(error);
