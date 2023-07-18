@@ -12,7 +12,7 @@ const validationUserSchema = Joi.object({
       'password'
     )
     .required(),
-  name: Joi.string().min(1).max(12),
+  name: Joi.string().min(1).max(12).allow(''),
 });
 
 const signup = async (req, res, next) => {
