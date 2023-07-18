@@ -1,25 +1,18 @@
 const User = require('../../service/schemas/users');
-const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const SECRET = process.env.SECRET;
+const {
+  validationUserRegisterSchema,
+  validationUserLoginSchema,
+} = require('../../validation');
 
-const validationUserSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string()
-    .pattern(
-      /^.*(?=.{6,12})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      'password'
-    )
-    .required(),
-  name: Joi.string().min(1).max(12).allow(''),
-});
+const SECRET = process.env.SECRET;
 
 const signup = async (req, res, next) => {
   const { email, password, name } = req.body;
 
   try {
-    const { error } = validationUserSchema.validate(req.body);
+    const { error } = validationUserRegisterSchema.validate(req.body);
     if (error) {
       return res.status(400).json({
         status: 'Bad request',
@@ -72,4 +65,54 @@ const signup = async (req, res, next) => {
   }
 };
 
-module.exports = { signup };
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const { error } = validationUserLoginSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        status: 'Bad request',
+        code: 400,
+        data: null,
+        message: error.message,
+      });
+    } else {
+      const user = await User.findOne({ email });
+
+      if (!user || !user.validPassword(password)) {
+        return res.status(401).json({
+          status: 'Unauthorized',
+          code: 401,
+          data: null,
+          message: 'Wrong email or password',
+        });
+      }
+
+      const payload = {
+        id: user.id,
+      };
+      const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
+
+      user.setToken(token);
+      await user.save();
+
+      res.status(200).json({
+        status: 'Success',
+        code: 200,
+        data: {
+          token: user.token,
+          user: {
+            email: user.email,
+            name: user.name,
+          },
+        },
+        message: null,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+module.exports = { signup, login };

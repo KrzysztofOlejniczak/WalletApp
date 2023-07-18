@@ -74,4 +74,64 @@ const router = express.Router();
 
 router.post('/signup', ctrlUsers.signup);
 
+/**
+ * @swagger
+ * /api/users/login:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Login user
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: e-mail
+ *               password:
+ *                 type: string
+ *                 description: password
+ *             example:
+ *               email: noreply@mail.com
+ *               password: UserPassword
+ *       required: true
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  data:
+ *                    type: object
+ *                    properties:
+ *                      token:
+ *                        type: string
+ *                        description: JWT token
+ *                      user:
+ *                        type: object
+ *                        properties:
+ *                          email:
+ *                            type: string
+ *                            description: e-mail
+ *                          name:
+ *                            type: string
+ *                            description: name
+ *                example:
+ *                  data:
+ *                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                    user:
+ *                      email: noreply@mail.com
+ *                      name: John
+ *        '400':
+ *          description: Invalid input
+ *        '401':
+ *          description: Wrong email or password
+ */
+
+router.post('/login', ctrlUsers.login);
+
 module.exports = router;
