@@ -24,15 +24,17 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
 
-if (process.env.NODE_ENV === 'production') {
-  const corsOptions = {
-    origin: 'https://wallet-app-goit.netlify.app',
-    optionsSuccessStatus: 200,
-  };
-  app.use(cors(corsOptions));
-} else {
-  app.use(cors());
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const corsOptions = {
+//     origin: 'https://wallet-app-goit.netlify.app',
+//     optionsSuccessStatus: 200,
+//   };
+//   app.use(cors(corsOptions));
+// } else {
+//   app.use(cors());
+// }
+
+app.use(cors());
 
 app.use(express.json());
 
