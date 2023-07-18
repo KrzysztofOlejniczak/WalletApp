@@ -1,5 +1,6 @@
 const express = require('express');
 const ctrlUsers = require('../../controller/users');
+const auth = require('../../middleware/auth');
 
 const router = express.Router();
 
@@ -70,6 +71,8 @@ const router = express.Router();
  *          description: Invalid input
  *        '409':
  *          description: Email in use
+ *        '500':
+ *          description: Internal server error
  */
 
 router.post('/signup', ctrlUsers.signup);
@@ -130,8 +133,36 @@ router.post('/signup', ctrlUsers.signup);
  *          description: Invalid input
  *        '401':
  *          description: Wrong email or password
+ *        '500':
+ *          description: Internal server error
  */
 
 router.post('/login', ctrlUsers.login);
+
+/**
+ * @swagger
+ * /api/users/logout:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Logs out current logged in user session
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *     responses:
+ *        '204':
+ *          description: The user is logged out
+ *        '401':
+ *          description: Not authorized
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.post('/logout', auth, ctrlUsers.logout);
 
 module.exports = router;

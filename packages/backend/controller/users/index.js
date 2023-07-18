@@ -115,4 +115,23 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login };
+const logout = async (req, res, next) => {
+  const { _id } = req.user;
+  const user = await User.findOne({ _id });
+
+  if (!user) {
+    return res.status(401).json({
+      status: 'Unauthorized',
+      code: 401,
+      data: null,
+      message: 'Not authorized',
+    });
+  }
+
+  user.setToken(null);
+  await user.save();
+
+  return res.status(204).send();
+};
+
+module.exports = { signup, login, logout };
