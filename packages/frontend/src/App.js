@@ -1,29 +1,19 @@
-import { useState } from "react";
-import { LoginForm } from "./components/login/login";
-import { RegisterForm } from "./components/registration/registerForm";
-import { ButtonAddTransactions } from "./components/buttonAddTransactions/buttonAddTransactions";
-import { ModalAddTransaction } from "./components/modalAddTransaction/modalAddTransaction";
+import Routing from './routing';
+import React, { useEffect } from 'react';
 
-function App() {
-  // const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
-  //   useState(false);
+import useAuth from './hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from './redux/auth/operations';
 
-  return (
-    <div>
-      <RegisterForm />
-      <LoginForm />
-      {/* <ButtonAddTransactions
-        handleClick={() =>
-          setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
-        }
-      />
-      {isModalAddTransactionOpen && (
-        <ModalAddTransaction
-          closeModal={() => setIsModalAddTransactionOpen(false)}
-        />
-      )} */}
-    </div>
-  );
-}
+const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return <>{isRefreshing ? <b>Refreshing user...</b> : <Routing />}</>;
+};
 
 export default App;

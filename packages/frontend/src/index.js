@@ -1,14 +1,33 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "modern-normalize/modern-normalize.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './styles/styles';
+
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import 'modern-normalize/modern-normalize.css';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 
