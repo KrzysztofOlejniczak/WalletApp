@@ -132,6 +132,6 @@ router.post('/signup', ctrlUsers.signup);
  *          description: Wrong email or password
  */
 
-router.post('/users/login', ctrlUsers.login);
+router.post('/login', ctrlUsers.login);
 
 module.exports = router;
