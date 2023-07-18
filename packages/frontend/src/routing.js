@@ -1,11 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
+import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
 // import { PrivateRoute } from "./PrivateRoute";
 
 import { Layout } from './pages/layout/layout';
 import { HomeTab } from './components/homeTab/homeTab';
 import { DiagramTab } from './components/diagramTab/diagramTab';
+import { Currency } from './components/currency/currency.jsx';
 
 const LoginPage = lazy(() => import('./pages/login/loginPage'));
 const RegistrationPage = lazy(() =>
@@ -49,6 +51,18 @@ const Routing = () => {
           <Route index element={<DiagramTab />} />
         </Route>
 
+        <Route path="/currency" element={<DashboardPage />}>
+          <Route
+            index
+            element={
+              <Media query="(max-width: 767px)">
+                {(matches) =>
+                  matches ? <Currency /> : <Navigate to="/login" />
+                }
+              </Media>
+            }
+          />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
