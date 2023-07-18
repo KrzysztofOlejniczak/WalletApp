@@ -149,9 +149,11 @@ router.post('/login', ctrlUsers.login);
  *     parameters:
  *       - name: Authorization
  *         in: header
- *         description: JWT token in format 'Bearer <token>'
+ *         description: JWT token in format 'Bearer [token]'
  *         required: true
- *         type: string
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
  *     responses:
  *        '204':
  *          description: The user is logged out
