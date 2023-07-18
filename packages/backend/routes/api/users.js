@@ -71,6 +71,8 @@ const router = express.Router();
  *          description: Invalid input
  *        '409':
  *          description: Email in use
+ *        '500':
+ *          description: Internal server error
  */
 
 router.post('/signup', ctrlUsers.signup);
@@ -131,11 +133,33 @@ router.post('/signup', ctrlUsers.signup);
  *          description: Invalid input
  *        '401':
  *          description: Wrong email or password
+ *        '500':
+ *          description: Internal server error
  */
 
 router.post('/login', ctrlUsers.login);
 
-// swagger                  204 The user is logged out.       401 Not authorized        500 Server error
+/**
+ * @swagger
+ * /api/users/logout:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Logs out current logged in user session
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer <token>'
+ *         required: true
+ *         type: string
+ *     responses:
+ *        '204':
+ *          description: The user is logged out
+ *        '401':
+ *          description: Not authorized
+ *        '500':
+ *          description: Internal server error
+ */
 
 router.post('/logout', auth, ctrlUsers.logout);
 

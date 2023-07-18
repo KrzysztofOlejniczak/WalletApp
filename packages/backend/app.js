@@ -34,6 +34,8 @@ app.use(logger(formatsLogger));
 //   app.use(cors());
 // }
 
+require('./config/config-passport');
+
 app.use(cors());
 
 app.use(express.json());
