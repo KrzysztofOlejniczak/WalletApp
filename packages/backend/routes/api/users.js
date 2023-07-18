@@ -74,4 +74,8 @@ const router = express.Router();
 
 router.post('/signup', ctrlUsers.signup);
 
+// swagger
+
+router.post('/users/login', ctrlUsers.login);
+
 module.exports = router;
