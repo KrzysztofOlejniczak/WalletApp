@@ -5,14 +5,14 @@ import { ButtonAddTransactions } from "./components/buttonAddTransactions/button
 import { ModalAddTransaction } from "./components/modalAddTransaction/modalAddTransaction";
 
 function App() {
-  const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
-    useState(false);
+  // const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
+  //   useState(false);
 
   return (
     <div>
       <RegisterForm />
       <LoginForm />
-      <ButtonAddTransactions
+      {/* <ButtonAddTransactions
         handleClick={() =>
           setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
         }
@@ -21,7 +21,7 @@ function App() {
         <ModalAddTransaction
           closeModal={() => setIsModalAddTransactionOpen(false)}
         />
-      )}
+      )} */}
     </div>
   );
 }

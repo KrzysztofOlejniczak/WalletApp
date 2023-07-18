@@ -15,13 +15,17 @@ export const ModalAddTransaction = ({ closeModal }) => {
         <span>Income</span>
         <input
           type="checkbox"
+          id="transaction-type"
+          name="transaction-type"
           defaultChecked={isChecked}
           onClick={() => setIsChecked(!isChecked)}
         />
         <span>Expense</span>
       </div>
-      {isChecked ? <AddIncomeForm /> : <AddExpenseForm />}
-      <button onClick={closeModal}>Cancel</button>
+      <div>
+        {isChecked ? <AddIncomeForm /> : <AddExpenseForm />}
+        <button onClick={closeModal}>Cancel</button>
+      </div>
     </div>
   );
 };

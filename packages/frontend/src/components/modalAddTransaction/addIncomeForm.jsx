@@ -6,14 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 import incomeAddValidationSchema from "../../validations/validateAddIncome";
 
 export const AddIncomeForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const initialValues = {
     amount: 0.0,
     date: new Date(),
     comment: "",
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -22,7 +22,7 @@ export const AddIncomeForm = () => {
         initialValues={initialValues}
         validationSchema={incomeAddValidationSchema}
       >
-        {/* dodac walidacje i errorHandle z toastify */}
+        {/* dodac errorHandle z toastify */}
         {(props) => {
           const { values } = props;
           return (
@@ -34,7 +34,6 @@ export const AddIncomeForm = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 rowGap: "10px",
-                width: "280px",
               }}
             >
               <Field
@@ -45,11 +44,14 @@ export const AddIncomeForm = () => {
                 value={values.amount}
               />
               <Datetime
+                id="date"
+                name="date"
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
                 initialValue={values.date}
               />
               <Field
+                id="comment"
                 name="comment"
                 value={values.comment}
                 placeholder="Comment"
