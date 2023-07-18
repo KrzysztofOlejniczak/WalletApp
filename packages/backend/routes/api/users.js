@@ -1,5 +1,6 @@
 const express = require('express');
 const ctrlUsers = require('../../controller/users');
+const auth = require('../../middleware/auth');
 
 const router = express.Router();
 
@@ -133,5 +134,9 @@ router.post('/signup', ctrlUsers.signup);
  */
 
 router.post('/login', ctrlUsers.login);
+
+// swagger                  204 The user is logged out.       401 Not authorized        500 Server error
+
+router.post('/logout', auth, ctrlUsers.logout);
 
 module.exports = router;
