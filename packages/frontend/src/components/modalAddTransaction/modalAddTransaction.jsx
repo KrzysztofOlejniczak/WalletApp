@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AddExpenseForm } from "./addExpenseForm";
-import { AddIncomeForm } from "./addIncomeForm";
+import { AddExpenseForm } from "../addExpenseForm/addExpenseForm";
+import { AddIncomeForm } from "../addIncomeForm/addIncomeForm";
 import css from "./modalAddTransaction.module.css";
 
 export const ModalAddTransaction = ({ closeModal }) => {
