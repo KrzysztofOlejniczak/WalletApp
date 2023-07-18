@@ -1,25 +1,26 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Media from 'react-media';
+import { Box, Link } from '@mui/material';
 
 export const Navigation = () => {
   return (
-    <nav>
-      <NavLink to="/home" >
+    <Box component="nav" sx={{display: 'flex', gap: 2, flexWrap: 'wrap'}}>
+      <Link variant="nav" to="/home" component={NavLink}>
         Home
-      </NavLink>
-      <NavLink to="/diagram" >
+      </Link>
+      <Link variant="nav" to="/diagram" component={NavLink}>
         Statistics
-      </NavLink>
+      </Link>
       <Media query="(max-width: 767px)">
         {(matches) =>
           matches && (
-            <NavLink to="/currency">
+            <Link variant="nav" to="/currency" component={NavLink}>
               Currency
-            </NavLink>
+            </Link>
           )
         }
       </Media>
-    </nav>
+    </Box>
   );
 };

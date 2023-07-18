@@ -38,6 +38,8 @@ const Routing = () => {
         <Route
           path="/home"
           element={<DashboardPage />}
+          // uncomment when login will work
+          
           // element={
           //   <PrivateRoute
           //     redirectTo='/login'
