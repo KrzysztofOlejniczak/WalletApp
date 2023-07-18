@@ -3,21 +3,42 @@ import Datetime from "react-datetime";
 // import { ToastContainer, toast } from "react-toastify";
 import "react-datetime/css/react-datetime.css";
 import "react-toastify/dist/ReactToastify.css";
+import expenseAddValidationSchema from "../../validations/validateAddExpense";
 
-export const AddExpenseForm = ({ initialValues }) => {
+export const AddExpenseForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
+  const initialValues = {
+    amount: 0.0,
+    category: "",
+    date: new Date(),
+    comment: "",
+  };
+
   return (
     <>
-      <Formik initialValues={initialValues}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={expenseAddValidationSchema}
+      >
         {/* dodac walidacje i errorHandle z toastify */}
         {(props) => {
           const { values } = props;
           return (
-            <Form onSubmit={(e) => handleSubmit(e)}>
-              <Field as="select">
+            <Form
+              onSubmit={(e) => handleSubmit(e)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                rowGap: "10px",
+                width: "280px",
+              }}
+            >
+              <Field as="select" id="category" name="category">
                 <option value="main-expenses">Main expenses</option>
                 <option value="products">Products</option>
                 <option value="car">Car</option>
