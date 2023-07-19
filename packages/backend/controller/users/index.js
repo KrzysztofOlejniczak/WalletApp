@@ -15,18 +15,12 @@ const signup = async (req, res, next) => {
     const { error } = validationUserRegisterSchema.validate(req.body);
     if (error) {
       return res.status(400).json({
-        status: 'Bad request',
-        code: 400,
-        data: null,
         message: error.message,
       });
     } else {
       const user = await User.findOne({ email });
       if (user) {
         return res.status(409).json({
-          status: 'Conflict',
-          code: 409,
-          data: null,
           message: 'Email in use',
         });
       }
@@ -44,16 +38,11 @@ const signup = async (req, res, next) => {
         await newUser.save();
 
         res.status(201).json({
-          status: 'Created',
-          code: 201,
-          data: {
-            token: newUser.token,
-            user: {
-              email: newUser.email,
-              name: newUser.name,
-            },
+          token: newUser.token,
+          user: {
+            email: newUser.email,
+            name: newUser.name,
           },
-          message: null,
         });
       } catch (error) {
         next(error);
@@ -71,9 +60,6 @@ const login = async (req, res, next) => {
     const { error } = validationUserLoginSchema.validate(req.body);
     if (error) {
       return res.status(400).json({
-        status: 'Bad request',
-        code: 400,
-        data: null,
         message: error.message,
       });
     } else {
@@ -81,9 +67,6 @@ const login = async (req, res, next) => {
 
       if (!user || !user.validPassword(password)) {
         return res.status(401).json({
-          status: 'Unauthorized',
-          code: 401,
-          data: null,
           message: 'Wrong email or password',
         });
       }
@@ -97,16 +80,11 @@ const login = async (req, res, next) => {
       await user.save();
 
       res.status(200).json({
-        status: 'Success',
-        code: 200,
-        data: {
-          token: user.token,
-          user: {
-            email: user.email,
-            name: user.name,
-          },
+        token: user.token,
+        user: {
+          email: user.email,
+          name: user.name,
         },
-        message: null,
       });
     }
   } catch (e) {
@@ -121,9 +99,6 @@ const logout = async (req, res, next) => {
 
   if (!user) {
     return res.status(401).json({
-      status: 'Unauthorized',
-      code: 401,
-      data: null,
       message: 'Not authorized',
     });
   }
