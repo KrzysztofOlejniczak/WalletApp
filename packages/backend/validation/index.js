@@ -21,4 +21,28 @@ const validationUserLoginSchema = Joi.object({
     .required(),
 });
 
-module.exports = { validationUserRegisterSchema, validationUserLoginSchema };
+const validationTransactionCreateSchema = Joi.object({
+  type: Joi.string().valid('income', 'expense').required(),
+  amount: Joi.number().required(),
+  date: Joi.date().required(),
+  comment: Joi.string().required(),
+  category: Joi.string().valid(
+    'Income',
+    'Main expenses',
+    'Products',
+    'Car',
+    'Self care',
+    'Child care',
+    'Household products',
+    'Education',
+    'Leisure',
+    'Other expenses',
+    'Entertainment'
+  ),
+});
+
+module.exports = {
+  validationUserRegisterSchema,
+  validationUserLoginSchema,
+  validationTransactionCreateSchema,
+};

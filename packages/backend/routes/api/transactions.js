@@ -1,4 +1,7 @@
-const express = require("express");
+const express = require('express');
+const ctrlTransaction = require('../../controller/transactions');
+const auth = require('../../middleware/auth');
+
 const router = express.Router();
 
 /**
@@ -8,8 +11,6 @@ const router = express.Router();
  *     description: Endpoints related to transactions
  */
 
-router.get("/", async (req, res, next) => {
-  res.json({ message: "template test message" });
-});
+router.post('/', auth, ctrlTransaction.create);
 
 module.exports = router;
