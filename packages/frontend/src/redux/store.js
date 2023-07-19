@@ -27,17 +27,10 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
-// Persisting transactions and balance fields from finace slice to localstorage
-const financePersistConfig = {
-  key: 'finance',
-  storage,
-  whitelist: ['transactions', 'balance'], 
-};
-
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    finance: persistReducer(financePersistConfig, financeReducer),
+    finance: financeReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(middleware),
   devTools: process.env.NODE_ENV === 'development',
