@@ -51,9 +51,6 @@ app.use(
 
 app.use((req, res) => {
   res.status(404).json({
-    status: 'Not found',
-    code: 404,
-    data: null,
     message:
       'Not found. Please visit documentation at: https://wallet-app-backend-3z9p.onrender.com/docs',
   });
@@ -61,9 +58,6 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   res.status(500).json({
-    status: 'Internal server error',
-    code: 500,
-    data: null,
     message: err.message,
   });
 });
