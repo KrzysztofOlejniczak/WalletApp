@@ -46,27 +46,23 @@ const router = express.Router();
  *              schema:
  *                type: object
  *                properties:
- *                  data:
+ *                  token:
+ *                    type: string
+ *                    description: JWT token
+ *                  user:
  *                    type: object
  *                    properties:
- *                      token:
+ *                      email:
  *                        type: string
- *                        description: JWT token
- *                      user:
- *                        type: object
- *                        properties:
- *                          email:
- *                            type: string
- *                            description: e-mail
- *                          name:
- *                            type: string
- *                            description: name
+ *                        description: e-mail
+ *                      name:
+ *                        type: string
+ *                        description: name
  *                example:
- *                  data:
- *                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
- *                    user:
- *                      email: noreply@mail.com
- *                      name: John
+ *                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                  user:
+ *                    email: noreply@mail.com
+ *                    name: John
  *        '400':
  *          description: Invalid input
  *        '409':
@@ -108,27 +104,23 @@ router.post('/signup', ctrlUsers.signup);
  *              schema:
  *                type: object
  *                properties:
- *                  data:
+ *                  token:
+ *                    type: string
+ *                    description: JWT token
+ *                  user:
  *                    type: object
  *                    properties:
- *                      token:
+ *                      email:
  *                        type: string
- *                        description: JWT token
- *                      user:
- *                        type: object
- *                        properties:
- *                          email:
- *                            type: string
- *                            description: e-mail
- *                          name:
- *                            type: string
- *                            description: name
+ *                        description: e-mail
+ *                      name:
+ *                        type: string
+ *                        description: name
  *                example:
- *                  data:
- *                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
- *                    user:
- *                      email: noreply@mail.com
- *                      name: John
+ *                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                  user:
+ *                    email: noreply@mail.com
+ *                    name: John
  *        '400':
  *          description: Invalid input
  *        '401':
@@ -164,5 +156,49 @@ router.post('/login', ctrlUsers.login);
  */
 
 router.post('/logout', auth, ctrlUsers.logout);
+
+/**
+ * @swagger
+ * /api/users/current:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Get information about current user
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  user:
+ *                    type: object
+ *                    properties:
+ *                      email:
+ *                        type: string
+ *                        description: e-mail
+ *                      name:
+ *                        type: string
+ *                        description: name
+ *                example:
+ *                  user:
+ *                    email: noreply@mail.com
+ *                    name: John
+ *        '401':
+ *          description: Not authorized
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.get('/current', auth, ctrlUsers.getCurrent);
 
 module.exports = router;

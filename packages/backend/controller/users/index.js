@@ -109,4 +109,17 @@ const logout = async (req, res, next) => {
   return res.status(204).send();
 };
 
-module.exports = { signup, login, logout };
+const getCurrent = async (req, res, next) => {
+  try {
+    const user = req.user;
+    res.status(200).json({
+      user: {
+        email: user.email,
+        name: user.name,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = { signup, login, logout, getCurrent };
