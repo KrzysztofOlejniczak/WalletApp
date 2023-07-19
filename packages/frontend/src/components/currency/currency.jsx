@@ -3,20 +3,25 @@ import Loader from '../loader/loader';
 
 export const Currency = () => {
   const [currencies, setCurrencies] = useState([]);
-  const [filter, setFilter] = useState(['USD', 'EUR', "CHF", "GBP"]);
+  // const [filter, setFilter] = useState(['USD', 'EUR', "CHF", "GBP"]);
+  const filter = ['USD', 'EUR', 'CHF', 'GBP'];
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCurrenciesFromAPI() {
       try {
-        const lastCurrenciesRequestTime = localStorage.getItem('lastRequestTime');
+        const lastCurrenciesRequestTime =
+          localStorage.getItem('lastRequestTime');
         const currentTime = new Date().getTime();
 
         // const minus = currentTime - lastCurrenciesRequestTime
         // console.log(minus)
 
         // Check if less than an hour has passed since the last request
-        if (lastCurrenciesRequestTime && currentTime - lastCurrenciesRequestTime < 60 * 60 * 1000) {
+        if (
+          lastCurrenciesRequestTime &&
+          currentTime - lastCurrenciesRequestTime < 60 * 60 * 1000
+        ) {
           const cachedCurrencies = JSON.parse(
             localStorage.getItem('currencies')
           );
@@ -51,6 +56,7 @@ export const Currency = () => {
       .catch((error) => {
         console.error(error);
       });
+    // eslint-disable-next-line
   }, []);
 
   return (
