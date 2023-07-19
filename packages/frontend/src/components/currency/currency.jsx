@@ -13,9 +13,9 @@ export const Currency = () => {
         const currentTime = new Date().getTime();
 
         const minus = currentTime - lastCurrenciesRequestTime
-        console.log(minus)
+        // console.log(minus)
 
-        // Sprawdź, czy minęło mniej niż godzina od ostatniego żądania
+        // Check if less than an hour has passed since the last request
         if (lastCurrenciesRequestTime && currentTime - lastCurrenciesRequestTime < 60 * 60 * 1000) {
           const cachedCurrencies = JSON.parse(
             localStorage.getItem('currencies')
@@ -29,7 +29,7 @@ export const Currency = () => {
         const data = await response.json();
         const fetchedCurrencies = data[0].rates;
 
-        // Zapisz czas ostatniego żądania i odpowiedź w localStorage
+        // Store last request time and response in localStorage
         localStorage.setItem('lastCurrenciesRequestTime', currentTime);
         localStorage.setItem('currencies', JSON.stringify(fetchedCurrencies));
 
