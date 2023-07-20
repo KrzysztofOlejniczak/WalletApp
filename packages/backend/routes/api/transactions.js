@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/transactions:
+ * /api/finance/transactions:
  *   post:
  *     tags:
  *       - Transactions
