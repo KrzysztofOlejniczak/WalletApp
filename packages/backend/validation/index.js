@@ -21,4 +21,7 @@ const validationUserLoginSchema = Joi.object({
     .required(),
 });
 
-module.exports = { validationUserRegisterSchema, validationUserLoginSchema };
+module.exports = {
+  validationUserRegisterSchema,
+  validationUserLoginSchema,
+};
