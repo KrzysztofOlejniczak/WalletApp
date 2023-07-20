@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { startLoading, stopLoading } from '../global/slice';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -18,10 +19,13 @@ export const fetchTransactions = createAsyncThunk(
     }
 
     try {
+      thunkAPI.dispatch(startLoading());
       setAuthHeader(persistedToken);
       const res = await axios.get('/finance/transactions');
+      thunkAPI.dispatch(stopLoading());
       return res.data;
     } catch (error) {
+      thunkAPI.dispatch(stopLoading());
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -38,10 +42,13 @@ export const fetchBalance = createAsyncThunk(
     }
 
     try {
+      thunkAPI.dispatch(startLoading());
       setAuthHeader(persistedToken);
       const res = await axios.get('/finance/balance');
+      thunkAPI.dispatch(stopLoading());
       return res.data;
     } catch (error) {
+      thunkAPI.dispatch(stopLoading());
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -58,10 +65,13 @@ export const addTransaction = createAsyncThunk(
     }
 
     try {
+      thunkAPI.dispatch(startLoading());
       setAuthHeader(persistedToken);
       const res = await axios.post('/finance/transactions', transactionData);
+      thunkAPI.dispatch(stopLoading());
       return res.data;
     } catch (error) {
+      thunkAPI.dispatch(stopLoading());
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -78,10 +88,13 @@ export const deleteTransaction = createAsyncThunk(
     }
 
     try {
+      thunkAPI.dispatch(startLoading());
       setAuthHeader(persistedToken);
       await axios.delete(`/finance/transactions/${transactionId}`);
+      thunkAPI.dispatch(stopLoading());
       return transactionId;
     } catch (error) {
+      thunkAPI.dispatch(stopLoading());
       return thunkAPI.rejectWithValue(error.message);
     }
   }
