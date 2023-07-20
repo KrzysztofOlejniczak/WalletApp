@@ -2,10 +2,11 @@ import Routing from './routing';
 import React, { useEffect } from 'react';
 
 import useAuth from './hooks/useAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
-import {selectIsLoading} from './redux/global/selectors'
-import Loader from './components/loader/loader'
+// import {selectIsLoading} from './redux/global/selectors'
+// import Loader from './components/loader/loader'
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,9 +16,9 @@ const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  const isLoading = useSelector(selectIsLoading);
+  // const isLoading = useSelector(selectIsLoading);
 
-  return <>{isLoading ? <Loader /> : isRefreshing ? <b>Refreshing user...</b> : <Routing />}</>;
+  return <>{isRefreshing ? <b>Refreshing user...</b> : <Routing />}</>;
 };
 
 export default App;
