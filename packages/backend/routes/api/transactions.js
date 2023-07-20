@@ -94,6 +94,6 @@ const router = express.Router();
  *          description: Internal server error
  */
 
-router.post('/addTransaction', auth, ctrlTransaction.create);
+router.post('/transactions', auth, ctrlTransaction.create);
 
 module.exports = router;
