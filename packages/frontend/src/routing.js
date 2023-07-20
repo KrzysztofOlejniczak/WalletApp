@@ -1,19 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-// import { lazy } from 'react';
+import { lazy } from 'react';
 import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 
-// import { Layout } from './pages/layout/layout';
-import { HomeTab } from './components/homeTab/homeTab';
-import { DiagramTab } from './components/diagramTab/diagramTab';
-import { Currency } from './components/currency/currency.jsx';
-
 import LoginPage from './pages/login/loginPage';
-
 import RegistrationPage from './pages/registration/registrationPage';
+import DashboardPage from './pages/dashboard/dashboardPage';
 
-import DashboardPage from './pages/dashboardPage/dashboardPage';
+const HomeTab = lazy(() => import('./components/homeTab/homeTab'));
+const DiagramTab = lazy(() => import('./components/diagramTab/diagramTab'));
+const Currency = lazy(() => import('./components/currency/currency'));
+
 
 const Routing = () => {
   return (
