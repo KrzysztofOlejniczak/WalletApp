@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {logOut } from '../auth/operations';
-import { fetchTransactions, fetchBalance, addTransaction, deleteTransaction } from './operations.js';
+import { logOut } from '../auth/operations';
+import {
+  fetchTransactions,
+  fetchBalance,
+  addTransaction,
+  deleteTransaction,
+} from './operations.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -31,7 +36,7 @@ const financeSlice = createSlice({
       .addCase(fetchBalance.pending, handlePending)
       .addCase(fetchBalance.rejected, handleRejected)
       .addCase(fetchBalance.fulfilled, (state, action) => {
-        state.balance = action.payload;
+        state.balance = action.payload.balance;
         state.loading = false;
         state.error = null;
       })

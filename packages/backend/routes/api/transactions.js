@@ -96,4 +96,40 @@ const router = express.Router();
 
 router.post('/transactions', auth, ctrlTransaction.create);
 
+/**
+ * @swagger
+ * /api/finance/balance:
+ *   get:
+ *     tags:
+ *       - Transactions
+ *     summary: Get users balance
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  balance:
+ *                    type: Number
+ *                    description: Balance uf user
+ *                example:
+ *                  balance: 1500
+ *        '401':
+ *          description: Not authorized
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.get('/balance', auth, ctrlTransaction.getBalance);
+
 module.exports = router;

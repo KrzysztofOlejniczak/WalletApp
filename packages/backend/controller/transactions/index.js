@@ -29,4 +29,25 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { create };
+const getBalance = async (req, res, next) => {
+  const owner = req.user._id;
+  let balance = 0;
+  try {
+    const transactions = await Transaction.find({ owner });
+
+    transactions.forEach((el) => {
+      if (el.isExpense) {
+        balance = balance - el.amount;
+      } else {
+        balance = balance + el.amount;
+      }
+    });
+
+    res.status(200).json({ balance });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+module.exports = { create, getBalance };
