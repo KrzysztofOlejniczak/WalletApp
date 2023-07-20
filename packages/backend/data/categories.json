@@ -1,0 +1,13 @@
+[
+  { "id": 1, "name": "Income" },
+  { "id": 2, "name": "Main expenses" },
+  { "id": 3, "name": "Products" },
+  { "id": 4, "name": "Car" },
+  { "id": 5, "name": "Self care" },
+  { "id": 6, "name": "Child care" },
+  { "id": 7, "name": "Household products" },
+  { "id": 8, "name": "Education" },
+  { "id": 9, "name": "Leisure" },
+  { "id": 10, "name": "Other expenses" },
+  { "id": 11, "name": "Entertainment" }
+]

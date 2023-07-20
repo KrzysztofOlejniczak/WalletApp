@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const categories = require('../../data/categories.json');
+const categoriesName = categories.map((item) => item.name);
 
 const transactions = new Schema({
-  type: {
-    type: String,
-    enum: ['income', 'expense'],
-    required: [true, 'Type is required'],
+  isExpense: {
+    type: Boolean,
+    required: [true, 'isExpense is required'],
   },
   amount: {
     type: Number,
@@ -17,23 +18,11 @@ const transactions = new Schema({
   },
   comment: {
     type: String,
-    required: [true, 'Comment is required'],
   },
   category: {
     type: String,
-    enum: [
-      'Income',
-      'Main expenses',
-      'Products',
-      'Car',
-      'Self care',
-      'Child care',
-      'Household products',
-      'Education',
-      'Leisure',
-      'Other expenses',
-      'Entertainment',
-    ],
+    enum: categoriesName,
+    required: [true, 'Category is required'],
     default: 'Income',
   },
   owner: {
