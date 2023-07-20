@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
-// import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 import LoginPage from './pages/login/loginPage';
 import RegistrationPage from './pages/registration/registrationPage';
@@ -36,10 +36,9 @@ const Routing = () => {
       />
       <Route
         path="/home"
-        element={<DashboardPage />}
-        // element={
-        //   <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
-        // }
+        element={
+          <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
+        }
       >
         <Route index element={<HomeTab />} />
       </Route>
