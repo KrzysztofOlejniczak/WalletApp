@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/transactions:
+ * /api/finance/transactions:
  *   post:
  *     tags:
  *       - Transactions
@@ -98,11 +98,11 @@ router.post('/transactions', auth, ctrlTransaction.create);
 
 /**
  * @swagger
- * /api/transactions:
- *   post:
+ * /api/finance/balance:
+ *   get:
  *     tags:
  *       - Transactions
- *     summary: Add transaction to database
+ *     summary: Get users balance
  *     parameters:
  *       - name: Authorization
  *         in: header
@@ -111,68 +111,19 @@ router.post('/transactions', auth, ctrlTransaction.create);
  *         schema:
  *           type: string
  *           default: Bearer [token]
- *     requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isExpense:
- *                 type: Boolean
- *                 description: Is transaction is expense?
- *               amount:
- *                 type: Number
- *                 description: Amount of transaction
- *               date:
- *                 type: Date
- *                 description: Date of transaction
- *               comment:
- *                 type: String
- *                 description: comment
- *               category:
- *                 type: String
- *                 description: category of transaction
- *                 default: Income
- *             example:
- *               isExpense: true
- *               amount: 250
- *               date: 2023-07-01
- *               comment: Fuel
- *               category: Car
- *       required: true
  *     responses:
- *        '201':
+ *        '200':
  *          description: Successful operation
  *          content:
  *            application/json:
  *              schema:
  *                type: object
  *                properties:
- *                  _id:
- *                   type: String
- *                   description: ID of transaction
- *                  isExpense:
- *                    type: Boolean
- *                    description: Is transaction is expense?
- *                  amount:
+ *                  balance:
  *                    type: Number
- *                    description: Amount of transaction
- *                  date:
- *                    type: Date
- *                    description: Date of transaction
- *                  comment:
- *                    type: String
- *                    description: comment
- *                  category:
- *                    type: String
- *                    description: category of transaction
+ *                    description: Balance uf user
  *                example:
- *                  _id: 64b8ec69e207d66b18d18cd6
- *                  isExpense: true
- *                  amount: 250
- *                  date: 2023-07-01
- *                  comment: Fuel
- *                  category: Car
+ *                  balance: 1500
  *        '401':
  *          description: Not authorized
  *        '500':
