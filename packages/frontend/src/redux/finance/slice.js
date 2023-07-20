@@ -7,15 +7,6 @@ import {
   deleteTransaction,
 } from './operations.js';
 
-const handlePending = (state) => {
-  state.loading = true;
-};
-
-const handleRejected = (state, action) => {
-  state.loading = false;
-  state.error = action.payload;
-};
-
 const financeSlice = createSlice({
   name: 'finance',
   initialState: {
@@ -26,40 +17,51 @@ const financeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTransactions.pending, handlePending)
-      .addCase(fetchTransactions.rejected, handleRejected)
+      .addCase(fetchTransactions.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchTransactions.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.transactions = action.payload;
-        state.loading = false;
         state.error = null;
       })
-      .addCase(fetchBalance.pending, handlePending)
-      .addCase(fetchBalance.rejected, handleRejected)
+      .addCase(fetchBalance.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchBalance.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(fetchBalance.fulfilled, (state, action) => {
         state.balance = action.payload.balance;
-        state.loading = false;
         state.error = null;
       })
-      .addCase(addTransaction.pending, handlePending)
-      .addCase(addTransaction.rejected, handleRejected)
+      .addCase(addTransaction.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(addTransaction.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.transactions.push(action.payload);
-        state.loading = false;
         state.error = null;
       })
-      .addCase(deleteTransaction.pending, handlePending)
-      .addCase(deleteTransaction.rejected, handleRejected)
+      .addCase(deleteTransaction.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(deleteTransaction.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
           (transaction) => transaction.id !== action.payload.id
         );
-        state.loading = false;
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.transactions = [];
         state.balance = null;
-        state.loading = false;
         state.error = null;
       });
   },

@@ -4,63 +4,60 @@ import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 
-import { Layout } from './pages/layout/layout';
-import { HomeTab } from './components/homeTab/homeTab';
-import { DiagramTab } from './components/diagramTab/diagramTab';
-import { Currency } from './components/currency/currency.jsx';
+import LoginPage from './pages/login/loginPage';
+import RegistrationPage from './pages/registration/registrationPage';
+import DashboardPage from './pages/dashboard/dashboardPage';
 
-const LoginPage = lazy(() => import('./pages/login/loginPage'));
-const RegistrationPage = lazy(() =>
-  import('./pages/registration/registrationPage')
-);
-const DashboardPage = lazy(() => import('./pages/dashboardPage/dashboardPage'));
+const HomeTab = lazy(() => import('./components/homeTab/homeTab'));
+const DiagramTab = lazy(() => import('./components/diagramTab/diagramTab'));
+const Currency = lazy(() => import('./components/currency/currency'));
+
 
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<LoginPage />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/home"
-              component={<RegistrationPage />}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
-          }
-        >
-          <Route index element={<HomeTab />} />
-        </Route>
-        <Route path="/diagram" element={<DashboardPage />}>
-          <Route index element={<DiagramTab />} />
-        </Route>
-
-        <Route path="/currency" element={<DashboardPage />}>
-          <Route
-            index
-            element={
-              <Media query="(max-width: 767px)">
-                {(matches) =>
-                  matches ? <Currency /> : <Navigate to="/login" />
-                }
-              </Media>
-            }
-          />
-        </Route>
+      <Route path="/" element={<Navigate to="/home" />}>
+        <Route index element={<DashboardPage />} />
       </Route>
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route
+        path="/register"
+        element={
+          <RestrictedRoute
+            redirectTo="/home"
+            component={<RegistrationPage />}
+          />
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
+        }
+      >
+        <Route index element={<HomeTab />} />
+      </Route>
+      <Route path="/diagram" element={<DashboardPage />}>
+        <Route index element={<DiagramTab />} />
+      </Route>
+
+      <Route path="/currency" element={<DashboardPage />}>
+        <Route
+          index
+          element={
+            <Media query="(max-width: 767px)">
+              {(matches) => (matches ? <Currency /> : <Navigate to="/login" />)}
+            </Media>
+          }
+        />
+      </Route>
+
+      <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
   );
 };
