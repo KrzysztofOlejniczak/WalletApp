@@ -132,4 +132,38 @@ router.post('/transactions', auth, ctrlTransaction.create);
 
 router.get('/balance', auth, ctrlTransaction.getBalance);
 
+/**
+ * @swagger
+ * /api/finance/category:
+ *   get:
+ *     tags:
+ *       - Transactions
+ *     summary: Get list of transactions category
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: Number
+ *                      description: id of category
+ *                    name:
+ *                      type: string
+ *                      description: name of category
+ *                example:
+ *                  - id: 1
+ *                    name: Income
+ *                  - id: 2
+ *                    name: Main expenses
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.get('/categories', ctrlTransaction.getCategoriesList);
+
 module.exports = router;
