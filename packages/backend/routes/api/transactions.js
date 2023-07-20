@@ -63,41 +63,37 @@ const router = express.Router();
  *              schema:
  *                type: object
  *                properties:
- *                  transaction:
- *                    type: object
- *                    properties:
- *                      _id:
- *                        type: String
- *                        description: ID of transaction
- *                      isExpense:
- *                        type: Boolean
- *                        description: Is transaction is expense?
- *                      amount:
- *                        type: Number
- *                        description: Amount of transaction
- *                      date:
- *                        type: Date
- *                        description: Date of transaction
- *                      comment:
- *                        type: String
- *                        description: comment
- *                      category:
- *                        type: String
- *                        description: category of transaction
+ *                  _id:
+ *                   type: String
+ *                   description: ID of transaction
+ *                  isExpense:
+ *                    type: Boolean
+ *                    description: Is transaction is expense?
+ *                  amount:
+ *                    type: Number
+ *                    description: Amount of transaction
+ *                  date:
+ *                    type: Date
+ *                    description: Date of transaction
+ *                  comment:
+ *                    type: String
+ *                    description: comment
+ *                  category:
+ *                    type: String
+ *                    description: category of transaction
  *                example:
- *                  transaction:
- *                    _id: 64b8ec69e207d66b18d18cd6
- *                    isExpense: true
- *                    amount: 250
- *                    date: 2023-07-01
- *                    comment: Fuel
- *                    category: Car
+ *                  _id: 64b8ec69e207d66b18d18cd6
+ *                  isExpense: true
+ *                  amount: 250
+ *                  date: 2023-07-01
+ *                  comment: Fuel
+ *                  category: Car
  *        '401':
  *          description: Not authorized
  *        '500':
  *          description: Internal server error
  */
 
-router.post('/', auth, ctrlTransaction.create);
+router.post('/addTransaction', auth, ctrlTransaction.create);
 
 module.exports = router;

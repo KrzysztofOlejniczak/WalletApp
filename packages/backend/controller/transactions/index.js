@@ -16,14 +16,12 @@ const create = async (req, res, next) => {
     await newTransaction.save();
 
     res.status(201).json({
-      transaction: {
-        _id: newTransaction._id,
-        isExpense,
-        amount,
-        date,
-        comment,
-        category,
-      },
+      _id: newTransaction._id,
+      isExpense,
+      amount,
+      date,
+      comment,
+      category,
     });
   } catch (e) {
     console.error(e);
