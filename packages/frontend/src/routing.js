@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
-// import { PrivateRoute } from "./PrivateRoute";
+import { PrivateRoute } from './PrivateRoute';
 
 import { Layout } from './pages/layout/layout';
 import { HomeTab } from './components/homeTab/homeTab';
@@ -37,15 +37,9 @@ const Routing = () => {
         />
         <Route
           path="/home"
-          element={<DashboardPage />}
-          // uncomment when login will work
-          
-          // element={
-          //   <PrivateRoute
-          //     redirectTo='/login'
-          //     component={<DashboardPage />}
-          //   />
-          // }
+          element={
+            <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
+          }
         >
           <Route index element={<HomeTab />} />
         </Route>
