@@ -41,7 +41,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', usersRouter);
-app.use('/api/transactions', transactionsRouter);
+app.use('/api/finance', transactionsRouter);
 
 app.use(
   '/docs',
