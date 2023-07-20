@@ -1,4 +1,5 @@
 const Transaction = require('../../service/schemas/transactions');
+const categoryList = require('../../data/categories.json');
 
 const create = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
@@ -21,7 +22,7 @@ const create = async (req, res, next) => {
       amount,
       date,
       comment,
-      category,
+      category: newTransaction.category,
     });
   } catch (e) {
     console.error(e);
@@ -50,4 +51,8 @@ const getBalance = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getBalance };
+const getCategoriesList = (req, res) => {
+  res.status(200).json(categoryList);
+};
+
+module.exports = { create, getBalance, getCategoriesList };
