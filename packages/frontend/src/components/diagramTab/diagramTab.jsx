@@ -1,5 +1,3 @@
-export const DiagramTab = () => {
-    return (
-        <div>DiagramTab</div>
-    )
+export default function DiagramTab() {
+  return <div>DiagramTab</div>;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Loader from '../loader/loader';
 
-export const Currency = () => {
+export default function Currency() {
   const [currencies, setCurrencies] = useState([]);
   // const [filter, setFilter] = useState(['USD', 'EUR', "CHF", "GBP"]);
   const filter = ['USD', 'EUR', 'CHF', 'GBP'];
@@ -86,4 +86,4 @@ export const Currency = () => {
       )}
     </div>
   );
-};
+}
