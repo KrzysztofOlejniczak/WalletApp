@@ -21,7 +21,7 @@ const create = async (req, res, next) => {
       amount,
       date,
       comment,
-      category,
+      category: newTransaction.category,
     });
   } catch (e) {
     console.error(e);
