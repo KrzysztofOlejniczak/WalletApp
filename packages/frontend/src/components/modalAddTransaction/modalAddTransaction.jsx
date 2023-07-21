@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { AddExpenseForm } from "../addExpenseForm/addExpenseForm";
-import { AddIncomeForm } from "../addIncomeForm/addIncomeForm";
-import css from "./modalAddTransaction.module.css";
+import { useState } from 'react';
+import { AddExpenseForm } from '../addExpenseForm/addExpenseForm';
+import { AddIncomeForm } from '../addIncomeForm/addIncomeForm';
+import css from './modalAddTransaction.module.css';
 
 export const ModalAddTransaction = ({ closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -23,7 +23,11 @@ export const ModalAddTransaction = ({ closeModal }) => {
         <span>Expense</span>
       </div>
       <div>
-        {isChecked ? <AddIncomeForm /> : <AddExpenseForm />}
+        {isChecked ? (
+          <AddIncomeForm closeModal={closeModal} />
+        ) : (
+          <AddExpenseForm closeModal={closeModal} />
+        )}
         <button onClick={closeModal}>Cancel</button>
       </div>
     </div>
