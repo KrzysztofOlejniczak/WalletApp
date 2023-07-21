@@ -12,7 +12,6 @@ export const fetchTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Token is missing');
     }
@@ -32,7 +31,6 @@ export const fetchBalance = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Token is missing');
     }
@@ -52,7 +50,6 @@ export const addTransaction = createAsyncThunk(
   async (transactionData, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Token is missing');
     }
@@ -72,7 +69,6 @@ export const deleteTransaction = createAsyncThunk(
   async (transactionId, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Token is missing');
     }

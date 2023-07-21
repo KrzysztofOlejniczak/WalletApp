@@ -1,6 +1,7 @@
 const Transaction = require('../../service/schemas/transactions');
+const categoryList = require('../../data/categories.json');
 
-const create = async (req, res, next) => {
+const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
   const owner = req.user._id;
   try {
@@ -21,8 +22,26 @@ const create = async (req, res, next) => {
       amount,
       date,
       comment,
-      category,
+      category: newTransaction.category,
     });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+const getTransactions = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+    const owner = req.user._id;
+
+    const results = await Transaction.find({ owner }, { owner: 0, __v: 0 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json(results);
   } catch (e) {
     console.error(e);
     next(e);
@@ -50,4 +69,13 @@ const getBalance = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getBalance };
+const getCategoriesList = (req, res) => {
+  res.status(200).json(categoryList);
+};
+
+module.exports = {
+  createTransaction,
+  getTransactions,
+  getBalance,
+  getCategoriesList,
+};
