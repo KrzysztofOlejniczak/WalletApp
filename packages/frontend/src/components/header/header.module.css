@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerHeading {
+  margin: 0;
+}
+
+.headerLogOut{
+    display: flex;
+}
+
+.headerIconExit {
+  width: 30px;
+  height: 30px;
+}
