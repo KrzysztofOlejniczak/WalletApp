@@ -16,6 +16,15 @@ export const theme = createTheme({
   // typography: {
   //   fontFamily: `'Red Hat Display', sans-serif`,
   // },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 320,
+      md: 768,
+      lg: 1280,
+   
+    },
+  },
   components: {
     // MuiStack: {
     //   variants: [
