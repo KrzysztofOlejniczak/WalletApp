@@ -172,7 +172,71 @@ router.post('/transactions', auth, ctrlTransaction.createTransaction);
 
 router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
-// ssw
+/**
+ * @swagger
+ * /api/finance/transactions/{id}:
+ *   delete:
+ *     tags:
+ *       - Transactions
+ *     summary: Delete transaction by id
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *       - name: id
+ *         in: path
+ *         description: ID of transaction to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  _id:
+ *                   type: String
+ *                   description: ID of transaction
+ *                  isExpense:
+ *                    type: Boolean
+ *                    description: Is transaction is expense?
+ *                  amount:
+ *                    type: Number
+ *                    description: Amount of transaction
+ *                  date:
+ *                    type: Date
+ *                    description: Date of transaction
+ *                  comment:
+ *                    type: String
+ *                    description: comment
+ *                  category:
+ *                    type: String
+ *                    description: category of transaction
+ *                  message:
+ *                    type: String
+ *                    description: Message from server
+ *                example:
+ *                  _id: 64b8ec69e207d66b18d18cd6
+ *                  isExpense: true
+ *                  amount: 250
+ *                  date: 2023-07-01
+ *                  comment: Fuel
+ *                  category: Car
+ *                  message: Transaction deleted
+ *        '401':
+ *          description: Not authorized
+ *        '404':
+ *          description: Not found
+ *        '500':
+ *          description: Internal server error
+ */
 
 router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
 
