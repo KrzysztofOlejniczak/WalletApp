@@ -5,6 +5,7 @@ import {
   fetchBalance,
   addTransaction,
   deleteTransaction,
+  fetchCategories,
 } from './operations.js';
 
 const handlePending = (state) => {
@@ -23,6 +24,7 @@ const financeSlice = createSlice({
     balance: null,
     loading: false,
     error: null,
+    categories: [],
   },
   extraReducers: (builder) => {
     builder
@@ -53,6 +55,13 @@ const financeSlice = createSlice({
         state.transactions = state.transactions.filter(
           (transaction) => transaction.id !== action.payload.id
         );
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchCategories.pending, handlePending)
+      .addCase(fetchCategories.rejected, handleRejected)
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
         state.loading = false;
         state.error = null;
       })
