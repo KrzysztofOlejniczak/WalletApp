@@ -21,6 +21,10 @@ code {
   width: 100%;
 }
 
+#root > div > div{
+padding: 0 16px;
+};
+
 link {
   text-decoration: none;
   text-transform: capitalize;

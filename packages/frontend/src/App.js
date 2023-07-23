@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
 // import {selectIsLoading} from './redux/global/selectors'
 // import Loader from './components/loader/loader'
-import { Container } from '@mui/material';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,17 +18,7 @@ const App = () => {
 
   // const isLoading = useSelector(selectIsLoading);
 
-  return (
-    <>
-      {isRefreshing ? (
-        <b>Refreshing user...</b>
-      ) : (
-        <Container fixed>
-          <Routing />
-        </Container>
-      )}
-    </>
-  );
+  return <>{isRefreshing ? <b>Refreshing user...</b> : <Routing />}</>;
 };
 
 export default App;
