@@ -1,13 +1,16 @@
 import { Formik, Form, Field } from 'formik';
 import Datetime from 'react-datetime';
-import { useDispatch } from 'react-redux';
-import { addTransaction } from '../../redux/finance/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addTransaction,
+  fetchCategories,
+} from '../../redux/finance/operations';
 import { useEffect, useState } from 'react';
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
 import expenseAddValidationSchema from '../../validations/validateAddExpense';
-import axios from 'axios';
+import { selectCategories } from '../../redux/finance/selectors';
 
 export const AddExpenseForm = ({ closeModal }) => {
   const initialValues = {
@@ -18,22 +21,13 @@ export const AddExpenseForm = ({ closeModal }) => {
   };
 
   const [dateValue, setDateValue] = useState(initialValues.date);
-  const [categories, setCategories] = useState([]);
+
   const dispatch = useDispatch();
-
-  const getCategories = async () => {
-    const res = await axios.get(
-      `https://wallet-app-backend-3z9p.onrender.com/api/finance/categories`
-    );
-    const categoriesArray = res.data.filter(
-      (category) => category.name !== 'Income'
-    );
-    setCategories([...categoriesArray]);
-  };
-
   useEffect(() => {
-    getCategories();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  const categories = useSelector(selectCategories);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,11 +85,13 @@ export const AddExpenseForm = ({ closeModal }) => {
               }}
             >
               <Field as="select" id="category" name="category">
-                {categories.map((category) => (
-                  <option key={category.id} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories
+                  .filter((category) => category.name !== 'Income')
+                  .map((category) => (
+                    <option key={category.id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
               </Field>
               <Field
                 type="text"

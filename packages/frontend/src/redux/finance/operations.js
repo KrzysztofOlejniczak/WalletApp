@@ -82,3 +82,15 @@ export const deleteTransaction = createAsyncThunk(
     }
   }
 );
+
+export const fetchCategories = createAsyncThunk(
+  'finance/fetchCategories',
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get('/finance/categories');
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
