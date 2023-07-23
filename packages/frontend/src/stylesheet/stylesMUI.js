@@ -21,6 +21,15 @@ export const theme = createTheme({
             width: '480px',
             height: '100vh',
           },
+          
+        },
+        {
+          props: { variant: 'tablet' },
+          style: {
+            width: '100%',
+           
+          },
+          
         },
       ],
     },
@@ -45,3 +54,5 @@ export const theme = createTheme({
 export const StyledContainer = styled(Container)({
   height: '100vh',
 });
+
+

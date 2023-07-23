@@ -1,9 +1,10 @@
 import { RegisterForm } from "../../components/registration/registerForm";
+import { StyledContainer } from "../../stylesheet/stylesMUI.js";
 
 export default function RegistrationPage() {
   return (
-    <div className=''>
+    <StyledContainer fixed>
       <RegisterForm />
-    </div>
+    </StyledContainer>
   );
 }

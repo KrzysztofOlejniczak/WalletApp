@@ -1,9 +1,10 @@
 import { LoginForm } from "../../components/login/login";
+import { StyledContainer } from "../../stylesheet/stylesMUI.js";
 
 export default function LoginPage() {
   return (
-    <div className=''>
+    <StyledContainer fixed>
       <LoginForm />
-    </div>
+    </StyledContainer>
   );
 }
