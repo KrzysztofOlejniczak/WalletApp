@@ -172,6 +172,10 @@ router.post('/transactions', auth, ctrlTransaction.createTransaction);
 
 router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
+// ssw
+
+router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
+
 /**
  * @swagger
  * /api/finance/balance:
