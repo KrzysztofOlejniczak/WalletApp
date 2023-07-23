@@ -174,6 +174,50 @@ router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
 /**
  * @swagger
+ * /api/finance/transactions/{id}:
+ *   delete:
+ *     tags:
+ *       - Transactions
+ *     summary: Delete transaction by id
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *       - name: id
+ *         in: path
+ *         description: ID of transaction to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: String
+ *                    description: Message from server
+ *                example:
+ *                  message: Transaction deleted
+ *        '401':
+ *          description: Not authorized
+ *        '404':
+ *          description: Not found
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
+
+/**
+ * @swagger
  * /api/finance/balance:
  *   get:
  *     tags:

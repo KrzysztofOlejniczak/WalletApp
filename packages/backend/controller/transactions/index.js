@@ -48,6 +48,27 @@ const getTransactions = async (req, res, next) => {
   }
 };
 
+const removeTransaction = async (req, res, next) => {
+  const owner = req.user._id;
+  const { id } = req.params;
+
+  console.log(req.params);
+
+  try {
+    const result = await Transaction.findByIdAndRemove({ _id: id, owner });
+    if (result) {
+      res.status(200).json({
+        message: 'Transaction deleted',
+      });
+    } else {
+      res.status(404).json({ message: `Transaction ${id} not found` });
+    }
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
 const getBalance = async (req, res, next) => {
   const owner = req.user._id;
   let balance = 0;
@@ -76,6 +97,7 @@ const getCategoriesList = (req, res) => {
 module.exports = {
   createTransaction,
   getTransactions,
+  removeTransaction,
   getBalance,
   getCategoriesList,
 };
