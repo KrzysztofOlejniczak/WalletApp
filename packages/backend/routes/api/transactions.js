@@ -174,6 +174,143 @@ router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
 /**
  * @swagger
+ * /api/finance/transactions/{id}:
+ *   put:
+ *     tags:
+ *       - Transactions
+ *     summary: Update transaction by id
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *       - name: id
+ *         in: path
+ *         description: ID of transaction to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isExpense:
+ *                 type: Boolean
+ *                 description: Is transaction is expense?
+ *               amount:
+ *                 type: Number
+ *                 description: Amount of transaction
+ *               date:
+ *                 type: Date
+ *                 description: Date of transaction
+ *               comment:
+ *                 type: String
+ *                 description: comment
+ *               category:
+ *                 type: String
+ *                 description: category of transaction
+ *                 default: Income
+ *             example:
+ *               isExpense: true
+ *               amount: 100
+ *               date: 2023-07-01
+ *               comment: carwash
+ *               category: Car
+ *       required: true
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  _id:
+ *                   type: String
+ *                   description: ID of transaction
+ *                  isExpense:
+ *                    type: Boolean
+ *                    description: Is transaction is expense?
+ *                  amount:
+ *                    type: Number
+ *                    description: Amount of transaction
+ *                  date:
+ *                    type: Date
+ *                    description: Date of transaction
+ *                  comment:
+ *                    type: String
+ *                    description: comment
+ *                  category:
+ *                    type: String
+ *                    description: category of transaction
+ *                example:
+ *                  _id: 64b8ec69e207d66b18d18cd6
+ *                  isExpense: true
+ *                  amount: 250
+ *                  date: 2023-07-01
+ *                  comment: Fuel
+ *                  category: Car
+ *        '401':
+ *          description: Not authorized
+ *        '404':
+ *          description: Not found
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.put('/transactions/:id', auth, ctrlTransaction.updateTransaction);
+
+/**
+ * @swagger
+ * /api/finance/transactions/{id}:
+ *   delete:
+ *     tags:
+ *       - Transactions
+ *     summary: Delete transaction by id
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *       - name: id
+ *         in: path
+ *         description: ID of transaction to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: String
+ *                    description: Message from server
+ *                example:
+ *                  message: Transaction deleted
+ *        '401':
+ *          description: Not authorized
+ *        '404':
+ *          description: Not found
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
+
+/**
+ * @swagger
  * /api/finance/balance:
  *   get:
  *     tags:
