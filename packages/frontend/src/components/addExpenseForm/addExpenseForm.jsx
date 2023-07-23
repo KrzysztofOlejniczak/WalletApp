@@ -23,21 +23,11 @@ export const AddExpenseForm = ({ closeModal }) => {
   const [dateValue, setDateValue] = useState(initialValues.date);
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchCategories());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const categories = useSelector(selectCategories);
-
-  // const getCategories = async () => {
-  //   const res = await axios.get(
-  //     `https://wallet-app-backend-3z9p.onrender.com/api/finance/categories`
-  //   );
-  //   const categoriesArray = res.data.filter(
-  //     (category) => category.name !== 'Income'
-  //   );
-  //   setCategories([...categoriesArray]);
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
