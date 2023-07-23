@@ -48,6 +48,36 @@ const getTransactions = async (req, res, next) => {
   }
 };
 
+const updateTransaction = async (req, res, next) => {
+  const owner = req.user._id;
+  const { id } = req.params;
+  const { isExpense, amount, date, comment, category } = req.body;
+
+  try {
+    const result = await Transaction.findByIdAndUpdate(
+      { _id: id, owner },
+      { isExpense, amount, date, comment, category }
+    );
+    if (result) {
+      res.status(200).json({
+        _id: result._id,
+        isExpense,
+        amount,
+        date,
+        comment,
+        category,
+      });
+    } else {
+      res.status(404).json({
+        message: `Transaction ${id} not found`,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
 const removeTransaction = async (req, res, next) => {
   const owner = req.user._id;
   const { id } = req.params;
@@ -97,6 +127,7 @@ const getCategoriesList = (req, res) => {
 module.exports = {
   createTransaction,
   getTransactions,
+  updateTransaction,
   removeTransaction,
   getBalance,
   getCategoriesList,
