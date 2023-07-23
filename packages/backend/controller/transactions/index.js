@@ -58,12 +58,6 @@ const removeTransaction = async (req, res, next) => {
     const result = await Transaction.findByIdAndRemove({ _id: id, owner });
     if (result) {
       res.status(200).json({
-        _id: result._id,
-        isExpense: result.isExpense,
-        amount: result.amount,
-        date: result.date,
-        comment: result.comment,
-        category: result.category,
         message: 'Transaction deleted',
       });
     } else {
