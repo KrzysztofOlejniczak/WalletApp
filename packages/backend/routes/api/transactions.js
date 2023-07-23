@@ -172,6 +172,14 @@ router.post('/transactions', auth, ctrlTransaction.createTransaction);
 
 router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
+// sw
+
+router.get(
+  '/transactions/:year/:month',
+  auth,
+  ctrlTransaction.getTransactionsMonthly
+);
+
 /**
  * @swagger
  * /api/finance/transactions/{id}:
