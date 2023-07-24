@@ -10,6 +10,7 @@ export const Balance = () => {
   const balance = useSelector(selectBalance);
   const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
+
   return (
     <div>
       {isLoading ? (

@@ -6,10 +6,23 @@ import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
+import { ModalEditTransaction } from '../modalEditTransaction/modalEditTransaction';
 
 export default function HomeTab() {
   const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
     useState(false);
+
+    const [isModalEditTransactionOpen, setIsModalEditTransactionOpen] =
+    useState(false);
+
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+    const handleEditTransaction = (transaction) => {
+      setSelectedTransaction(transaction);
+/*       console.log(transaction) */
+      setIsModalEditTransactionOpen(true);
+    };
+
 
 
   const renderDesktopLayout = () => {
@@ -24,7 +37,7 @@ export default function HomeTab() {
     return (
       <div>
         <Balance />
-        <TableCard />
+        <TableCard handleEditTransaction={handleEditTransaction} />
       </div>
     );
   };
@@ -42,6 +55,12 @@ export default function HomeTab() {
         {isModalAddTransactionOpen && (
           <ModalAddTransaction
             closeModal={() => setIsModalAddTransactionOpen(false)}
+          />
+        )}
+         {isModalEditTransactionOpen && (
+          <ModalEditTransaction
+          closeModal={() => setIsModalEditTransactionOpen(false)}
+          transaction={selectedTransaction}
           />
         )}
     </div>

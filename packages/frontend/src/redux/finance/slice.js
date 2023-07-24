@@ -5,6 +5,7 @@ import {
   fetchBalance,
   addTransaction,
   deleteTransaction,
+  editTransaction,
   fetchCategories,
 } from './operations.js';
 
@@ -53,8 +54,15 @@ const financeSlice = createSlice({
       .addCase(deleteTransaction.rejected, handleRejected)
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
-          (transaction) => transaction.id !== action.payload.id
+          (transaction) => transaction._id !== action.payload
         );
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(editTransaction.pending, handlePending)
+      .addCase(editTransaction.rejected, handleRejected)
+      .addCase(editTransaction.fulfilled, (state, action) => {
+        console.log(state, action);
         state.loading = false;
         state.error = null;
       })

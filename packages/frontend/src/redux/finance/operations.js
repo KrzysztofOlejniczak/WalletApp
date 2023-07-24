@@ -57,6 +57,7 @@ export const addTransaction = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axios.post('/finance/transactions', transactionData);
+      thunkAPI.dispatch(fetchBalance());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -76,7 +77,30 @@ export const deleteTransaction = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       await axios.delete(`/finance/transactions/${transactionId}`);
+      thunkAPI.dispatch(fetchBalance())
       return transactionId;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editTransaction = createAsyncThunk(
+  'finance/editTransaction',
+  async (transactionData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Token is missing');
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+      console.log(transactionData)
+      const res = await axios.put(`/finance/transactions/${transactionData._id}`, transactionData);
+      thunkAPI.dispatch(fetchBalance());
+      thunkAPI.dispatch(fetchTransactions())
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
