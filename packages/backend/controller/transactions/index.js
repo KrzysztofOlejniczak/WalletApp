@@ -1,5 +1,6 @@
 const Transaction = require('../../service/schemas/transactions');
 const categoryList = require('../../data/categories.json');
+const { validationYearAndMonth } = require('../../validation');
 
 const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
@@ -45,6 +46,60 @@ const getTransactions = async (req, res, next) => {
   } catch (e) {
     console.error(e);
     next(e);
+  }
+};
+
+const getMonthlyStats = async (req, res, next) => {
+  const { month, year } = req.params;
+  const startOfMonth = new Date(year, month - 1);
+  const endOfMonth = new Date(year, month);
+  const owner = req.user._id;
+
+  const { error } = validationYearAndMonth.validate(req.params);
+
+  if (error) {
+    return res.status(400).json({
+      message: error.message,
+    });
+  } else {
+    try {
+      const transactions = await Transaction.find({
+        date: { $gte: startOfMonth, $lt: endOfMonth },
+        owner,
+      });
+
+      const expenseTransactions = transactions.filter(
+        (transaction) => transaction.isExpense === true
+      );
+
+      const expenseByCategory = categoryList
+        .filter((category) => category.name !== 'Income')
+        .map((category) => {
+          const amountByCategory = expenseTransactions.reduce((acc, el) => {
+            return acc + (el.category === category.name ? el.amount : 0);
+          }, 0);
+          return { category: category.name, amount: amountByCategory };
+        });
+
+      const calculateBalance = (type) => {
+        const isExpense = type === 'expense';
+        return transactions
+          .filter((t) => t.isExpense === isExpense)
+          .map((t) => t.amount)
+          .reduce((acc, num) => {
+            return acc + num;
+          }, 0);
+      };
+
+      res.status(200).json({
+        expenseByCategory,
+        income: calculateBalance('income'),
+        expense: calculateBalance('expense'),
+      });
+    } catch (e) {
+      console.error(e);
+      next(e);
+    }
   }
 };
 
@@ -127,6 +182,7 @@ const getCategoriesList = (req, res) => {
 module.exports = {
   createTransaction,
   getTransactions,
+  getMonthlyStats,
   updateTransaction,
   removeTransaction,
   getBalance,
