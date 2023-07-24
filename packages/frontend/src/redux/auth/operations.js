@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -20,6 +21,8 @@ const clearAuthHeader = () => {
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(startAsyncRequest());
+
     try {
       const res = await axios.post('/users/signup', credentials);
       // After successful registration, add the token to the HTTP header
@@ -29,6 +32,8 @@ export const register = createAsyncThunk(
     } catch (error) {
       console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
     }
   }
 );
@@ -40,6 +45,7 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(startAsyncRequest());
     try {
       const res = await axios.post('/users/login', credentials);
       // After successful login, add the token to the HTTP header
@@ -47,6 +53,8 @@ export const logIn = createAsyncThunk(
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
     }
   }
 );
@@ -56,12 +64,15 @@ export const logIn = createAsyncThunk(
  * headers: Authorization: Bearer token
  */
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  thunkAPI.dispatch(startAsyncRequest());
   try {
     await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
+  } finally {
+    thunkAPI.dispatch(finishAsyncRequest());
   }
 });
 
@@ -80,6 +91,8 @@ export const refreshUser = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
 
+    thunkAPI.dispatch(startAsyncRequest());
+
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
@@ -87,6 +100,8 @@ export const refreshUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
     }
   }
 );

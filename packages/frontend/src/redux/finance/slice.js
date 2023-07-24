@@ -8,9 +8,7 @@ import {
   fetchCategories,
 } from './operations.js';
 
-const handlePending = (state) => {
-  state.loading = true;
-};
+const handlePending = (state) => {};
 
 const handleRejected = (state, action) => {
   state.loading = false;
