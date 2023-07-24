@@ -1,9 +1,10 @@
 import { LoginForm } from "../../components/login/login";
+import { Container } from "@mui/material";
 
 export default function LoginPage() {
   return (
-    <div className=''>
+    <Container fixed>
       <LoginForm />
-    </div>
+    </Container>
   );
 }

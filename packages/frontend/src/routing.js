@@ -6,7 +6,7 @@ import { PrivateRoute } from './PrivateRoute';
 
 import LoginPage from './pages/login/loginPage';
 import RegistrationPage from './pages/registration/registrationPage';
-import DashboardPage from './pages/dashboard/dashboardPage';
+import DashboardPage from './pages/dashboard/dashboard';
 
 const HomeTab = lazy(() => import('./components/homeTab/homeTab'));
 const DiagramTab = lazy(() => import('./components/diagramTab/diagramTab'));
