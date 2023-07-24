@@ -13,14 +13,14 @@ import editValidationSchema from '../../validations/validateEditTransaction';
 import { selectCategories } from '../../redux/finance/selectors';
 
 export const EditTransactionForm = ({ closeModal, transaction }) => {
-    const formatDate = (dateString) => {
-        const dateObj = new Date(dateString);
-        const day = String(dateObj.getDate()).padStart(2, '0');
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const year = String(dateObj.getFullYear()).slice(-2);
-      
-        return `${day}-${month}-${year}`;
-      };
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = String(dateObj.getFullYear()).slice(-2);
+
+    return `${day}-${month}-${year}`;
+  };
 
   const formattedDate = formatDate(transaction.date);
 
