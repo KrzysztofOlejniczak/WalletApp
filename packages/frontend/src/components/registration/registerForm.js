@@ -9,13 +9,13 @@ import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
 import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
 import { ReactComponent as NameIcon } from '../../images/icons/name.svg';
 
-import Logo from '../Logo/Logo';
-import TextInput from '../TextInput/TextInput';
-import TextInputConfirm from '../TextInput/TextInputConfirm';
-import MainButton from '../MainButton/MainButton';
+import Logo from '../logo/Logo';
+import TextInput from '../textInput/TextInput';
+import TextInputConfirm from '../textInput/TextInputConfirm';
+import MainButton from '../mainButton/MainButton';
 
 import './registerForm.scss';
-import '../MainButton/MainButton.scss';
+import '../mainButton/MainButton.scss';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();

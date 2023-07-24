@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
 import { selectIsLoading } from './redux/global/selectors';
-import Loader from './components/Loader/loader';
+import Loader from './components/loader/loader';
 
 const App = () => {
   const dispatch = useDispatch();
