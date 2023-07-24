@@ -174,11 +174,7 @@ router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
 // sw
 
-router.get(
-  '/transactions/:year/:month',
-  auth,
-  ctrlTransaction.getTransactionsMonthly
-);
+router.get('/transactions/:year/:month', auth, ctrlTransaction.getMonthlyStats);
 
 /**
  * @swagger

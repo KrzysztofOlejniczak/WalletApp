@@ -21,7 +21,17 @@ const validationUserLoginSchema = Joi.object({
     .required(),
 });
 
+const validationYearAndMonth = Joi.object({
+  month: Joi.number().integer().min(1).max(12).required(),
+  year: Joi.number()
+    .integer()
+    .min(1900)
+    .max(new Date().getFullYear())
+    .required(),
+});
+
 module.exports = {
   validationUserRegisterSchema,
   validationUserLoginSchema,
+  validationYearAndMonth,
 };
