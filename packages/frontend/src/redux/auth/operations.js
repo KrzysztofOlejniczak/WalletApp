@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
+import { notifyError } from '../../utils/notifies';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -30,7 +31,8 @@ export const register = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      notifyError(error.message);
+
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
@@ -52,6 +54,9 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+
+      notifyError(error.message);
+
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
@@ -70,6 +75,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
   } catch (error) {
+    notifyError(error.message);
     return thunkAPI.rejectWithValue(error.message);
   } finally {
     thunkAPI.dispatch(finishAsyncRequest());
@@ -99,6 +105,7 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get('/users/current');
       return res.data;
     } catch (error) {
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
