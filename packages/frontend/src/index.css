@@ -25,7 +25,7 @@ code {
 }
 
 #root > .MuiContainer-fixed {
- padding: 0;
+  padding: 0;
 }
 
 #root > .MuiBox-root > .MuiContainer-fixed {

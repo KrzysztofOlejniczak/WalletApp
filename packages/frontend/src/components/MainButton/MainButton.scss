@@ -1,0 +1,51 @@
+@import '../../stylesheet/main.scss';
+
+.Button {
+  display: inline-block;
+  height: 50px;
+  width: 280px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  border-radius: 20px;
+  text-align: center;
+  transition: 100ms linear, color 100ms linear, border-color 100ms linear;
+}
+
+.register_btn {
+  @extend .Button;
+  background-color: var(--accent-green);
+  border: transparent;
+
+  &:hover {
+    background-color: #05bd95;
+  }
+}
+
+.logo_btn {
+  @extend .Button;
+  background-color: var(--accent-green);
+  border: transparent;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: #05bd95;
+  }
+}
+
+.main_btn {
+  @extend .Button;
+  color: var(--accent-blue);
+  background-color: var(--white);
+  border: 2px solid var(--accent-blue);
+  padding-top: 10px;
+
+  &:hover {
+    color: var(--white);
+    background-color: var(--accent-blue);
+  }
+}

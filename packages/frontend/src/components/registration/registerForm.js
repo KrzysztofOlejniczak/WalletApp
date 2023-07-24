@@ -1,10 +1,21 @@
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import css from './registerForm.module.css';
 import validationSchema from '../../validations/validateForm';
 import { PasswordStrengthBar } from '../passwordSecureBar/passwordStrengthBar';
+
+import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
+import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
+import { ReactComponent as NameIcon } from '../../images/icons/name.svg';
+
+import Logo from '../Logo/Logo';
+import TextInput from '../TextInput/TextInput';
+import TextInputConfirm from '../TextInput/TextInputConfirm';
+import MainButton from '../MainButton/MainButton';
+
+import './registerForm.scss';
+import '../MainButton/MainButton.scss';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -36,71 +47,58 @@ export const RegisterForm = () => {
       {(props) => {
         const { values } = props;
         return (
-          <div>
-            <img className="" src="" alt="wallet icon"></img>
-            <h1>Wallet</h1>
-            <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
-              <label htmlFor="email">
-                <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="E-mail"
-                  value={values.email}
-                />
-                <ErrorMessage name="email">
-                  {(error) => <p className={css.formError}>{error}</p>}
-                </ErrorMessage>
-              </label>
-              <label htmlFor="password">
-                <Field
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={values.password}
-                  autoComplete="off"
-                />
-                <PasswordStrengthBar password={values.password} />
-                {values.password.length > 0 && (
-                  <ErrorMessage name="password">
-                    {(error) => <p className={css.formError}>{error}</p>}
-                  </ErrorMessage>
-                )}
-              </label>
-              <label htmlFor="confirmPassword">
-                <Field
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Confirm password"
-                  value={values.confirmPassword}
-                  autoComplete="off"
-                />
-                {values.confirmPassword.length > 0 && (
-                  <ErrorMessage name="confirmPassword">
-                    {(error) => <p className={css.formError}>{error}</p>}
-                  </ErrorMessage>
-                )}
-              </label>
-              <label htmlFor="name">
-                <Field
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="First name"
-                  value={values.name}
-                />
-                <ErrorMessage name="name">
-                  {(error) => <p className={css.formError}>{error}</p>}
-                </ErrorMessage>
-              </label>
-              <button type="submit">Register</button>
-              <NavLink className={css.link} to="/login">
-                Log In
-              </NavLink>
-            </Form>
-          </div>
+          <Form className="form-register" onSubmit={(e) => handleSubmit(e)}>
+            <div className="logo_reg">
+              <Logo />
+              <h1>Wallet</h1>
+            </div>
+            <div className="container_input">
+              <TextInput
+                label={<EmailIcon width={20} height={16} />}
+                type="email"
+                name="email"
+                value={values.email}
+                placeholder="E-mail"
+                className="input"
+                id="email"
+              />
+              <TextInput
+                label={<LockIcon width={16} height={21} />}
+                type="password"
+                name="password"
+                value={values.password}
+                placeholder="Password"
+                className="input"
+                id="password"
+              />
+              <TextInputConfirm
+                label={<LockIcon width={16} height={21} />}
+                type="password"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                placeholder="Confirm password"
+                className="input"
+              />
+              <PasswordStrengthBar password={values.password} />
+              <TextInput
+                label={<NameIcon width={18} height={18} />}
+                type="text"
+                name="name"
+                value={values.name}
+                placeholder="First name"
+                className="input"
+                id="name"
+              />
+            </div>
+            <div className="button_container">
+              <MainButton type="submit" text="Register" className="logo_btn" />
+              <div>
+                <NavLink to="/login" className="main_btn">
+                  Login
+                </NavLink>
+              </div>
+            </div>
+          </Form>
         );
       }}
     </Formik>
