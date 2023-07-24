@@ -1,15 +1,9 @@
-import {
-  selectTransactions,
-  selectLoading,
-  selectError,
-} from '../../redux/finance/selectors';
+import { selectTransactions, selectError } from '../../redux/finance/selectors';
 import { deleteTransaction } from '../../redux/finance/operations';
 import { useSelector, useDispatch } from 'react-redux';
-import Loader from '../loader/loader';
 
-export const TableCard = ({ handleEditTransaction }) => {
+export const TableCard = () => {
   const transactions = useSelector(selectTransactions);
-  const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
   const dispatch = useDispatch();
 
@@ -29,11 +23,11 @@ export const TableCard = ({ handleEditTransaction }) => {
     dispatch(deleteTransaction(transactionId));
   };
 
+  console.log(transactions);
+
   return (
     <div>
-      {isLoading ? (
-        <Loader />
-      ) : isError ? (
+      {isError ? (
         <p>Something went wrong!</p>
       ) : (
         <ul>
@@ -41,16 +35,14 @@ export const TableCard = ({ handleEditTransaction }) => {
             return (
               <li key={el._id}>
                 <p>Date {formatDate(el.date)}</p>
-                {el.isExpense === true ? <p>Type -</p> : <p>Type +</p>}
+                {el.type ? <p>Type {el.type}</p> : <p>Type -</p>}
                 <p>Category {el.category} </p>
                 <p>Comment {el.comment}</p>
                 <p> Sum {el.amount}</p>
                 <button onClick={() => handleDeleteTransaction(el._id)}>
                   Delete
                 </button>
-                <button onClick={() => handleEditTransaction(el)}>
-                  Edit
-                </button>
+                <button>Edit</button>
               </li>
             );
           })}

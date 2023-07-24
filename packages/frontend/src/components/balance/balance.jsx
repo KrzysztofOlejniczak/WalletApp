@@ -1,21 +1,12 @@
 import { useSelector } from 'react-redux';
-import {
-  selectBalance,
-  selectLoading,
-  selectError,
-} from '../../redux/finance/selectors';
-import Loader from '../loader/loader';
-
+import { selectBalance, selectError } from '../../redux/finance/selectors';
 export const Balance = () => {
   const balance = useSelector(selectBalance);
-  const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
 
   return (
     <div>
-      {isLoading ? (
-        <Loader />
-      ) : isError ? (
+      {isError ? (
         <p>Something went wrong!</p>
       ) : (
         <div>

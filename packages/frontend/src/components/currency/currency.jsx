@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import Loader from '../loader/loader';
+import { useDispatch } from 'react-redux';
+import {
+  startAsyncRequest,
+  finishAsyncRequest,
+} from '../../redux/global/slice';
 
 export default function Currency() {
+  const dispatch = useDispatch();
   const [currencies, setCurrencies] = useState([]);
   // const [filter, setFilter] = useState(['USD', 'EUR', "CHF", "GBP"]);
   const filter = ['USD', 'EUR', 'CHF', 'GBP'];
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCurrenciesFromAPI() {
@@ -28,6 +32,8 @@ export default function Currency() {
           return cachedCurrencies;
         }
 
+        dispatch(startAsyncRequest());
+
         const response = await fetch(
           'https://api.nbp.pl/api/exchangerates/tables/C?format=json'
         );
@@ -42,6 +48,8 @@ export default function Currency() {
       } catch (error) {
         console.error('Error fetching currencies:', error);
         throw error;
+      } finally {
+        dispatch(finishAsyncRequest());
       }
     }
 
@@ -51,7 +59,6 @@ export default function Currency() {
           filter.includes(currency.code)
         );
         setCurrencies(filtered);
-        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
@@ -62,28 +69,24 @@ export default function Currency() {
   return (
     <div>
       <h2>Currency</h2>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Currency</th>
-              <th>Purchase</th>
-              <th>Sale</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Purchase</th>
+            <th>Sale</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currencies.map((currency) => (
+            <tr key={currency.code}>
+              <td>{currency.code}</td>
+              <td>{currency.bid}</td>
+              <td>{currency.ask}</td>
             </tr>
-          </thead>
-          <tbody>
-            {currencies.map((currency) => (
-              <tr key={currency.code}>
-                <td>{currency.code}</td>
-                <td>{currency.bid}</td>
-                <td>{currency.ask}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

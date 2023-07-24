@@ -1,3 +1,5 @@
+import { Chart } from "../chart/chart.jsx";
+
 export default function DiagramTab() {
-  return <div>DiagramTab</div>;
+  return <div><Chart /></div>;
 }
