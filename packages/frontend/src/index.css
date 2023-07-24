@@ -28,7 +28,7 @@ code {
  padding: 0;
 }
 
-#root > .MuiBox-root > .MuiContainer-fixed {
+#root > div > .MuiContainer-fixed {
   padding: 0 16px;
 }
 
