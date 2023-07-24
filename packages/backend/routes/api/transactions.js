@@ -172,7 +172,76 @@ router.post('/transactions', auth, ctrlTransaction.createTransaction);
 
 router.get('/transactions', auth, ctrlTransaction.getTransactions);
 
-// sw
+/**
+ * @swagger
+ * /api/finance/transactions/{year}/{month}:
+ *   get:
+ *     tags:
+ *       - Transactions
+ *     summary: Get monthly stats
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: JWT token in format 'Bearer [token]'
+ *         required: true
+ *         schema:
+ *           type: string
+ *           default: Bearer [token]
+ *       - name: year
+ *         in: path
+ *         description: Year f.e. 2023
+ *         required: true
+ *         schema:
+ *           type: number
+ *       - name: month
+ *         in: path
+ *         description: Month in range 01-12
+ *         required: true
+ *         schema:
+ *           type: number
+ *     responses:
+ *        '200':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  expenseByCategory:
+ *                   type: Array
+ *                   description: Array with expenses divided into categories
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       category:
+ *                         type: String
+ *                         description: Name of category
+ *                       amount:
+ *                         type: Number
+ *                         description: Amount of all expenses in a category
+ *                  income:
+ *                    type: Number
+ *                    description: Amount of income for the month
+ *                  expense:
+ *                    type: Number
+ *                    description: Amount of expense for the month
+ *                example:
+ *                  expenseByCategory:
+ *                    - category: Products
+ *                      amount: 3000
+ *                    - category: Car
+ *                      amount: 1000
+ *                  income: 7500
+ *                  expense: 4000
+ *        '400':
+ *          description: Bad request
+ *        '401':
+ *          description: Not authorized
+ *        '404':
+ *          description: Not found
+ *        '500':
+ *          description: Internal server error
+ */
 
 router.get('/transactions/:year/:month', auth, ctrlTransaction.getMonthlyStats);
 
