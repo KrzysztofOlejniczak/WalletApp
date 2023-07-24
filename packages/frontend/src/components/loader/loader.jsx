@@ -1,18 +1,23 @@
 import React from 'react';
-import { Circles } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import css from './loader.module.css';
 
 const Loader = () => {
   return (
-    <Circles
-      height="25vh"
-      width="25vw"
-      color="blue"
-      ariaLabel="circles-loading"
-      wrapperClass={css.spinner}
-      visible={true}
-      animationDuration="0.99"
-    />
+    <div className={css.backdrop}>
+      <div className={css.spinner}>
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#00AD84"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
+      </div>
+    </div>
   );
 };
 
