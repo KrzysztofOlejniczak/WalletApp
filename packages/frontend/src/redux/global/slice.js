@@ -4,6 +4,7 @@ const initialState = {
   isModalLogoutOpen: false,
   isModalAddTransactionOpen: false,
   isLoading: false,
+  asyncRequestsCounter: 0,
 };
 
 const globalSlice = createSlice({
@@ -14,16 +15,19 @@ const globalSlice = createSlice({
       const { modalName, isOpen } = action.payload;
       state[modalName] = isOpen;
     },
-    startLoading: (state) => {
+    startAsyncRequest: (state) => {
+      state.asyncRequestsCounter++;
       state.isLoading = true;
     },
-    stopLoading: (state) => {
-      state.isLoading = false;
+    finishAsyncRequest: (state) => {
+      state.asyncRequestsCounter--;
+      state.isLoading = state.asyncRequestsCounter > 0;
     },
   },
 });
 
-export const { setModalOpen, startLoading, stopLoading } = globalSlice.actions;
+export const { setModalOpen, startAsyncRequest, finishAsyncRequest } =
+  globalSlice.actions;
 
 // export const financeReducer = financeSlice.reducer;
 export const globalReducer = globalSlice.reducer;
