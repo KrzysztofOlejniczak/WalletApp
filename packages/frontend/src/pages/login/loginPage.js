@@ -1,10 +1,10 @@
 import { LoginForm } from "../../components/login/login";
-import { StyledContainer } from "../../stylesheet/stylesMUI.js";
+import { Container } from "@mui/material";
 
 export default function LoginPage() {
   return (
-    <StyledContainer fixed>
+    <Container fixed>
       <LoginForm />
-    </StyledContainer>
+    </Container>
   );
 }

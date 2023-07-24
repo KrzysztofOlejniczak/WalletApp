@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 // import Media from 'react-media';
-import { Grid, useMediaQuery } from '@mui/material';
+import { Grid, Container, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../components/header/header';
 import { Navigation } from '../../components/navigation/navigation';
@@ -11,8 +11,11 @@ import {
   fetchTransactions,
   fetchBalance,
 } from '../../redux/finance/operations';
-import { StyledContainer } from '../../stylesheet/stylesMUI';
-import {StyledBox, StyledDivider} from './dashboard.styles'
+import {
+  EllipsePurple,
+  EllipsePink,
+} from '../../stylesheet/stylesMUI';
+import { StyledBox, Vector } from './dashboard.styles';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -31,15 +34,13 @@ export default function DashboardPage() {
 
   const renderDeskTabLayout = () => {
     return (
-      <Grid container direction={isTablet ? 'column' : 'row'}>
-        <Grid item variant={isDesktop ? 'desktop': 'tablet'}>
+      <Grid container  sx={{height: '100%'}} direction={isTablet ? 'column' : 'row'}>
+        <Grid item variant={isDesktop ? 'desktop' : 'tablet'}>
           <Navigation />
           <Balance />
           <Currency />
         </Grid>
-        {isDesktop && (
-          <StyledDivider orientation='vertical' flexItem light/>
-        )}
+        {isDesktop && <Vector  />}
         <Suspense>
           <Grid item>
             <Outlet />
@@ -68,9 +69,11 @@ export default function DashboardPage() {
     <>
       <Header />
       <StyledBox>
-        <StyledContainer fixed> 
+          {!isMobile && <EllipsePurple sx={{ filter: 'blur(25px)' }} />}
+          {!isMobile && <EllipsePink sx={{ filter: 'blur(25px)' }} />}
+        <Container fixed>
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
-        </StyledContainer>
+        </Container>
       </StyledBox>
     </>
   );
