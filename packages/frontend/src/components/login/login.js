@@ -1,14 +1,20 @@
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
-import css from '../registration/registerForm.module.css';
 import validationSchema from '../../validations/validateForm';
 
+import TextInput from '../textInput/textInput';
+import MainButton from '../mainButton/mainButton';
+import Logo from '../logo/logo';
+import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
+import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
+
+import './login.scss';
+import '../mainButton/mainButton.scss';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-
 
   const initialValues = {
     email: '',
@@ -31,46 +37,48 @@ export const LoginForm = () => {
   };
 
   return (
-    <>
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
-        {(props) => {
-          const { values } = props;
-          return (
-            <div>
-              <img className="" src="" alt="wallet icon"></img>
-              <h1>Wallet</h1>
-              <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
-                <label htmlFor="email">
-                  <Field
-                    id="emailLog"
-                    name="email"
-                    type="email"
-                    placeholder="E-mail"
-                    value={values.email}
-                  />
-                  <ErrorMessage name="email">
-                    {(error) => <p className={css.formError}>{error}</p>}
-                  </ErrorMessage>
-                </label>
-                <label htmlFor="password">
-                  <Field
-                    id="passwordLog"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={values.password}
-                    autoComplete="off"
-                  />
-                </label>
-                <button type="submit">Login</button>
-                <NavLink className={css.link} to="/register">
-                  Register
-                </NavLink>
-              </Form>
-            </div>
-          );
-        }}
-      </Formik>
-    </>
+    <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      {(props) => {
+        const { values } = props;
+
+        return (
+          <div>
+            <Form className="form-login" onSubmit={(e) => handleSubmit(e)}>
+              <div className="logo">
+                <Logo />
+                <h1>Wallet</h1>
+              </div>
+              <div className="container_input">
+                <TextInput
+                  label={<EmailIcon width={20} height={16} />}
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  placeholder="E-mail"
+                  className="input"
+                />
+
+                <TextInput
+                  label={<LockIcon width={16} height={21} />}
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  placeholder="Password"
+                  className="input"
+                />
+              </div>
+              <div className="button_container">
+                <MainButton type="submit" text="Login" className="logo_btn" />
+                <div>
+                  <NavLink className="main_btn" to="/register">
+                    Register
+                  </NavLink>
+                </div>
+              </div>
+            </Form>
+          </div>
+        );
+      }}
+    </Formik>
   );
 };
