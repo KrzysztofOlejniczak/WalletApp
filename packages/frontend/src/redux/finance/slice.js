@@ -60,7 +60,6 @@ const financeSlice = createSlice({
       .addCase(editTransaction.pending, handlePending)
       .addCase(editTransaction.rejected, handleRejected)
       .addCase(editTransaction.fulfilled, (state, action) => {
-        console.log(state, action);
         state.loading = false;
         state.error = null;
       })

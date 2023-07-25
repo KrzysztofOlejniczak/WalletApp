@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { EditTransactionForm } from '../editTransactionForm/editTransactionForm';
 import css from './modalEditTransaction.module.css';
 

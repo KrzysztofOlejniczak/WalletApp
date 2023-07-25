@@ -5,7 +5,7 @@ import {
   editTransaction,
   fetchCategories,
 } from '../../redux/finance/operations';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,8 +33,6 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
     isExpense: transaction.isExpense,
   };
 
-  const [dateValue, setDateValue] = useState(initialValues.date);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCategories());
@@ -45,16 +43,14 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
   const handleSubmit = (e, values) => {
     e.preventDefault();
     const form = e.currentTarget;
-    console.log({
-      date: values.date,
-    });
+    const isoDate = new Date(values.date).toISOString();
     try {
       dispatch(
         editTransaction({
           _id: transaction._id,
           isExpense: values.isExpense,
           amount: values.amount,
-          date: values.date,
+          date: isoDate,
           category: values.category,
           comment: values.comment,
         })
@@ -133,10 +129,10 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 name="date"
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
-                value={formattedDate} //ora automatyczne aktualizowanie transakcji w tableCard.
+                value={formattedDate}
                 onChange={(newDate) => {
-                  setDateValue(newDate);
-                }}
+                    props.setFieldValue('date', newDate);
+                  }}
               />
               <Field
                 id="comment"

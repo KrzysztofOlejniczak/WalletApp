@@ -19,7 +19,6 @@ export default function HomeTab() {
 
     const handleEditTransaction = (transaction) => {
       setSelectedTransaction(transaction);
-/*       console.log(transaction) */
       setIsModalEditTransactionOpen(true);
     };
 
