@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 import validationSchema from '../../validations/validateForm';
 
-import TextInput from '../textInput/TextInput';
-import MainButton from '../mainButton/MainButton';
-import Logo from '../logo/Logo';
+import TextInput from '../textInput/textInput';
+import MainButton from '../mainButton1/mainButton';
+import Logo from '../logo/logo';
 import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
 import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
 
 import './login.scss';
-import '../mainButton/MainButton.scss';
+import '../mainButton1/MainButton.scss';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
