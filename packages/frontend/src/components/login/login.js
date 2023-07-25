@@ -6,7 +6,7 @@ import validationSchema from '../../validations/validateForm';
 
 import TextInput from '../textInput/textInput';
 import MainButton from '../mainButton/mainButton';
-import Logo from '../logo1/logo';
+import Logo from '../logo/logo';
 import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
 import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
 
