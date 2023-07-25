@@ -38,7 +38,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
     const form = e.currentTarget;
     dispatch(
       addTransaction({
-        isExpense: isChecked ? false : true,
+        isExpense: !isChecked,
         amount: form.elements.amount.value,
         date: dateValue,
         category: isChecked ? 'Income' : form.elements.category.value,
