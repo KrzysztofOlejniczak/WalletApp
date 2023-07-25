@@ -57,10 +57,7 @@ export default function HomeTab() {
       <ButtonAddTransactions
         handleClick={() => {
           dispatch(openModal('isModalAddTransactionOpen'));
-          console.log(isModalAddTransactionOpen);
         }}
-
-        // setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
       />
       {isModalAddTransactionOpen && (
         <ModalAddTransaction
