@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 import validationSchema from '../../validations/validateForm';
 
-import TextInput from '../textInput2/textInput';
+import TextInput from '../textInput/textInput';
 import MainButton from '../mainButton/mainButton';
 import Logo from '../logo/logo';
 import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
