@@ -55,7 +55,7 @@ export const logIn = createAsyncThunk(
       return res.data;
     } catch (error) {
 
-      notifyError(error.message);
+      // notifyError(error.message);
 
       return thunkAPI.rejectWithValue(error.message);
     } finally {
