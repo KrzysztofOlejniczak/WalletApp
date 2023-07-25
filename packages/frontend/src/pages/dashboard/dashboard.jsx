@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 // import Media from 'react-media';
-import { Grid, Container, useMediaQuery } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../components/header/header';
 import { Navigation } from '../../components/navigation/navigation';
@@ -11,11 +11,7 @@ import {
   fetchTransactions,
   fetchBalance,
 } from '../../redux/finance/operations';
-import {
-  EllipsePurple,
-  EllipsePink,
-} from '../../stylesheet/stylesMUI';
-import { StyledBox, Vector } from './dashboard.styles';
+import { Vector, ContainerWrapper, StyledContainer, DashboardWrapper } from './dashboard.styles';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -34,13 +30,17 @@ export default function DashboardPage() {
 
   const renderDeskTabLayout = () => {
     return (
-      <Grid container  sx={{height: '100%'}} direction={isTablet ? 'column' : 'row'}>
+      <Grid
+        container
+        sx={{ height: '100%' }}
+        direction={isTablet ? 'column' : 'row'}
+      >
         <Grid item variant={isDesktop ? 'desktop' : 'tablet'}>
           <Navigation />
           <Balance />
           <Currency />
         </Grid>
-        {isDesktop && <Vector  />}
+        {isDesktop && <Vector />}
         <Suspense>
           <Grid item>
             <Outlet />
@@ -66,15 +66,13 @@ export default function DashboardPage() {
   };
 
   return (
-    <>
+    <DashboardWrapper>
       <Header />
-      <StyledBox>
-          {!isMobile && <EllipsePurple sx={{ filter: 'blur(25px)' }} />}
-          {!isMobile && <EllipsePink sx={{ filter: 'blur(25px)' }} />}
-        <Container fixed>
+      <ContainerWrapper>
+        <StyledContainer fixed >
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
-        </Container>
-      </StyledBox>
-    </>
+        </StyledContainer>
+      </ContainerWrapper>
+    </DashboardWrapper>
   );
 }
