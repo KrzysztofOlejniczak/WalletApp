@@ -1,4 +1,5 @@
 const User = require('../../service/schemas/users');
+const BlacklistedToken = require('../../service/schemas/blacklistedTokens');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const {
@@ -103,10 +104,18 @@ const logout = async (req, res, next) => {
     });
   }
 
-  user.setToken(null);
-  await user.save();
+  try {
+    const token = user.token;
+    const blacklistedToken = new BlacklistedToken({ token });
+    await blacklistedToken.save();
 
-  return res.status(204).send();
+    user.setToken(null);
+    await user.save();
+
+    return res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getCurrent = async (req, res, next) => {
@@ -122,4 +131,5 @@ const getCurrent = async (req, res, next) => {
     next(error);
   }
 };
+
 module.exports = { signup, login, logout, getCurrent };

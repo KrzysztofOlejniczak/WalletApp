@@ -1,6 +1,7 @@
 const express = require('express');
 const ctrlUsers = require('../../controller/users');
 const auth = require('../../middleware/auth');
+const checkBlacklist = require('../../middleware/checkBlacklist');
 
 const router = express.Router();
 
@@ -155,7 +156,7 @@ router.post('/login', ctrlUsers.login);
  *          description: Internal server error
  */
 
-router.post('/logout', auth, ctrlUsers.logout);
+router.post('/logout', checkBlacklist, auth, ctrlUsers.logout);
 
 /**
  * @swagger
@@ -199,6 +200,6 @@ router.post('/logout', auth, ctrlUsers.logout);
  *          description: Internal server error
  */
 
-router.get('/current', auth, ctrlUsers.getCurrent);
+router.get('/current', checkBlacklist, auth, ctrlUsers.getCurrent);
 
 module.exports = router;

@@ -22,7 +22,7 @@ export const AddExpenseForm = ({ closeModal }) => {
 
   const [dateValue, setDateValue] = useState(initialValues.date);
 
-  console.log(dateValue)
+  // console.log(dateValue);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,37 +34,17 @@ export const AddExpenseForm = ({ closeModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
+    dispatch(
+      addTransaction({
+        isExpense: true,
+        amount: form.elements.amount.value,
+        date: dateValue,
+        category: form.elements.category.value,
+        comment: form.elements.comment.value,
+      })
+    );
 
-    try {
-      dispatch(
-        addTransaction({
-          isExpense: true,
-          amount: form.elements.amount.value,
-          date: dateValue,
-          category: form.elements.category.value,
-          comment: form.elements.comment.value,
-        })
-      );
-
-      form.reset();
-      closeModal();
-    } catch (error) {
-      // IMPLEMENT ERROR HANDLING
-      // console.log(error);
-      // toast.error(
-      //   { error },
-      //   {
-      //     position: 'top-right',
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'light',
-      //   }
-      // );
-    }
+    form.reset();
   };
 
   return (
