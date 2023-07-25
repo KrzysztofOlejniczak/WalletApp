@@ -12,7 +12,6 @@ import {
 const handlePending = (state) => {};
 
 const handleRejected = (state, action) => {
-  state.loading = false;
   state.error = action.payload;
 };
 
@@ -21,7 +20,6 @@ const financeSlice = createSlice({
   initialState: {
     transactions: [],
     balance: null,
-    loading: false,
     error: null,
     categories: [],
   },
@@ -31,21 +29,18 @@ const financeSlice = createSlice({
       .addCase(fetchTransactions.rejected, handleRejected)
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.transactions = action.payload;
-        state.loading = false;
         state.error = null;
       })
       .addCase(fetchBalance.pending, handlePending)
       .addCase(fetchBalance.rejected, handleRejected)
       .addCase(fetchBalance.fulfilled, (state, action) => {
         state.balance = action.payload.balance;
-        state.loading = false;
         state.error = null;
       })
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.rejected, handleRejected)
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.transactions.push(action.payload);
-        state.loading = false;
         state.error = null;
       })
       .addCase(deleteTransaction.pending, handlePending)
@@ -54,26 +49,22 @@ const financeSlice = createSlice({
         state.transactions = state.transactions.filter(
           (transaction) => transaction._id !== action.payload
         );
-        state.loading = false;
         state.error = null;
       })
       .addCase(editTransaction.pending, handlePending)
       .addCase(editTransaction.rejected, handleRejected)
       .addCase(editTransaction.fulfilled, (state, action) => {
-        state.loading = false;
         state.error = null;
       })
       .addCase(fetchCategories.pending, handlePending)
       .addCase(fetchCategories.rejected, handleRejected)
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.categories = action.payload;
-        state.loading = false;
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.transactions = [];
         state.balance = null;
-        state.loading = false;
         state.error = null;
       });
   },
