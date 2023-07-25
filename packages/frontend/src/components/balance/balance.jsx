@@ -3,6 +3,7 @@ import { selectBalance, selectError } from '../../redux/finance/selectors';
 export const Balance = () => {
   const balance = useSelector(selectBalance);
   const isError = useSelector(selectError);
+
   return (
     <div>
       {isError ? (
