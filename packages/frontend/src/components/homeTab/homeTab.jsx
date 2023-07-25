@@ -9,7 +9,7 @@ import { ButtonAddTransactions } from '../../components/buttonAddTransactions/bu
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
 import { ModalEditTransaction } from '../modalEditTransaction/modalEditTransaction';
 import { selectTransactions } from '../../redux/finance/selectors.js';
-import {TableWrapper} from './homeTab.styles'
+import { TableWrapper } from './homeTab.styles';
 
 export default function HomeTab() {
   const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
@@ -44,10 +44,7 @@ export default function HomeTab() {
       <div>
         <Balance />
         <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
-          <TableCard
-            data={sortedTransactions}
-            handleEditTransaction={handleEditTransaction}
-          />
+          <TableCard handleEditTransaction={handleEditTransaction} />
         </div>
       </div>
     );
