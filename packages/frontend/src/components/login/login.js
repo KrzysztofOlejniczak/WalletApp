@@ -1,9 +1,17 @@
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
-import css from '../registration/registerForm.module.css';
 import validationSchema from '../../validations/validateForm';
+
+import TextInput from '../textInput/textInput';
+import MainButton from '../mainButton/mainButton';
+import Logo from '../logo/logo';
+import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
+import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
+
+import './login.scss';
+import '../mainButton/mainButton.scss';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -11,13 +19,13 @@ export const LoginForm = () => {
   const initialValues = {
     email: '',
     password: '',
-    confirmPassword: '',
-    name: '',
+    // confirmPassword: '',
+    // name: '',
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+
     const form = e.currentTarget;
     dispatch(
       logIn({
@@ -35,35 +43,38 @@ export const LoginForm = () => {
 
         return (
           <div>
-            <img className="" src="" alt="wallet icon"></img>
-            <h1>Wallet</h1>
-            <Form className={css.form} onSubmit={(e) => handleSubmit(e)}>
-              <label htmlFor="email">
-                <Field
-                  id="emailLog"
-                  name="email"
+            <Form className="form-login" onSubmit={(e) => handleSubmit(e)}>
+              <div className="logo">
+                <Logo />
+                <h1>Wallet</h1>
+              </div>
+              <div className="container_input">
+                <TextInput
+                  label={<EmailIcon width={20} height={16} />}
                   type="email"
-                  placeholder="E-mail"
+                  name="email"
                   value={values.email}
+                  placeholder="E-mail"
+                  className="input"
                 />
-                <ErrorMessage name="email">
-                  {(error) => <p className={css.formError}>{error}</p>}
-                </ErrorMessage>
-              </label>
-              <label htmlFor="password">
-                <Field
-                  id="passwordLog"
-                  name="password"
+
+                <TextInput
+                  label={<LockIcon width={16} height={21} />}
                   type="password"
-                  placeholder="Password"
+                  name="password"
                   value={values.password}
-                  autoComplete="off"
+                  placeholder="Password"
+                  className="input"
                 />
-              </label>
-              <button type="submit">Login</button>
-              <NavLink className={css.link} to="/register">
-                Register
-              </NavLink>
+              </div>
+              <div className="button_container">
+                <MainButton type="submit" text="Login" className="logo_btn" />
+                <div>
+                  <NavLink className="main_btn" to="/register">
+                    Register
+                  </NavLink>
+                </div>
+              </div>
             </Form>
           </div>
         );
