@@ -1,4 +1,4 @@
-import { LoginForm } from '../../components/login1/login';
+import { LoginForm } from '../../components/login/login';
 import './loginPage.scss';
 
 export default function LoginPage() {
