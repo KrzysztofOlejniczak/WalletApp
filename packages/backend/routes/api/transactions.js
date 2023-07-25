@@ -1,6 +1,7 @@
 const express = require('express');
 const ctrlTransaction = require('../../controller/transactions');
 const auth = require('../../middleware/auth');
+const checkBlacklist = require('../../middleware/checkBlacklist');
 
 const router = express.Router();
 
@@ -94,7 +95,12 @@ const router = express.Router();
  *          description: Internal server error
  */
 
-router.post('/transactions', auth, ctrlTransaction.createTransaction);
+router.post(
+  '/transactions',
+  checkBlacklist,
+  auth,
+  ctrlTransaction.createTransaction
+);
 
 /**
  * @swagger
@@ -170,7 +176,12 @@ router.post('/transactions', auth, ctrlTransaction.createTransaction);
  *          description: Internal server error
  */
 
-router.get('/transactions', auth, ctrlTransaction.getTransactions);
+router.get(
+  '/transactions',
+  checkBlacklist,
+  auth,
+  ctrlTransaction.getTransactions
+);
 
 /**
  * @swagger
@@ -243,7 +254,12 @@ router.get('/transactions', auth, ctrlTransaction.getTransactions);
  *          description: Internal server error
  */
 
-router.get('/transactions/:year/:month', auth, ctrlTransaction.getMonthlyStats);
+router.get(
+  '/transactions/:year/:month',
+  checkBlacklist,
+  auth,
+  ctrlTransaction.getMonthlyStats
+);
 
 /**
  * @swagger
@@ -336,7 +352,12 @@ router.get('/transactions/:year/:month', auth, ctrlTransaction.getMonthlyStats);
  *          description: Internal server error
  */
 
-router.put('/transactions/:id', auth, ctrlTransaction.updateTransaction);
+router.put(
+  '/transactions/:id',
+  checkBlacklist,
+  auth,
+  ctrlTransaction.updateTransaction
+);
 
 /**
  * @swagger
@@ -380,7 +401,12 @@ router.put('/transactions/:id', auth, ctrlTransaction.updateTransaction);
  *          description: Internal server error
  */
 
-router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
+router.delete(
+  '/transactions/:id',
+  checkBlacklist,
+  auth,
+  ctrlTransaction.removeTransaction
+);
 
 /**
  * @swagger
@@ -416,7 +442,7 @@ router.delete('/transactions/:id', auth, ctrlTransaction.removeTransaction);
  *          description: Internal server error
  */
 
-router.get('/balance', auth, ctrlTransaction.getBalance);
+router.get('/balance', checkBlacklist, auth, ctrlTransaction.getBalance);
 
 /**
  * @swagger
