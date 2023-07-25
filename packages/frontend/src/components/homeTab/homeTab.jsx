@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Media from 'react-media';
 
-import { Table } from '../table/table';
+import Table from '../table/table';
 import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
@@ -13,6 +13,8 @@ import {
   selectIsModalAddTransactionOpen,
   selectIsModalEditTransactionOpen,
 } from '../../redux/global/selectors';
+import { selectTransactions } from '../../redux/finance/selectors.js';
+import {TableWrapper} from './homeTab.styles'
 
 export default function HomeTab() {
   const dispatch = useDispatch();
@@ -32,11 +34,17 @@ export default function HomeTab() {
     dispatch(openModal('isModalEditTransactionOpen'));
   };
 
+const transactions = useSelector(selectTransactions);
+
+const sortedTransactions = [...transactions].sort(
+(a, b) => new Date(b.date) - new Date(a.date)
+);
+
   const renderDesktopLayout = () => {
     return (
-      <div>
-        <Table />
-      </div>
+      <TableWrapper>
+        <Table data={sortedTransactions} />
+      </TableWrapper>
     );
   };
 
