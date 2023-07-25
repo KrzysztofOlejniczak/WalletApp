@@ -2,7 +2,7 @@ import { selectTransactions, selectError } from '../../redux/finance/selectors';
 import { deleteTransaction } from '../../redux/finance/operations';
 import { useSelector, useDispatch } from 'react-redux';
 
-export const TableCard = () => {
+export const TableCard = ({ handleEditTransaction }) => {
   const transactions = useSelector(selectTransactions);
   const isError = useSelector(selectError);
   const dispatch = useDispatch();
@@ -23,8 +23,6 @@ export const TableCard = () => {
     dispatch(deleteTransaction(transactionId));
   };
 
-  console.log(transactions);
-
   return (
     <div>
       {isError ? (
@@ -35,14 +33,14 @@ export const TableCard = () => {
             return (
               <li key={el._id}>
                 <p>Date {formatDate(el.date)}</p>
-                {el.type ? <p>Type {el.type}</p> : <p>Type -</p>}
+                {el.isExpense === true ? <p>Type -</p> : <p>Type +</p>}
                 <p>Category {el.category} </p>
                 <p>Comment {el.comment}</p>
                 <p> Sum {el.amount}</p>
                 <button onClick={() => handleDeleteTransaction(el._id)}>
                   Delete
                 </button>
-                <button>Edit</button>
+                <button onClick={() => handleEditTransaction(el)}>Edit</button>
               </li>
             );
           })}

@@ -2,27 +2,36 @@ import { Formik, Form, Field } from 'formik';
 import Datetime from 'react-datetime';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addTransaction,
+  editTransaction,
   fetchCategories,
 } from '../../redux/finance/operations';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
-import expenseAddValidationSchema from '../../validations/validateAddExpense';
+import editValidationSchema from '../../validations/validateEditTransaction';
 import { selectCategories } from '../../redux/finance/selectors';
 
-export const AddExpenseForm = ({ closeModal }) => {
-  const initialValues = {
-    amount: 0.0,
-    category: '',
-    date: new Date(),
-    comment: '',
+export const EditTransactionForm = ({ closeModal, transaction }) => {
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = String(dateObj.getFullYear()).slice(-2);
+
+    return `${day}-${month}-${year}`;
   };
 
-  const [dateValue, setDateValue] = useState(initialValues.date);
+  const formattedDate = formatDate(transaction.date);
 
-  console.log(dateValue)
+  const initialValues = {
+    _id: transaction._id,
+    amount: transaction.amount,
+    category: transaction.category,
+    date: transaction.date,
+    comment: transaction.comment,
+    isExpense: transaction.isExpense,
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,18 +40,19 @@ export const AddExpenseForm = ({ closeModal }) => {
 
   const categories = useSelector(selectCategories);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, values) => {
     e.preventDefault();
     const form = e.currentTarget;
-
+    const isoDate = new Date(values.date).toISOString();
     try {
       dispatch(
-        addTransaction({
-          isExpense: true,
-          amount: form.elements.amount.value,
-          date: dateValue,
-          category: form.elements.category.value,
-          comment: form.elements.comment.value,
+        editTransaction({
+          _id: transaction._id,
+          isExpense: values.isExpense,
+          amount: values.amount,
+          date: isoDate,
+          category: values.category,
+          comment: values.comment,
         })
       );
 
@@ -71,13 +81,13 @@ export const AddExpenseForm = ({ closeModal }) => {
     <>
       <Formik
         initialValues={initialValues}
-        validationSchema={expenseAddValidationSchema}
+        validationSchema={editValidationSchema}
       >
         {(props) => {
           const { values } = props;
           return (
             <Form
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={(e) => handleSubmit(e, props.values)}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -86,6 +96,18 @@ export const AddExpenseForm = ({ closeModal }) => {
                 rowGap: '10px',
               }}
             >
+              {/* Tu trzeba zrobić ładnego switcha */}
+              <span>Income</span>
+              <input
+                type="checkbox"
+                id="transaction-type"
+                name="transaction-type"
+                checked={values.isExpense}
+                onChange={() =>
+                  props.setFieldValue('isExpense', !values.isExpense)
+                }
+              />
+              <span>Expense</span>
               <Field as="select" id="category" name="category">
                 {categories
                   .filter((category) => category.name !== 'Income')
@@ -107,10 +129,10 @@ export const AddExpenseForm = ({ closeModal }) => {
                 name="date"
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
-                value={dateValue}
+                value={formattedDate}
                 onChange={(newDate) => {
-                  setDateValue(newDate);
-                }}
+                    props.setFieldValue('date', newDate);
+                  }}
               />
               <Field
                 id="comment"
@@ -119,7 +141,7 @@ export const AddExpenseForm = ({ closeModal }) => {
                 value={values.comment}
                 placeholder="Comment"
               ></Field>
-              <button type="submit">Add</button>
+              <button type="submit">Change</button>
             </Form>
           );
         }}
