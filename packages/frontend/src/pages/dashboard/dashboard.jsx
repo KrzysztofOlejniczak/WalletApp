@@ -11,7 +11,7 @@ import {
   fetchTransactions,
   fetchBalance,
 } from '../../redux/finance/operations';
-import { Vector, ContainerWrapper, StyledContainer } from './dashboard.styles';
+import { Vector, ContainerWrapper, StyledContainer, DashboardWrapper } from './dashboard.styles';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -66,13 +66,13 @@ export default function DashboardPage() {
   };
 
   return (
-    <>
+    <DashboardWrapper>
       <Header />
       <ContainerWrapper>
         <StyledContainer fixed >
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
         </StyledContainer>
       </ContainerWrapper>
-    </>
+    </DashboardWrapper>
   );
 }

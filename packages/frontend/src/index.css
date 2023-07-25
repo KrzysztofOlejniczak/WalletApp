@@ -24,13 +24,6 @@ code {
   flex-direction: column;
 }
 
-#root > .MuiContainer-fixed {
-  padding: 0;
-}
-
-#root > div > .MuiContainer-fixed {
-  padding: 0 16px;
-}
 
 link {
   text-decoration: none;
