@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { AddExpenseForm } from '../addExpenseForm/addExpenseForm';
 import { AddIncomeForm } from '../addIncomeForm/addIncomeForm';
 import css from './modalAddTransaction.module.css';
+import { useSelector } from 'react-redux';
+import { selectError } from '../../redux/finance/selectors';
+import { NotifyError } from '../errNotifications/errNotify';
 
 export const ModalAddTransaction = ({ closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const error = useSelector(selectError);
+  const shouldShowError = error !== null;
 
   return (
     <div className={css.overlay}>
@@ -30,6 +36,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
         )}
         <button onClick={closeModal}>Cancel</button>
       </div>
+      {shouldShowError ? <NotifyError error={error} /> : null}
     </div>
   );
 };

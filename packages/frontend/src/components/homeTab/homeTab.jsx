@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Media from 'react-media';
 
 import { Table } from '../table/table';
@@ -7,22 +7,30 @@ import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
 import { ModalEditTransaction } from '../modalEditTransaction/modalEditTransaction';
+import { closeModal, openModal } from '../../redux/global/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectIsModalAddTransactionOpen,
+  selectIsModalEditTransactionOpen,
+} from '../../redux/global/selectors';
 
 export default function HomeTab() {
-  const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
-    useState(false);
+  const dispatch = useDispatch();
 
-    const [isModalEditTransactionOpen, setIsModalEditTransactionOpen] =
-    useState(false);
+  const isModalAddTransactionOpen = useSelector(
+    selectIsModalAddTransactionOpen
+  );
 
-    const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const isModalEditTransactionOpen = useSelector(
+    selectIsModalEditTransactionOpen
+  );
 
-    const handleEditTransaction = (transaction) => {
-      setSelectedTransaction(transaction);
-      setIsModalEditTransactionOpen(true);
-    };
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-
+  const handleEditTransaction = (transaction) => {
+    setSelectedTransaction(transaction);
+    dispatch(openModal('isModalEditTransactionOpen'));
+  };
 
   const renderDesktopLayout = () => {
     return (
@@ -47,21 +55,25 @@ export default function HomeTab() {
         {(matches) => (matches ? renderDesktopLayout() : renderMobileLayout())}
       </Media>
       <ButtonAddTransactions
-          handleClick={() =>
-            setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
-          }
+        handleClick={() => {
+          dispatch(openModal('isModalAddTransactionOpen'));
+          console.log(isModalAddTransactionOpen);
+        }}
+
+        // setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
+      />
+      {isModalAddTransactionOpen && (
+        <ModalAddTransaction
+          closeModal={() => dispatch(closeModal('isModalAddTransactionOpen'))}
         />
-        {isModalAddTransactionOpen && (
-          <ModalAddTransaction
-            closeModal={() => setIsModalAddTransactionOpen(false)}
-          />
-        )}
-         {isModalEditTransactionOpen && (
-          <ModalEditTransaction
-          closeModal={() => setIsModalEditTransactionOpen(false)}
+      )}
+
+      {isModalEditTransactionOpen && (
+        <ModalEditTransaction
+          closeModal={() => dispatch(closeModal('isModalEditTransactionOpen'))}
           transaction={selectedTransaction}
-          />
-        )}
+        />
+      )}
     </div>
   );
 }

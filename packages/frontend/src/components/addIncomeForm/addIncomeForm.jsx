@@ -22,36 +22,18 @@ export const AddIncomeForm = ({ closeModal }) => {
     e.preventDefault();
 
     const form = e.currentTarget;
+    dispatch(
+      addTransaction({
+        isExpense: false,
+        amount: form.elements.amount.value,
+        date: dateValue,
+        comment: form.elements.comment.value,
+      })
+    );
 
-    try {
-      dispatch(
-        addTransaction({
-          isExpense: false,
-          amount: form.elements.amount.value,
-          date: dateValue,
-          comment: form.elements.comment.value,
-        })
-      );
-
-      form.reset();
-      closeModal();
-    } catch (error) {
-      // IMPLEMENT ERROR HANDLING
-      // <ToastContainer />;
-      // toast.error(`${error}`, {
-      //   position: 'top-right',
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: 'light',
-      // });
-    }
+    form.reset();
 
     // closeModal();
-    form.reset();
   };
 
   return (
@@ -60,7 +42,6 @@ export const AddIncomeForm = ({ closeModal }) => {
         initialValues={initialValues}
         validationSchema={incomeAddValidationSchema}
       >
-        {/* dodac errorHandle z toastify */}
         {(props) => {
           const { values } = props;
           return (
