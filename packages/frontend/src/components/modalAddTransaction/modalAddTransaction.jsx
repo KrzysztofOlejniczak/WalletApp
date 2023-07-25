@@ -47,7 +47,6 @@ export const ModalAddTransaction = ({ closeModal }) => {
     );
 
     form.reset();
-    // closeModal();
   };
 
   const error = useSelector(selectError);
