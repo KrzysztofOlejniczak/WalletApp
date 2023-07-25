@@ -1,34 +1,41 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Media from 'react-media';
+import { useSelector } from 'react-redux';
 
-import { Table } from '../table/table';
+import Table from '../table/table';
 import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
 import { ModalEditTransaction } from '../modalEditTransaction/modalEditTransaction';
+import { selectTransactions } from '../../redux/finance/selectors.js';
+import {TableWrapper} from './homeTab.styles'
 
 export default function HomeTab() {
   const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] =
     useState(false);
 
-    const [isModalEditTransactionOpen, setIsModalEditTransactionOpen] =
+  const [isModalEditTransactionOpen, setIsModalEditTransactionOpen] =
     useState(false);
 
-    const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-    const handleEditTransaction = (transaction) => {
-      setSelectedTransaction(transaction);
-      setIsModalEditTransactionOpen(true);
-    };
+  const handleEditTransaction = (transaction) => {
+    setSelectedTransaction(transaction);
+    setIsModalEditTransactionOpen(true);
+  };
 
+  const transactions = useSelector(selectTransactions);
 
+  const sortedTransactions = [...transactions].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 
   const renderDesktopLayout = () => {
     return (
-      <div>
-        <Table />
-      </div>
+      <TableWrapper>
+        <Table data={sortedTransactions} />
+      </TableWrapper>
     );
   };
 
@@ -36,7 +43,12 @@ export default function HomeTab() {
     return (
       <div>
         <Balance />
-        <TableCard handleEditTransaction={handleEditTransaction} />
+        <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+          <TableCard
+            data={sortedTransactions}
+            handleEditTransaction={handleEditTransaction}
+          />
+        </div>
       </div>
     );
   };
@@ -47,21 +59,21 @@ export default function HomeTab() {
         {(matches) => (matches ? renderDesktopLayout() : renderMobileLayout())}
       </Media>
       <ButtonAddTransactions
-          handleClick={() =>
-            setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
-          }
+        handleClick={() =>
+          setIsModalAddTransactionOpen(!isModalAddTransactionOpen)
+        }
+      />
+      {isModalAddTransactionOpen && (
+        <ModalAddTransaction
+          closeModal={() => setIsModalAddTransactionOpen(false)}
         />
-        {isModalAddTransactionOpen && (
-          <ModalAddTransaction
-            closeModal={() => setIsModalAddTransactionOpen(false)}
-          />
-        )}
-         {isModalEditTransactionOpen && (
-          <ModalEditTransaction
+      )}
+      {isModalEditTransactionOpen && (
+        <ModalEditTransaction
           closeModal={() => setIsModalEditTransactionOpen(false)}
           transaction={selectedTransaction}
-          />
-        )}
+        />
+      )}
     </div>
   );
 }

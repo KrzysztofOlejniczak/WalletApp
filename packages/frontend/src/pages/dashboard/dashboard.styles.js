@@ -11,17 +11,17 @@ export const DashboardWrapper = styled('div')({
   flexDirection: 'column',
   '@media (max-width: 767px)': {
     '& .MuiContainer-fixed': {
-      padding: '0 20px', 
+      padding: '0 20px',
     },
   },
   '@media (min-width: 768px) and (max-width: 1279px)': {
     '& .MuiContainer-fixed': {
-      padding: '0 32px', 
+      padding: '0 32px',
     },
   },
   '@media (min-width: 1280px)': {
     '& .MuiContainer-fixed': {
-      padding: '0 16px', 
+      padding: '0 16px',
     },
   },
 });
