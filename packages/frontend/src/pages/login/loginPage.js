@@ -1,7 +1,11 @@
 import { LoginForm } from '../../components/login/login';
-import './loginPage.scss';
+import { Container } from '@mui/material';
 
 export default function LoginPage() {
+  const error = useSelector(selectError);
+
+  const shouldShowError = error !== null;
+
   return (
     <div className="page_center">
       <div className="page">

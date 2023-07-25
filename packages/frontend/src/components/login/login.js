@@ -19,13 +19,13 @@ export const LoginForm = () => {
   const initialValues = {
     email: '',
     password: '',
-    confirmPassword: '',
-    name: '',
+    // confirmPassword: '',
+    // name: '',
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+
     const form = e.currentTarget;
     dispatch(
       logIn({
