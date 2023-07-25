@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { ErrorMessage, useField } from 'formik';
-import './TextInput.scss';
+import './textInput.scss';
 
 const TextInput = ({ label, ...props }) => {
   const [field] = useField(props);

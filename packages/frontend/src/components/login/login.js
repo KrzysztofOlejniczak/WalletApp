@@ -11,7 +11,7 @@ import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
 import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
 
 import './login.scss';
-import '../mainButton/MainButton.scss';
+import '../mainButton/mainButton.scss';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();

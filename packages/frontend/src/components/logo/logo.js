@@ -1,6 +1,6 @@
 import React from 'react';
 import sprite from '../../images/svg/symbol-defs.svg';
-import './Logo.scss';
+import './logo.scss';
 
 const Logo = () => {
   return (
