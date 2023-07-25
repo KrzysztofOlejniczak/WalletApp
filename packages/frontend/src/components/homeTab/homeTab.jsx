@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Media from 'react-media';
 import { useSelector } from 'react-redux';
 
-import {TransactionsTable} from '../table/table'
+import Table from '../table/table';
 import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
@@ -34,7 +34,7 @@ export default function HomeTab() {
   const renderDesktopLayout = () => {
     return (
       <TableWrapper>
-        <TransactionsTable data={sortedTransactions} />
+        <Table data={sortedTransactions} />
       </TableWrapper>
     );
   };
