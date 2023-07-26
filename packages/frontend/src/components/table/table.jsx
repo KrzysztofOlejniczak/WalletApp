@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
@@ -13,7 +12,7 @@ import {
 } from '@mui/material';
 
 import { ReactComponent as Edit } from '../../images/edit.svg';
-import {StyledTableCell} from './table.styles'
+import { StyledTableCell } from './table.styles';
 
 export default function TransactionsTable({
   data,
@@ -54,13 +53,17 @@ export default function TransactionsTable({
               key={el._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <StyledTableCell align="left">{formatDate(el.date)}</StyledTableCell>
+              <StyledTableCell align="left">
+                {formatDate(el.date)}
+              </StyledTableCell>
               <StyledTableCell align="left">
                 {el.isExpense === true ? '-' : '+'}
               </StyledTableCell>
               <StyledTableCell align="left">{el.category}</StyledTableCell>
               <StyledTableCell align="left">{el.comment}</StyledTableCell>
-              <StyledTableCell align="right">{formatAmount(el.amount)}</StyledTableCell>
+              <StyledTableCell align="right">
+                {formatAmount(el.amount)}
+              </StyledTableCell>
               <StyledTableCell align="center">
                 <IconButton
                   aria-label="edit"
