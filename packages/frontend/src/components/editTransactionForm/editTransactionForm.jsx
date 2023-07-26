@@ -82,7 +82,7 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 type="checkbox"
                 id="transaction-type"
                 name="transaction-type"
-                checked={values.isExpense}
+                checked={!values.isExpense}
                 onChange={() =>
                   props.setFieldValue('isExpense', !values.isExpense)
                 }
