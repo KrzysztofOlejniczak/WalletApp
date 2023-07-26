@@ -44,37 +44,18 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
     e.preventDefault();
     const form = e.currentTarget;
     const isoDate = new Date(values.date).toISOString();
-    try {
-      dispatch(
-        editTransaction({
-          _id: transaction._id,
-          isExpense: values.isExpense,
-          amount: values.amount,
-          date: isoDate,
-          category: values.category,
-          comment: values.comment,
-        })
-      );
+    dispatch(
+      editTransaction({
+        _id: transaction._id,
+        isExpense: values.isExpense,
+        amount: values.amount,
+        date: isoDate,
+        category: values.category,
+        comment: values.comment,
+      })
+    );
 
-      form.reset();
-      closeModal();
-    } catch (error) {
-      // IMPLEMENT ERROR HANDLING
-      // console.log(error);
-      // toast.error(
-      //   { error },
-      //   {
-      //     position: 'top-right',
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'light',
-      //   }
-      // );
-    }
+    form.reset();
   };
 
   return (
@@ -131,8 +112,8 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 timeFormat={false}
                 value={formattedDate}
                 onChange={(newDate) => {
-                    props.setFieldValue('date', newDate);
-                  }}
+                  props.setFieldValue('date', newDate);
+                }}
               />
               <Field
                 id="comment"

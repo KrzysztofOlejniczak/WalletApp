@@ -123,6 +123,7 @@ export const editTransaction = createAsyncThunk(
       );
       thunkAPI.dispatch(fetchBalance());
       thunkAPI.dispatch(fetchTransactions());
+      thunkAPI.dispatch(closeModal('isModalEditTransactionOpen'));
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
