@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Media from 'react-media';
-
-import { Table } from '../table/table';
+import { useMediaQuery } from '@mui/material';
+import Table from '../table/table';
 import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
@@ -13,9 +12,14 @@ import {
   selectIsModalAddTransactionOpen,
   selectIsModalEditTransactionOpen,
 } from '../../redux/global/selectors';
+import { selectTransactions } from '../../redux/finance/selectors.js';
+import { deleteTransaction } from '../../redux/finance/operations.js';
+import { TableWrapper } from './homeTab.styles';
 
 export default function HomeTab() {
   const dispatch = useDispatch();
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const isModalAddTransactionOpen = useSelector(
     selectIsModalAddTransactionOpen
@@ -32,11 +36,25 @@ export default function HomeTab() {
     dispatch(openModal('isModalEditTransactionOpen'));
   };
 
-  const renderDesktopLayout = () => {
+  const handleDeleteTransaction = (transactionId) => {
+    dispatch(deleteTransaction(transactionId));
+  };
+
+  const transactions = useSelector(selectTransactions);
+
+  const sortedTransactions = [...transactions].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  const renderDeskTabLayout = () => {
     return (
-      <div>
-        <Table />
-      </div>
+      <TableWrapper>
+        <Table
+          data={sortedTransactions}
+          handleEditTransaction={handleEditTransaction}
+          handleDeleteTransaction={handleDeleteTransaction}
+        />
+      </TableWrapper>
     );
   };
 
@@ -44,16 +62,19 @@ export default function HomeTab() {
     return (
       <div>
         <Balance />
-        <TableCard handleEditTransaction={handleEditTransaction} />
+        <TableCard
+          data={sortedTransactions}
+          handleEditTransaction={handleEditTransaction}
+          handleDeleteTransaction={handleDeleteTransaction}
+        />
       </div>
     );
   };
 
   return (
     <div>
-      <Media query="(min-width: 768px)">
-        {(matches) => (matches ? renderDesktopLayout() : renderMobileLayout())}
-      </Media>
+      {!isMobile ? renderDeskTabLayout() : renderMobileLayout()}
+
       <ButtonAddTransactions
         handleClick={() => {
           dispatch(openModal('isModalAddTransactionOpen'));

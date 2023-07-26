@@ -1,11 +1,12 @@
-import { selectTransactions, selectError } from '../../redux/finance/selectors';
-import { deleteTransaction } from '../../redux/finance/operations';
-import { useSelector, useDispatch } from 'react-redux';
+import { selectError } from '../../redux/finance/selectors';
+import { useSelector } from 'react-redux';
 
-export const TableCard = ({ handleEditTransaction }) => {
-  const transactions = useSelector(selectTransactions);
+export const TableCard = ({
+  data,
+  handleEditTransaction,
+  handleDeleteTransaction,
+}) => {
   const isError = useSelector(selectError);
-  const dispatch = useDispatch();
 
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
@@ -16,20 +17,13 @@ export const TableCard = ({ handleEditTransaction }) => {
     return `${day}.${month}.${year}`;
   };
 
-  const sortedTransactions = [...transactions];
-  sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const handleDeleteTransaction = (transactionId) => {
-    dispatch(deleteTransaction(transactionId));
-  };
-
   return (
     <div>
       {isError ? (
         <p>Something went wrong!</p>
       ) : (
         <ul>
-          {sortedTransactions.map((el) => {
+          {data.map((el) => {
             return (
               <li key={el._id}>
                 <p>Date {formatDate(el.date)}</p>

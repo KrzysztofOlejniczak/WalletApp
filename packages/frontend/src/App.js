@@ -10,7 +10,6 @@ import { refreshUser } from './redux/auth/operations';
 import { selectIsLoading } from './redux/global/selectors';
 import Loader from './components/loader/loader';
 
-
 const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();

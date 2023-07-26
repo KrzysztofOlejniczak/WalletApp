@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
-import Media from 'react-media';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { useMediaQuery } from '@mui/material';
 
 import LoginPage from './pages/login/loginPage';
 import RegistrationPage from './pages/registration/registrationPage';
@@ -12,8 +12,9 @@ const HomeTab = lazy(() => import('./components/homeTab/homeTab'));
 const DiagramTab = lazy(() => import('./components/diagramTab/diagramTab'));
 const Currency = lazy(() => import('./components/currency/currency'));
 
-
 const Routing = () => {
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />}>
@@ -49,11 +50,7 @@ const Routing = () => {
       <Route path="/currency" element={<DashboardPage />}>
         <Route
           index
-          element={
-            <Media query="(max-width: 767px)">
-              {(matches) => (matches ? <Currency /> : <Navigate to="/login" />)}
-            </Media>
-          }
+          element={isMobile ? <Currency /> : <Navigate to="/login" />}
         />
       </Route>
 
