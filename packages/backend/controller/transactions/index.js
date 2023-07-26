@@ -33,14 +33,9 @@ const createTransaction = async (req, res, next) => {
 
 const getTransactions = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 5;
-    const skip = (page - 1) * limit;
     const owner = req.user._id;
 
-    const results = await Transaction.find({ owner }, { owner: 0, __v: 0 })
-      .skip(skip)
-      .limit(limit);
+    const results = await Transaction.find({ owner }, { owner: 0, __v: 0 });
 
     res.status(200).json(results);
   } catch (e) {
