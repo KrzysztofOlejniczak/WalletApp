@@ -1,5 +1,6 @@
 const User = require('../../service/schemas/users');
 const BlacklistedToken = require('../../service/schemas/blacklistedTokens');
+const RefreshToken = require('../../service/schemas/refreshTokens');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const {
@@ -8,6 +9,7 @@ const {
 } = require('../../validation');
 
 const SECRET = process.env.SECRET;
+const REFRESH = process.env.REFRESH;
 
 const signup = async (req, res, next) => {
   const { email, password, name } = req.body;
@@ -36,10 +38,17 @@ const signup = async (req, res, next) => {
         const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
         newUser.setToken(token);
 
+        const refresh = jwt.sign(payload, REFRESH, { expiresIn: '1w' });
+        newUser.setRefresh(refresh);
+
+        const refreshToken = new RefreshToken({ refresh });
+        await refreshToken.save();
+
         await newUser.save();
 
         res.status(201).json({
           token: newUser.token,
+          refresh: newUser.refresh,
           user: {
             email: newUser.email,
             name: newUser.name,
@@ -76,12 +85,19 @@ const login = async (req, res, next) => {
         id: user.id,
       };
       const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
-
       user.setToken(token);
+
+      const refresh = jwt.sign(payload, REFRESH, { expiresIn: '1w' });
+      user.setRefresh(refresh);
+
+      const refreshToken = new RefreshToken({ refresh });
+      await refreshToken.save();
+
       await user.save();
 
       res.status(200).json({
         token: user.token,
+        refresh: user.refresh,
         user: {
           email: user.email,
           name: user.name,
@@ -106,10 +122,16 @@ const logout = async (req, res, next) => {
 
   try {
     const token = user.token;
+    const refresh = user.refresh;
+
     const blacklistedToken = new BlacklistedToken({ token });
     await blacklistedToken.save();
 
     user.setToken(null);
+    user.setRefresh(null);
+
+    await RefreshToken.findOneAndDelete({ refresh });
+
     await user.save();
 
     return res.status(204).send();
@@ -132,4 +154,8 @@ const getCurrent = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login, logout, getCurrent };
+const refresh = async (req, res, next) => {
+  console.log('l');
+};
+
+module.exports = { signup, login, logout, getCurrent, refresh };
