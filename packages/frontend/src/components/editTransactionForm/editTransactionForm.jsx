@@ -50,7 +50,7 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
         isExpense: values.isExpense,
         amount: values.amount,
         date: isoDate,
-        category: values.category,
+        category: values.isExpense ? values.category : 'Income',
         comment: values.comment,
       })
     );
@@ -77,7 +77,6 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 rowGap: '10px',
               }}
             >
-              {/* Tu trzeba zrobić ładnego switcha */}
               <span>Income</span>
               <input
                 type="checkbox"
@@ -89,15 +88,6 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 }
               />
               <span>Expense</span>
-              <Field as="select" id="category" name="category">
-                {categories
-                  .filter((category) => category.name !== 'Income')
-                  .map((category) => (
-                    <option key={category.id} value={category.name}>
-                      {category.name}
-                    </option>
-                  ))}
-              </Field>
               <Field
                 type="text"
                 id="amount"
@@ -105,6 +95,17 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 placeholder="Amount"
                 value={values.amount}
               />
+              {values.isExpense ? (
+                <Field as="select" id="category" name="category">
+                  {categories
+                    .filter((category) => category.name !== 'Income')
+                    .map((category) => (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                </Field>
+              ) : null}
               <Datetime
                 id="date"
                 name="date"
