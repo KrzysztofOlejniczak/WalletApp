@@ -44,37 +44,18 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
     e.preventDefault();
     const form = e.currentTarget;
     const isoDate = new Date(values.date).toISOString();
-    try {
-      dispatch(
-        editTransaction({
-          _id: transaction._id,
-          isExpense: values.isExpense,
-          amount: values.amount,
-          date: isoDate,
-          category: values.category,
-          comment: values.comment,
-        })
-      );
+    dispatch(
+      editTransaction({
+        _id: transaction._id,
+        isExpense: values.isExpense,
+        amount: values.amount,
+        date: isoDate,
+        category: values.isExpense ? values.category : 'Income',
+        comment: values.comment,
+      })
+    );
 
-      form.reset();
-      closeModal();
-    } catch (error) {
-      // IMPLEMENT ERROR HANDLING
-      // console.log(error);
-      // toast.error(
-      //   { error },
-      //   {
-      //     position: 'top-right',
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'light',
-      //   }
-      // );
-    }
+    form.reset();
   };
 
   return (
@@ -96,27 +77,17 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 rowGap: '10px',
               }}
             >
-              {/* Tu trzeba zrobić ładnego switcha */}
               <span>Income</span>
               <input
                 type="checkbox"
                 id="transaction-type"
                 name="transaction-type"
-                checked={values.isExpense}
+                checked={!values.isExpense}
                 onChange={() =>
                   props.setFieldValue('isExpense', !values.isExpense)
                 }
               />
               <span>Expense</span>
-              <Field as="select" id="category" name="category">
-                {categories
-                  .filter((category) => category.name !== 'Income')
-                  .map((category) => (
-                    <option key={category.id} value={category.name}>
-                      {category.name}
-                    </option>
-                  ))}
-              </Field>
               <Field
                 type="text"
                 id="amount"
@@ -124,6 +95,17 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 placeholder="Amount"
                 value={values.amount}
               />
+              {values.isExpense ? (
+                <Field as="select" id="category" name="category">
+                  {categories
+                    .filter((category) => category.name !== 'Income')
+                    .map((category) => (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                </Field>
+              ) : null}
               <Datetime
                 id="date"
                 name="date"
@@ -131,8 +113,8 @@ export const EditTransactionForm = ({ closeModal, transaction }) => {
                 timeFormat={false}
                 value={formattedDate}
                 onChange={(newDate) => {
-                    props.setFieldValue('date', newDate);
-                  }}
+                  props.setFieldValue('date', newDate);
+                }}
               />
               <Field
                 id="comment"
