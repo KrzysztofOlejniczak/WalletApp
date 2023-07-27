@@ -35,7 +35,7 @@ export default function HomeTab() {
   const renderDesktopLayout = () => {
     return (
       <div>
-        <Table />
+        <TableCard handleEditTransaction={handleEditTransaction} />
       </div>
     );
   };

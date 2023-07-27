@@ -1,0 +1,234 @@
+@import '../../stylesheet/main.scss';
+
+.transactionList {
+  list-style: none;
+  padding: 0rem;
+  margin-top: 1.25rem;
+}
+
+.transactionListContainer {
+  width: 100%;
+  padding: 2.5rem 0rem 2.5rem 2.875rem;
+  @media screen and (min-width: $DesktopWidth) {
+    border-left: 0.0625rem solid #e7e5f2;
+  }
+}
+.transactionListHeader {
+  background-color: var(--white);
+  border-radius: 1.875rem;
+  width: 704px;
+  @media screen and (min-width: $DesktopWidth) {
+    width: 715px;
+  }
+  display: flex;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  margin-top: 0.625rem;
+}
+
+.transactionDetailName {
+  font-family: 'Circe';
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  color: var(--primary-text-color);
+}
+
+.dateBox {
+  width: 11.66%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.typeBox {
+  width: 11.66%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryBox {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.commentBox {
+  width: 16.66%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.sumBox {
+  width: 16.66%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-weight: 700;
+}
+
+.dummyBox {
+  width: 16.66%;
+}
+/////////////////////
+
+.transactionBox {
+  display: flex;
+  padding: 0.5625rem 1.25rem;
+  border-bottom: 0.0625rem solid var(--transactions-line);
+  font-family: 'Circe';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  justify-content: space-between;
+}
+
+.deleteButton {
+  font-family: 'Circe';
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--accent-green);
+  border-radius: 1.125rem;
+  color: var(--white);
+  border: none;
+  transition: 200ms;
+}
+
+.deleteButton:hover {
+  background-color: var(--accent-red);
+  cursor: pointer;
+}
+
+.deleteButton:focus {
+  outline: none;
+}
+
+.editDeleteBox {
+  width: 16.66%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.greenSum {
+  color: var(--accent-green);
+}
+
+.redSum {
+  color: var(--accent-red);
+}
+
+.editIcon {
+  width: 1rem;
+  margin-right: 0.3125rem;
+  cursor: pointer;
+  transition: width 200ms;
+}
+
+.editIcon:hover {
+  width: 1.2rem;
+}
+
+///////mobile////////
+.mobiletransactionBox {
+  background-color: var(--white);
+  border-radius: 0.625rem;
+  padding-top: 0.5rem;
+  border-left: 0.3125rem solid;
+  margin-bottom: 0.5rem;
+}
+
+.greenBorder {
+  border-color: var(--accent-green);
+}
+
+.redBorder {
+  border-color: var(--accent-red);
+}
+
+.transactionSubBox {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1.25rem;
+  border-bottom: 0.0625rem solid var(--color-transaction-border);
+}
+
+.mobileTransactionDetailName {
+  font-family: 'Circe';
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  display: inline-block;
+  margin-right: 0.625rem;
+  color: var(--primary-text-color);
+}
+
+.transactionDetailValue {
+  font-family: 'Circe';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  color: var(--primary-text-color);
+}
+
+.mobileDeleteButton {
+  font-family: 'Circe';
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--accent-green);
+  border-radius: 1.125rem;
+  color: var(--white);
+  border: none;
+  transition: 200ms;
+}
+
+.mobileDeleteButton:hover {
+  background-color: var(--accent-red);
+  cursor: pointer;
+}
+
+.mobileDeleteButton:focus {
+  outline: none;
+}
+
+.editTransaction {
+  cursor: pointer;
+  color: var(--primary-text-color);
+  font-family: 'Circe';
+  font-size: 0.875rem;
+}
+
+.editBox {
+  display: flex;
+  align-items: center;
+}
+
+.editBox:hover {
+  cursor: pointer;
+}
+
+.mobileEditIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.3125rem;
+  transition: width 200ms;
+}
+
+.mobileEditIcon:hover .mobileEditIcon {
+  width: 1.2rem;
+}

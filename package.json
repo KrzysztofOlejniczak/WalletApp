@@ -28,6 +28,8 @@
     "trailingComma": "es5"
   },
   "dependencies": {
+    "react-svg": "^16.1.19",
+    "recharts": "^2.7.2",
     "sass": "^1.64.1",
     "start": "^5.1.0"
   }
