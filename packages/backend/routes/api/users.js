@@ -202,4 +202,6 @@ router.post('/logout', checkBlacklist, auth, ctrlUsers.logout);
 
 router.get('/current', checkBlacklist, auth, ctrlUsers.getCurrent);
 
+router.get('/refresh', ctrlUsers.refresh);
+
 module.exports = router;

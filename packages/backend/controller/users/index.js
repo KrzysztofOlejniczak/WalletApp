@@ -1,6 +1,7 @@
 const User = require('../../service/schemas/users');
 const BlacklistedToken = require('../../service/schemas/blacklistedTokens');
 const RefreshToken = require('../../service/schemas/refreshTokens');
+const { generateTokens } = require('../../utils/tokens');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const {
@@ -8,7 +9,6 @@ const {
   validationUserLoginSchema,
 } = require('../../validation');
 
-const SECRET = process.env.SECRET;
 const REFRESH = process.env.REFRESH;
 
 const signup = async (req, res, next) => {
@@ -31,15 +31,9 @@ const signup = async (req, res, next) => {
         const newUser = new User({ email, name });
         newUser.setPassword(password);
 
-        const payload = {
-          id: newUser.id,
-        };
+        const id = newUser.id;
 
-        const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
-        newUser.setToken(token);
-
-        const refresh = jwt.sign(payload, REFRESH, { expiresIn: '1w' });
-        newUser.setRefresh(refresh);
+        const { token, refresh } = generateTokens(id);
 
         const refreshToken = new RefreshToken({ refresh });
         await refreshToken.save();
@@ -47,8 +41,8 @@ const signup = async (req, res, next) => {
         await newUser.save();
 
         res.status(201).json({
-          token: newUser.token,
-          refresh: newUser.refresh,
+          token: token,
+          refresh: refresh,
           user: {
             email: newUser.email,
             name: newUser.name,
@@ -81,13 +75,10 @@ const login = async (req, res, next) => {
         });
       }
 
-      const payload = {
-        id: user.id,
-      };
-      const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
-      user.setToken(token);
+      const id = user.id;
 
-      const refresh = jwt.sign(payload, REFRESH, { expiresIn: '1w' });
+      const { token, refresh } = generateTokens(id);
+
       user.setRefresh(refresh);
 
       const refreshToken = new RefreshToken({ refresh });
@@ -96,7 +87,7 @@ const login = async (req, res, next) => {
       await user.save();
 
       res.status(200).json({
-        token: user.token,
+        token: token,
         refresh: user.refresh,
         user: {
           email: user.email,
@@ -121,13 +112,12 @@ const logout = async (req, res, next) => {
   }
 
   try {
-    const token = user.token;
+    const token = req.header('Authorization').split(' ')[1];
     const refresh = user.refresh;
 
     const blacklistedToken = new BlacklistedToken({ token });
     await blacklistedToken.save();
 
-    user.setToken(null);
     user.setRefresh(null);
 
     await RefreshToken.findOneAndDelete({ refresh });
@@ -155,7 +145,42 @@ const getCurrent = async (req, res, next) => {
 };
 
 const refresh = async (req, res, next) => {
-  console.log('l');
+  const { refresh } = req.body;
+
+  const refreshToken = await RefreshToken.findOne({ refresh });
+
+  if (!refreshToken) {
+    return res.status(401).json({
+      message: 'Invalid refresh token',
+    });
+  }
+
+  try {
+    const decodedRefreshToken = jwt.verify(refreshToken.refresh, REFRESH);
+    const user = await User.findById(decodedRefreshToken.id);
+
+    if (!user) {
+      return res.status(401).json({
+        message: 'Invalid refresh token',
+      });
+    }
+
+    await RefreshToken.findOneAndDelete({ refresh: refreshToken.refresh });
+
+    const { token, refresh: newRefreshToken } = generateTokens(user._id);
+
+    RefreshToken.create({ refresh: newRefreshToken });
+
+    user.setRefresh(newRefreshToken);
+    await user.save();
+
+    res.status(200).json({
+      token: token,
+      refresh: user.refresh,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = { signup, login, logout, getCurrent, refresh };
