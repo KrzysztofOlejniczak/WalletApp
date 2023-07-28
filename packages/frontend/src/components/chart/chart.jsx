@@ -2,47 +2,13 @@ import { useSelector } from 'react-redux';
 import { VictoryPie } from 'victory';
 import { selectTransactions } from '../../redux/finance/selectors';
 import { statisticsSum } from '../../utils/calcStatistics';
-
-const colorPallete = [
-  '#FED057',
-  '#FFD8D0',
-  '#FD9498 ',
-  '#C5BAFF',
-  '#6E78E8',
-  '#4A56E2',
-  '#81E1FF',
-  '#24CCA7',
-  '#00AD84',
-  '#cf97a9',
-];
-
-export const ChartTable = ({ data }) => {
-  return (
-    <table>
-      <tbody>
-        {data.map((el, index) => (
-          <tr key={el.label}>
-            <td>
-              <div
-                style={{
-                  backgroundColor: colorPallete[index],
-                  borderRadius: '2px',
-                  width: '24px',
-                  height: '24px',
-                }}
-              ></div>
-            </td>
-            <td>{el.label}</td>
-            <td>{el.y}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
+import { selectBalance } from '../../redux/finance/selectors';
+import { ChartTable } from './chartTable';
+import { colorPallete } from '../../stylesheet/chartColors';
 
 export const Chart = () => {
   const data = useSelector(selectTransactions);
+  const balance = useSelector(selectBalance);
 
   const statisticsData = statisticsSum(data);
 
@@ -63,8 +29,9 @@ export const Chart = () => {
         labelComponent={<></>}
         padding={0}
         colorScale={colorPallete}
-      />
-      <ChartTable data={dataForPieChart} />
+      ></VictoryPie>
+      <h2>&#36;{balance}</h2>
+      <ChartTable data={dataForPieChart} income={statisticsData.Income} colorPallete={colorPallete} />
     </>
   );
 };
