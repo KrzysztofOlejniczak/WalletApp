@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { closeModal } from '../../redux/global/operations';
+import { notifyError } from '../../utils/notifies';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -96,6 +97,7 @@ export const addTransaction = createAsyncThunk(
       thunkAPI.dispatch(closeModal('isModalAddTransactionOpen'));
       return res.data;
     } catch (error) {
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
@@ -149,6 +151,7 @@ export const editTransaction = createAsyncThunk(
       thunkAPI.dispatch(closeModal('isModalEditTransactionOpen'));
       return res.data;
     } catch (error) {
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
