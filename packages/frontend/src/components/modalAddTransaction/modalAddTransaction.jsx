@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import css from './modalAddTransaction.module.css';
 import { useSelector } from 'react-redux';
-import { selectError } from '../../redux/finance/selectors';
-import { NotifyError } from '../errNotifications/errNotify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -49,9 +47,6 @@ export const ModalAddTransaction = ({ closeModal }) => {
     form.reset();
   };
 
-  const error = useSelector(selectError);
-  const shouldShowError = error !== null;
-
   return (
     <div className={css.overlay}>
       <h1>Add transaction</h1>
@@ -59,6 +54,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
       <div>
         {/* Tu trzeba zrobić ładnego switcha */}
         <span>Income</span>
+
         <input
           type="checkbox"
           id="transaction-type"
@@ -132,7 +128,6 @@ export const ModalAddTransaction = ({ closeModal }) => {
         </Formik>
         <button onClick={closeModal}>Cancel</button>
       </div>
-      {shouldShowError ? <NotifyError error={error} /> : null}
     </div>
   );
 };
