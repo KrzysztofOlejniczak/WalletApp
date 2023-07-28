@@ -42,6 +42,7 @@ export default function HomeTab() {
 
   const transactions = useSelector(selectTransactions);
 
+
   const sortedTransactions = [...transactions].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );

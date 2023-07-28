@@ -56,7 +56,7 @@ const Routing = () => {
       <Route path="/currency" element={<DashboardPage />}>
         <Route
           index
-          element={isMobile ? <Currency /> : <Navigate to="/login" />}
+          element={isMobile ?  <PrivateRoute redirectTo="/login" component={<Currency />} /> : <Navigate to="/login" />}
         />
       </Route>
 

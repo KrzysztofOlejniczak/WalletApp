@@ -33,6 +33,29 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
+export const fetchMonthlyStats = createAsyncThunk(
+  'finance/fetchMonthlyStats',
+  async ({ year, month }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Token is missing');
+    }
+
+    thunkAPI.dispatch(startAsyncRequest());
+
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.get(`/finance/transactions/${year}/${month}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
+    }
+  }
+);
+
 export const fetchBalance = createAsyncThunk(
   'finance/fetchBalance',
   async (_, thunkAPI) => {
