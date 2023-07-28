@@ -150,7 +150,7 @@ const refresh = async (req, res, next) => {
   const refreshToken = await RefreshToken.findOne({ refresh });
 
   if (!refreshToken) {
-    return res.status(401).json({
+    return res.status(403).json({
       message: 'Invalid refresh token',
     });
   }
@@ -160,7 +160,7 @@ const refresh = async (req, res, next) => {
     const user = await User.findById(decodedRefreshToken.id);
 
     if (!user) {
-      return res.status(401).json({
+      return res.status(403).json({
         message: 'Invalid refresh token',
       });
     }
