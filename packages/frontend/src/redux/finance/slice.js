@@ -24,7 +24,6 @@ const financeSlice = createSlice({
     balance: null,
     error: null,
     categories: [],
-    
   },
   extraReducers: (builder) => {
     builder
@@ -34,9 +33,9 @@ const financeSlice = createSlice({
         state.transactions = action.payload;
         state.error = null;
       })
-      .addCase(fetchMonthlyStats.pending, handlePending) 
-      .addCase(fetchMonthlyStats.rejected, handleRejected) 
-      .addCase(fetchMonthlyStats.fulfilled, (state, action) => { 
+      .addCase(fetchMonthlyStats.pending, handlePending)
+      .addCase(fetchMonthlyStats.rejected, handleRejected)
+      .addCase(fetchMonthlyStats.fulfilled, (state, action) => {
         state.monthlyStats = action.payload;
         state.error = null;
       })
