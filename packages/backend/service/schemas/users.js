@@ -17,6 +17,10 @@ const users = new Schema({
     type: String,
     default: null,
   },
+  // token: {
+  //   type: String,
+  //   default: null,
+  // },
   refresh: {
     type: String,
     default: null,
