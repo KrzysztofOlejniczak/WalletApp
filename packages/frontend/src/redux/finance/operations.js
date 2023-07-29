@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
+import { closeModal } from '../../redux/global/operations';
+import { notifyError } from '../../utils/notifies';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -22,6 +24,29 @@ export const fetchTransactions = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axios.get('/finance/transactions');
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
+    }
+  }
+);
+
+export const fetchMonthlyStats = createAsyncThunk(
+  'finance/fetchMonthlyStats',
+  async ({ year, month }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Token is missing');
+    }
+
+    thunkAPI.dispatch(startAsyncRequest());
+
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.get(`/finance/transactions/${year}/${month}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -69,8 +94,10 @@ export const addTransaction = createAsyncThunk(
       setAuthHeader(persistedToken);
       const res = await axios.post('/finance/transactions', transactionData);
       thunkAPI.dispatch(fetchBalance());
+      thunkAPI.dispatch(closeModal('isModalAddTransactionOpen'));
       return res.data;
     } catch (error) {
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
@@ -121,8 +148,10 @@ export const editTransaction = createAsyncThunk(
       );
       thunkAPI.dispatch(fetchBalance());
       thunkAPI.dispatch(fetchTransactions());
+      thunkAPI.dispatch(closeModal('isModalEditTransactionOpen'));
       return res.data;
     } catch (error) {
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());

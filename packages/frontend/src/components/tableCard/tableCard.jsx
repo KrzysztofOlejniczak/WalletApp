@@ -33,10 +33,43 @@ const TransactionListHeader = () => {
 };
 
 
-export const TableCard = ({ handleEditTransaction }) => {
-  const transactions = useSelector(selectTransactions);
+import { ReactComponent as EditIcon } from '../../images/svg/edit_icon.svg';
+import Media from 'react-media';
+
+import './tableCard.scss';
+
+const TransactionListHeader = () => {
+  return (
+    <div className="transactionListHeader">
+      <div className="dateBox">
+        <span className="transactionDetailName">Date</span>
+      </div>
+      <div className="typeBox">
+        <span className="transactionDetailName">Type</span>
+      </div>
+      <div className="categoryBox">
+        <span className="transactionDetailName">Category</span>
+      </div>
+      <div className="commentBox">
+        <span className="transactionDetailName">Comment</span>
+      </div>
+      <div className="sumBox">
+        <span className="transactionDetailName">Sum</span>
+      </div>
+      <div className="dummyBox">
+        <span className="transactionDetailDummy"></span>
+      </div>
+    </div>
+  );
+};
+
+
+export const TableCard = ({
+  data,
+  handleEditTransaction,
+  handleDeleteTransaction,
+}) => {
   const isError = useSelector(selectError);
-  const dispatch = useDispatch();
 
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { logOut } from '../auth/operations';
 import {
   fetchTransactions,
+  fetchMonthlyStats,
   fetchBalance,
   addTransaction,
   deleteTransaction,
@@ -19,6 +20,7 @@ const financeSlice = createSlice({
   name: 'finance',
   initialState: {
     transactions: [],
+    monthlyStats: {},
     balance: null,
     error: null,
     categories: [],
@@ -29,6 +31,12 @@ const financeSlice = createSlice({
       .addCase(fetchTransactions.rejected, handleRejected)
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.transactions = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchMonthlyStats.pending, handlePending)
+      .addCase(fetchMonthlyStats.rejected, handleRejected)
+      .addCase(fetchMonthlyStats.fulfilled, (state, action) => {
+        state.monthlyStats = action.payload;
         state.error = null;
       })
       .addCase(fetchBalance.pending, handlePending)

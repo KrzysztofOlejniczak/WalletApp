@@ -117,18 +117,6 @@ router.post(
  *         schema:
  *           type: string
  *           default: Bearer [token]
- *       - name: page
- *         in: query
- *         description: number of page
- *         schema:
- *           type: integer
- *           default: 1
- *       - name: limit
- *         in: query
- *         description: number of transactions per page
- *         schema:
- *           type: integer
- *           default: 5
  *     responses:
  *        '200':
  *          description: Successful operation

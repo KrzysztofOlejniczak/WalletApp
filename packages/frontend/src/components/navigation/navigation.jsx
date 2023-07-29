@@ -9,6 +9,8 @@ import { ReactComponent as CurrencyIcon } from '../../images/svg/currency.svg';
 import './navigation.scss';
 
 export const Navigation = () => {
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
   return (
     <nav className="nav_container">
       <ul className="nav_list">

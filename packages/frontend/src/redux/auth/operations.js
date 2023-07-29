@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { notifyError } from '../../utils/notifies';
+import { closeModal } from '../../redux/global/operations';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -54,9 +55,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-
-      // notifyError(error.message);
-
+      notifyError(error.message);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
@@ -74,6 +73,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
+    thunkAPI.dispatch(closeModal('isModalLogoutOpen'));
   } catch (error) {
     notifyError(error.message);
     return thunkAPI.rejectWithValue(error.message);
