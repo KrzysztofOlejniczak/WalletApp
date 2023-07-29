@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { closeModal } from '../../redux/global/operations';
 import { notifyError } from '../../utils/notifies';
+import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -94,9 +95,7 @@ export const addTransaction = createAsyncThunk(
       setAuthHeader(persistedToken);
       const res = await axios.post('/finance/transactions', transactionData);
       thunkAPI.dispatch(fetchBalance());
-      const currentDate = new Date();
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
+      const { year, month } = getCurrentYearAndMonth();
       thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
       thunkAPI.dispatch(closeModal('isModalAddTransactionOpen'));
       return res.data;
@@ -124,6 +123,8 @@ export const deleteTransaction = createAsyncThunk(
       setAuthHeader(persistedToken);
       await axios.delete(`/finance/transactions/${transactionId}`);
       thunkAPI.dispatch(fetchBalance());
+      const { year, month } = getCurrentYearAndMonth();
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
       return transactionId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -152,6 +153,8 @@ export const editTransaction = createAsyncThunk(
       );
       thunkAPI.dispatch(fetchBalance());
       thunkAPI.dispatch(fetchTransactions());
+      const { year, month } = getCurrentYearAndMonth();
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
       thunkAPI.dispatch(closeModal('isModalEditTransactionOpen'));
       return res.data;
     } catch (error) {
