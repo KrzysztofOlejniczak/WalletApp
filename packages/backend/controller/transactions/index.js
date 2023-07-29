@@ -136,7 +136,7 @@ const updateTransaction = async (req, res, next) => {
   try {
     const result = await Transaction.findByIdAndUpdate(
       { _id: id, owner },
-      { transaction }
+      { isExpense, amount: parseNumber(amount), date, comment, category }
     );
     if (result) {
       res.status(200).json({
