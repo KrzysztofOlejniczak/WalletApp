@@ -2,15 +2,13 @@
 
 .transactionList {
   list-style: none;
-  padding: 0rem;
   margin-top: 1.25rem;
 }
 
 .transactionListContainer {
   width: 100%;
-  padding: 2.5rem 0rem 2.5rem 2.875rem;
-  @media screen and (min-width: $DesktopWidth) {
-    border-left: 0.0625rem solid #e7e5f2;
+  @media screen and (max-width: $MaxMobileWidth) {
+    padding-top: 20px;
   }
 }
 .transactionListHeader {

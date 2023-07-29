@@ -1,6 +1,7 @@
-import { VictoryPie } from 'victory';
+import { VictoryPie, VictoryLabel } from 'victory';
 import { ChartTable } from './chartTable';
 import { colorPallete } from '../../stylesheet/chartColors';
+import './chart.scss';
 
 export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
   const dataForPieChart = expenseByCategory.map((categoryData) => ({
@@ -10,22 +11,41 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
 
   return (
     <>
-      <VictoryPie
-        innerRadius={100}
-        data={dataForPieChart}
-        width={280}
-        height={280}
-        labelComponent={<></>}
-        padding={0}
-        colorScale={colorPallete}
-      ></VictoryPie>
-      <h2>&#36;{balance}</h2>
-      <p>Total Expenses: &#36;{expensesSum}</p>
-      <ChartTable
-        data={dataForPieChart}
-        income={income}
-        colorPallete={colorPallete}
-      />
+      <div className="mainSheet">
+        <div className="statsSheet">
+          <h2 className="pieHeader">Statistics</h2>
+          <div className="pieStyle">
+            <VictoryPie
+              innerRadius={100}
+              width={280}
+              height={280}
+              labelComponent={
+                <VictoryLabel
+                  textAnchor="middle"
+                  style={{
+                    fontSize: 18,
+                    fontFamily: 'Circe',
+                    fontWeight: '700',
+                  }}
+                  x={140}
+                  y={140}
+                  text={balance}
+                />
+              }
+              data={dataForPieChart}
+              padding={0}
+              colorScale={colorPallete}
+            ></VictoryPie>
+          </div>
+        </div>
+        <div className="chartStyle">
+          <ChartTable
+            data={dataForPieChart}
+            income={income}
+            colorPallete={colorPallete}
+          />
+        </div>
+      </div>
     </>
   );
 };

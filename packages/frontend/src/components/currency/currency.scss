@@ -1,33 +1,35 @@
+@import '../../stylesheet/main.scss';
 .currency {
   position: relative;
-  width: 100%;
-  height: 10.875rem;
+  height: 100%;
   margin: 0 auto;
   margin-top: 1.938rem;
   border-radius: 1.875rem;
-  color: #ffffff;
-  background-color: #4a56e2;
+  color: var(--white);
+  background-color: var(--accent-blue);
   background-image: url('../../images/svg/wave-mobile.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
   @media (min-width: 500px) and (max-width: 767px) {
+    width: 100%;
     background-size: contain;
     background-image: url('../../images/svg/wave-tablet.svg');
   }
-  @media (min-width: 1050px) and (max-width: 1279px) {
+  @media (min-width: $TabletWidth) and (max-width: 1279px) {
+    width: 363px;
     background-image: url('../../images/svg/wave-desktop.svg');
     background-size: contain;
   }
 }
 .currency * {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .currency td,
 .currency th,
 .currency thead {
-  color: ffffff;
+  color: var(--white);
 }
 
 .currency table {
@@ -77,24 +79,20 @@
   transform: translate(-50%, -50%);
 }
 
-@media (min-width: 768px) {
+@media (min-width: $TabletWidth) {
   .currency {
     margin-left: 0.625rem;
-    width: 50%;
-  }
-
-  .currencyShow {
-    animation: currency-show 0.5s forwards;
+    width: 363px;
   }
   .loader {
     top: 50%;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: $DesktopWidth) {
   .currency {
-    width: 100%;
-    height: 21.688rem;
+    width: 393px;
+    height: 331px;
     margin-top: 2rem;
     margin-left: 0rem;
   }
@@ -109,20 +107,5 @@
 
   .currency td {
     padding-top: 1.438rem;
-  }
-}
-
-@keyframes currency-show {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateX(0);
   }
 }

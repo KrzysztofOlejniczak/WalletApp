@@ -6,9 +6,10 @@ import '../../stylesheet/vars.css';
 
 export const DashboardWrapper = styled('div')({
   width: '100%',
-  height: '100vh',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
+
   '@media (max-width: 767px)': {
     '& .MuiContainer-fixed': {
       padding: '0 20px',
@@ -21,7 +22,7 @@ export const DashboardWrapper = styled('div')({
   },
   '@media (min-width: 1280px)': {
     '& .MuiContainer-fixed': {
-      padding: '0 16px',
+      padding: '0 16px 0 16px',
     },
   },
 });
@@ -29,8 +30,9 @@ export const DashboardWrapper = styled('div')({
 export const ContainerWrapper = styled('div')({
   position: 'relative',
   height: '100%',
+  width: '100%',
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row',
   alignItems: 'center',
   '::before': {
     content: '""',

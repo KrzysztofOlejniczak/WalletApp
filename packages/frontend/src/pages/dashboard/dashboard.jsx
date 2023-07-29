@@ -18,6 +18,8 @@ import {
   DashboardWrapper,
 } from './dashboard.styles';
 
+import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
+
 export default function DashboardPage() {
   const dispatch = useDispatch();
 
@@ -31,9 +33,7 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(fetchTransactions());
     dispatch(fetchBalance());
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
+    const { year, month } = getCurrentYearAndMonth();
     dispatch(fetchMonthlyStats({ year, month }));
   }, [dispatch]);
 

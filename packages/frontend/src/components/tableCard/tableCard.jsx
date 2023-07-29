@@ -1,6 +1,5 @@
-import { selectTransactions, selectError } from '../../redux/finance/selectors';
-import { deleteTransaction } from '../../redux/finance/operations';
-import { useSelector, useDispatch } from 'react-redux';
+import { selectError } from '../../redux/finance/selectors';
+import { useSelector } from 'react-redux';
 
 import { ReactComponent as EditIcon } from '../../images/svg/edit_icon.svg';
 import Media from 'react-media';
@@ -31,38 +30,6 @@ const TransactionListHeader = () => {
     </div>
   );
 };
-
-
-import { ReactComponent as EditIcon } from '../../images/svg/edit_icon.svg';
-import Media from 'react-media';
-
-import './tableCard.scss';
-
-const TransactionListHeader = () => {
-  return (
-    <div className="transactionListHeader">
-      <div className="dateBox">
-        <span className="transactionDetailName">Date</span>
-      </div>
-      <div className="typeBox">
-        <span className="transactionDetailName">Type</span>
-      </div>
-      <div className="categoryBox">
-        <span className="transactionDetailName">Category</span>
-      </div>
-      <div className="commentBox">
-        <span className="transactionDetailName">Comment</span>
-      </div>
-      <div className="sumBox">
-        <span className="transactionDetailName">Sum</span>
-      </div>
-      <div className="dummyBox">
-        <span className="transactionDetailDummy"></span>
-      </div>
-    </div>
-  );
-};
-
 
 export const TableCard = ({
   data,
@@ -80,12 +47,6 @@ export const TableCard = ({
     return `${day}.${month}.${year}`;
   };
 
-  const sortedTransactions = [...transactions];
-  sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const handleDeleteTransaction = (transactionId) => {
-    dispatch(deleteTransaction(transactionId));
-  };
   const queries = {
     mobile: '(max-width: 767px)',
     tablet: '(min-width: 768px) and (max-width: 1279px)',
@@ -104,7 +65,7 @@ export const TableCard = ({
                 <>
                   <div className="transactionListContainer">
                     <TransactionListHeader />
-                    {sortedTransactions.map((el) => {
+                    {data.map((el) => {
                       return (
                         <div className="transactionList" key={el._id}>
                           <li className="transactionBox">
@@ -142,78 +103,84 @@ export const TableCard = ({
               )}
               {matches.mobile && (
                 <>
-                  {sortedTransactions.map((el) => {
-                    const borderColor =
-                      el.isExpense === true ? 'redBorder' : 'greenBorder';
-                    return (
-                      <li
-                        className={`mobiletransactionBox ${borderColor}`}
-                        key={el._id}
-                      >
-                        <div>
-                          <div className="transactionSubBox">
-                            <span className="mobileTransactionDetailName">
-                              Date
-                            </span>
-                            <span className="transactionDetailValue">
-                              {formatDate(el.date)}
-                            </span>
-                          </div>
-                          <div className="transactionSubBox">
-                            <span className="transactionDetailName">Type</span>
-                            <span className="transactionDetailValue">
-                              {el.isExpense === true ? `-` : `+`}
-                            </span>
-                          </div>
-                          <div className="transactionSubBox">
-                            <span className="transactionDetailName">
-                              Category
-                            </span>
-                            <span className="transactionDetailValue">
-                              {el.category}
-                            </span>
-                          </div>
-                          <div className="transactionSubBox">
-                            <span className="transactionDetailName">
-                              Comment
-                            </span>
-                            <span className="transactionDetailValue">
-                              {el.comment}
-                            </span>
-                          </div>
-                          <div className="transactionSubBox">
-                            <span className="transactionDetailName">Sum</span>
-                            {el.isExpense === true ? (
-                              <span className="sumBox redSum">{el.amount}</span>
-                            ) : (
-                              <span className="sumBox greenSum">
-                                {el.amount}
+                  <div className="transactionListContainer">
+                    {data.map((el) => {
+                      const borderColor =
+                        el.isExpense === true ? 'redBorder' : 'greenBorder';
+                      return (
+                        <li
+                          className={`mobiletransactionBox ${borderColor}`}
+                          key={el._id}
+                        >
+                          <div>
+                            <div className="transactionSubBox">
+                              <span className="mobileTransactionDetailName">
+                                Date
                               </span>
-                            )}
-                          </div>
-                          <div className="transactionSubBox">
-                            <button
-                              onClick={() => handleDeleteTransaction(el._id)}
-                              className="mobileDeleteButton"
-                              type="button"
-                            >
-                              Delete
-                            </button>
-                            <div
-                              onClick={() => handleEditTransaction(el)}
-                              className="editBox"
-                            >
-                              <EditIcon
-                                className="editIcon"
+                              <span className="transactionDetailValue">
+                                {formatDate(el.date)}
+                              </span>
+                            </div>
+                            <div className="transactionSubBox">
+                              <span className="transactionDetailName">
+                                Type
+                              </span>
+                              <span className="transactionDetailValue">
+                                {el.isExpense === true ? `-` : `+`}
+                              </span>
+                            </div>
+                            <div className="transactionSubBox">
+                              <span className="transactionDetailName">
+                                Category
+                              </span>
+                              <span className="transactionDetailValue">
+                                {el.category}
+                              </span>
+                            </div>
+                            <div className="transactionSubBox">
+                              <span className="transactionDetailName">
+                                Comment
+                              </span>
+                              <span className="transactionDetailValue">
+                                {el.comment}
+                              </span>
+                            </div>
+                            <div className="transactionSubBox">
+                              <span className="transactionDetailName">Sum</span>
+                              {el.isExpense === true ? (
+                                <span className="sumBox redSum">
+                                  {el.amount}
+                                </span>
+                              ) : (
+                                <span className="sumBox greenSum">
+                                  {el.amount}
+                                </span>
+                              )}
+                            </div>
+                            <div className="transactionSubBox">
+                              <button
+                                onClick={() => handleDeleteTransaction(el._id)}
+                                className="mobileDeleteButton"
+                                type="button"
+                              >
+                                Delete
+                              </button>
+                              <div
                                 onClick={() => handleEditTransaction(el)}
-                              />
-                              <span className="editTransaction">Edit</span>
+                                className="editBox"
+                              >
+                                <EditIcon
+                                  className="editIcon"
+                                  onClick={() => handleEditTransaction(el)}
+                                />
+                                <span className="editTransaction">Edit</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
-                    );
-                  })}
+                        </li>
+                      );
+                    })}
+                  </div>
                 </>
               )}
             </>

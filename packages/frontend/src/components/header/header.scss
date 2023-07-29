@@ -47,7 +47,7 @@
 
 .Header__logout {
   display: flex;
-  color: #bdbdbd;
+  color: var(--placeholder-text);
   font-size: 18px;
   height: 30px;
   line-height: 30px;
@@ -56,7 +56,7 @@
 .Header__button {
   display: flex;
   align-items: center;
-  color: #bdbdbd;
+  color: var(--placeholder-text);
 }
 
 .Header__logout-text {
@@ -70,16 +70,11 @@
 .Header__username {
   margin-right: 10px;
   font-family: 'Circe';
-  color: #bdbdbd;
+  color: var(--placeholder-text);
 
   @media screen and (min-width: $TabletWidth) {
     margin-right: 15px;
     padding-right: 15px;
     border-right: 1px solid;
   }
-}
-.user-info-container {
-  font-family: 'Circe';
-  position: relative;
-  color: #000;
 }

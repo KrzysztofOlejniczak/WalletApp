@@ -4,7 +4,7 @@
   min-width: 280px;
   max-width: 350px;
   padding: 8px 30px;
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 30px;
   margin-bottom: 0px;
   margin-right: auto;
@@ -35,6 +35,5 @@
   font-size: 30px;
   line-height: 45px;
   margin: 0;
-  align-items: center;
-  color: #000000;
+  color: var(--primary-text-color);
 }
