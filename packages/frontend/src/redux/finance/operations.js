@@ -94,6 +94,10 @@ export const addTransaction = createAsyncThunk(
       setAuthHeader(persistedToken);
       const res = await axios.post('/finance/transactions', transactionData);
       thunkAPI.dispatch(fetchBalance());
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
       thunkAPI.dispatch(closeModal('isModalAddTransactionOpen'));
       return res.data;
     } catch (error) {
