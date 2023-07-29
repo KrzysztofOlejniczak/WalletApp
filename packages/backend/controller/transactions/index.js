@@ -1,14 +1,16 @@
 const Transaction = require('../../service/schemas/transactions');
 const categoryList = require('../../data/categories.json');
 const { validationYearAndMonth } = require('../../validation');
+const { parseNumber } = require('../../utils/parseData');
 
 const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
   const owner = req.user._id;
+
   try {
     const newTransaction = new Transaction({
       isExpense,
-      amount,
+      amount: parseNumber(amount),
       date,
       comment,
       category,
@@ -20,7 +22,7 @@ const createTransaction = async (req, res, next) => {
     res.status(201).json({
       _id: newTransaction._id,
       isExpense,
-      amount,
+      amount: newTransaction.amount,
       date,
       comment,
       category: newTransaction.category,
@@ -106,13 +108,13 @@ const updateTransaction = async (req, res, next) => {
   try {
     const result = await Transaction.findByIdAndUpdate(
       { _id: id, owner },
-      { isExpense, amount, date, comment, category }
+      { isExpense, amount: parseNumber(amount), date, comment, category }
     );
     if (result) {
       res.status(200).json({
         _id: result._id,
         isExpense,
-        amount,
+        amount: result.amount,
         date,
         comment,
         category,

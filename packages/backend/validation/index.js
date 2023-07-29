@@ -30,8 +30,17 @@ const validationYearAndMonth = Joi.object({
     .required(),
 });
 
+// const validationTransactionAddSchema = Joi.object({
+//   isExpense: Joi.bool().required(),
+//   amount: Joi.number().precision(2).required(),
+//   date: Joi.date().required(),
+//   comment: Joi.string().allow(''),
+//   category: Joi.string().required(),
+// });
+
 module.exports = {
   validationUserRegisterSchema,
   validationUserLoginSchema,
   validationYearAndMonth,
+  // validationTransactionAddSchema,
 };
