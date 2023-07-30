@@ -5,6 +5,9 @@ import {
   finishAsyncRequest,
 } from '../../redux/global/slice';
 
+import './currency.scss';
+import Loader from '../loader/loader';
+
 export default function Currency() {
   const dispatch = useDispatch();
   const [currencies, setCurrencies] = useState([]);
@@ -67,7 +70,7 @@ export default function Currency() {
   }, []);
 
   return (
-    <div>
+    /*<div>
       <h2>Currency</h2>
       <table>
         <thead>
@@ -87,6 +90,34 @@ export default function Currency() {
           ))}
         </tbody>
       </table>
+    </div>*/
+    <div className="currency">
+      {currencies.length === 0 ? (
+        <div className="loader">
+          <Loader />
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <td>Currency</td>
+              <td>Purchase</td>
+              <td>Sell</td>
+            </tr>
+          </thead>
+          <tbody>
+            {currencies.map((item) => {
+              return (
+                <tr key={item.code}>
+                  <td>{item.code}</td>
+                  <td>{item.bid}</td>
+                  <td>{item.ask}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

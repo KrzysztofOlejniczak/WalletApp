@@ -1,28 +1,42 @@
 const Transaction = require('../../service/schemas/transactions');
 const categoryList = require('../../data/categories.json');
-const { validationYearAndMonth } = require('../../validation');
+const {
+  validationYearAndMonth,
+  validationTransactionSchema,
+} = require('../../validation');
+const { parseNumber } = require('../../utils/parseData');
 
 const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
   const owner = req.user._id;
-  try {
-    const newTransaction = new Transaction({
-      isExpense,
-      amount,
-      date,
-      comment,
-      category,
-      owner,
+
+  const transaction = {
+    isExpense,
+    amount: parseNumber(amount),
+    date,
+    comment,
+    category,
+  };
+
+  const { error } = validationTransactionSchema.validate(transaction);
+
+  if (error) {
+    return res.status(400).json({
+      message: error.message,
     });
+  }
+
+  try {
+    const newTransaction = new Transaction({ ...transaction, owner });
 
     await newTransaction.save();
 
     res.status(201).json({
       _id: newTransaction._id,
-      isExpense,
-      amount,
-      date,
-      comment,
+      isExpense: newTransaction.isExpense,
+      amount: newTransaction.amount,
+      date: newTransaction.date,
+      comment: newTransaction.comment,
       category: newTransaction.category,
     });
   } catch (e) {
@@ -33,14 +47,9 @@ const createTransaction = async (req, res, next) => {
 
 const getTransactions = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 5;
-    const skip = (page - 1) * limit;
     const owner = req.user._id;
 
-    const results = await Transaction.find({ owner }, { owner: 0, __v: 0 })
-      .skip(skip)
-      .limit(limit);
+    const results = await Transaction.find({ owner }, { owner: 0, __v: 0 });
 
     res.status(200).json(results);
   } catch (e) {
@@ -108,19 +117,35 @@ const updateTransaction = async (req, res, next) => {
   const { id } = req.params;
   const { isExpense, amount, date, comment, category } = req.body;
 
+  const transaction = {
+    isExpense,
+    amount: parseNumber(amount),
+    date,
+    comment,
+    category,
+  };
+
+  const { error } = validationTransactionSchema.validate(transaction);
+
+  if (error) {
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
+
   try {
     const result = await Transaction.findByIdAndUpdate(
       { _id: id, owner },
-      { isExpense, amount, date, comment, category }
+      { isExpense, amount: parseNumber(amount), date, comment, category }
     );
     if (result) {
       res.status(200).json({
         _id: result._id,
-        isExpense,
-        amount,
-        date,
-        comment,
-        category,
+        isExpense: result.isExpense,
+        amount: result.amount,
+        date: result.date,
+        comment: result.comment,
+        category: result.category,
       });
     } else {
       res.status(404).json({

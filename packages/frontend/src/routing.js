@@ -43,14 +43,20 @@ const Routing = () => {
       >
         <Route index element={<HomeTab />} />
       </Route>
-      <Route path="/diagram" element={<DashboardPage />}>
+
+      <Route
+        path="/diagram"
+        element={
+          <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
+        }
+      >
         <Route index element={<DiagramTab />} />
       </Route>
 
       <Route path="/currency" element={<DashboardPage />}>
         <Route
           index
-          element={isMobile ? <Currency /> : <Navigate to="/login" />}
+          element={isMobile ?  <PrivateRoute redirectTo="/login" component={<Currency />} /> : <Navigate to="/login" />}
         />
       </Route>
 

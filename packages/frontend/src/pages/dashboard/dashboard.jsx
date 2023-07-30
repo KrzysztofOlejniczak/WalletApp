@@ -9,6 +9,7 @@ import Currency from '../../components/currency/currency';
 import {
   fetchTransactions,
   fetchBalance,
+  fetchMonthlyStats,
 } from '../../redux/finance/operations';
 import {
   Vector,
@@ -16,6 +17,7 @@ import {
   StyledContainer,
   DashboardWrapper,
 } from './dashboard.styles';
+import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -30,6 +32,8 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(fetchTransactions());
     dispatch(fetchBalance());
+    const { year, month } = getCurrentYearAndMonth();
+    dispatch(fetchMonthlyStats({ year, month }));
   }, [dispatch]);
 
   const renderDeskTabLayout = () => {
