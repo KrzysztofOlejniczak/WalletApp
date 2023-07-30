@@ -1,9 +1,6 @@
 import { createTheme } from '@mui/material/styles';
-// import iconSprite from '../images/icons.svg';
-
 import './vars.css';
-
-const defaultTheme = createTheme();
+import './base/fonts.scss';
 
 export const theme = createTheme({
   breakpoints: {
@@ -14,102 +11,22 @@ export const theme = createTheme({
       lg: 1280,
     },
   },
+  typography: {
+    fontFamily: `'Poppins', 'Circe', sans-serif`,
+  },
   components: {
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          width: '14px',
-          height: '14px',
-          transition: '200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-          '&:hover': {
-            transform: 'scale(1.1)',
-          },
-        },
-      },
-    },
-    MuiIconButton: {
-styleOverrides: {
-  root: {
-    ':hover': {
-      backgroundColor: 'transparent',
-    }
-
-  }
-}
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          transition: '200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-          '&:hover': {
-            transform: 'scale(1.1)',
-          },
-          color: 'var(--white)',
-          backgroundColor: 'var(--green-light)',
-          textTransform: 'none',
-          boxShadow:
-            '0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06)',
-          '&:active': {
-            boxShadow: defaultTheme.shadows[4],
-          },
-        },
-      },
-      variants: [
-        {
-          props: { variant: 'delete' },
-          style: {
-            width: '67px',
-            height: '26px',
-            padding: '4px 12px',
-            borderRadius: '18px',
-            fontSize: '14px',
-            fontWeight: 400,
-            '&:hover': {
-              backgroundColor: 'var(--green-light)',
-            },
-            '&.active': {
-              border: 'none',
-            },
-          },
-        },
-        {
-          props: { variant: 'large' },
-          style: {
-            minWidth: 80,
-            padding: '4px 6px',
-            border: '1px solid #FF5F6D',
-            color: '#FF5F6D',
-          },
-        },
-      ],
-    },
     MuiGrid: {
       variants: [
         {
-          props: { variant: 'desktop' },
+          props: { variant: 'limitedWidth' },
           style: {
-            width: '480px',
+            minWidth: '464px',
           },
         },
         {
-          props: { variant: 'tablet' },
+          props: { variant: 'fullWidth' },
           style: {
             width: '100%',
-          },
-        },
-      ],
-    },
-    MuiLink: {
-      variants: [
-        {
-          props: { variant: 'nav' },
-          style: {
-            color: 'black',
-            textDecoration: 'none',
-
-            '&.active': {
-              color: 'red',
-            },
           },
         },
       ],
