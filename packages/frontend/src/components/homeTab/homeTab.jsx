@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { TableCard } from '../tableCard/tableCard';
+import { Table } from '../table/table';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
@@ -48,7 +48,7 @@ export default function HomeTab() {
   const renderDeskTabLayout = () => {
     return (
       <TableWrapper>
-        <TableCard
+        <Table
           data={sortedTransactions}
           handleEditTransaction={handleEditTransaction}
           handleDeleteTransaction={handleDeleteTransaction}
@@ -61,7 +61,7 @@ export default function HomeTab() {
     return (
       <div>
         <Balance />
-        <TableCard
+        <Table
           data={sortedTransactions}
           handleEditTransaction={handleEditTransaction}
           handleDeleteTransaction={handleDeleteTransaction}
