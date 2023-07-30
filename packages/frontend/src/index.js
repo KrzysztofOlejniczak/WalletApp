@@ -7,7 +7,7 @@ import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './stylesheet/stylesMUI';
+import { theme } from './stylesheet/utils/breakpoinsMUI';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
