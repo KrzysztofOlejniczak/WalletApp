@@ -1,8 +1,12 @@
 @import '../../stylesheet/main.scss';
 
 .nav_container {
-  padding-top: 10px;
   padding: 12px 30px;
+
+  @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
+    padding: 40px 0 28px;
+    max-width: 350px;
+  }
 
   @media screen and (min-width: $DesktopWidth) {
     padding-top: 20px;
