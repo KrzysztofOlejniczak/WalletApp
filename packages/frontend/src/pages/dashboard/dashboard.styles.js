@@ -4,11 +4,10 @@ import ellipsePurple from '../../images/ellipse-purple.svg';
 import ellipsePink from '../../images/ellipse-pink.svg';
 
 export const DashboardWrapper = styled('div')({
-  width: '100%',
-  height: '100%',
+  minWidth: '100vw',
+  minHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',
-
 
   '@media (max-width: 767px)': {
     '& .MuiContainer-fixed': {
@@ -29,8 +28,7 @@ export const DashboardWrapper = styled('div')({
 
 export const ContainerWrapper = styled('div')({
   position: 'relative',
-  height: '100vh',
-  width: '100vw',
+  //width: '100vw',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
@@ -79,4 +77,3 @@ export const NavGrid = styled(Grid)({
 export const DataGrid = styled(Grid)({
   display: 'flex',
 });
-
