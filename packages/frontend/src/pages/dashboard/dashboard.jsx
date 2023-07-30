@@ -17,6 +17,7 @@ import {
   StyledContainer,
   DashboardWrapper,
 } from './dashboard.styles';
+import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
 import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
