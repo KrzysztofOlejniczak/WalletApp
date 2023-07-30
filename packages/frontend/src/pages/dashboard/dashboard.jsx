@@ -16,6 +16,8 @@ import {
   ContainerWrapper,
   StyledContainer,
   DashboardWrapper,
+  NavGrid,
+  DataGrid,
 } from './dashboard.styles';
 import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
@@ -40,19 +42,19 @@ export default function DashboardPage() {
     return (
       <Grid
         container
-        sx={{ height: '100%' }}
+        sx={{ height: '100%', flexWrap: 'nowrap', flexGrow: 1 }}
         direction={isTablet ? 'column' : 'row'}
       >
-        <Grid item variant={isDesktop ? 'desktop' : 'tablet'}>
+        <NavGrid item>
           <Navigation />
           <Balance />
           <Currency />
-        </Grid>
+        </NavGrid>
         {isDesktop && <Vector />}
         <Suspense>
-          <Grid item>
+          <DataGrid item>
             <Outlet />
-          </Grid>
+          </DataGrid>
         </Suspense>
       </Grid>
     );
@@ -61,13 +63,13 @@ export default function DashboardPage() {
   const renderMobileLayout = () => {
     return (
       <Grid container direction="column">
-        <Grid item>
+        <NavGrid item>
           <Navigation />
-        </Grid>
+        </NavGrid>
         <Suspense>
-          <Grid item>
+          <DataGrid item>
             <Outlet />
-          </Grid>
+          </DataGrid>
         </Suspense>
       </Grid>
     );
