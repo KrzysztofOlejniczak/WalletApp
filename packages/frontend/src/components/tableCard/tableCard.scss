@@ -37,7 +37,7 @@
   width: 11.66%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .typeBox {
@@ -51,21 +51,21 @@
   width: 20%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .commentBox {
   width: 16.66%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .sumBox {
   width: 16.66%;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   font-weight: 700;
 }
 

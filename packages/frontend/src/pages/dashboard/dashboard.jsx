@@ -19,8 +19,6 @@ import {
 } from './dashboard.styles';
 import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
 
-import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
-
 export default function DashboardPage() {
   const dispatch = useDispatch();
 
