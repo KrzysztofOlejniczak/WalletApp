@@ -96,7 +96,7 @@ export const addTransaction = createAsyncThunk(
       const res = await axios.post('/finance/transactions', transactionData);
       thunkAPI.dispatch(fetchBalance());
       const { year, month } = getCurrentYearAndMonth();
-      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month }));
       thunkAPI.dispatch(closeModal('isModalAddTransactionOpen'));
       return res.data;
     } catch (error) {
@@ -124,7 +124,7 @@ export const deleteTransaction = createAsyncThunk(
       await axios.delete(`/finance/transactions/${transactionId}`);
       thunkAPI.dispatch(fetchBalance());
       const { year, month } = getCurrentYearAndMonth();
-      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month }));
       return transactionId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -154,7 +154,7 @@ export const editTransaction = createAsyncThunk(
       thunkAPI.dispatch(fetchBalance());
       thunkAPI.dispatch(fetchTransactions());
       const { year, month } = getCurrentYearAndMonth();
-      thunkAPI.dispatch(fetchMonthlyStats({ year, month })); 
+      thunkAPI.dispatch(fetchMonthlyStats({ year, month }));
       thunkAPI.dispatch(closeModal('isModalEditTransactionOpen'));
       return res.data;
     } catch (error) {

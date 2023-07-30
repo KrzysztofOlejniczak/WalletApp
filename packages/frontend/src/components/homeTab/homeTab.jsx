@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import Table from '../table/table';
 import { TableCard } from '../tableCard/tableCard';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
@@ -42,7 +41,6 @@ export default function HomeTab() {
 
   const transactions = useSelector(selectTransactions);
 
-
   const sortedTransactions = [...transactions].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
@@ -50,7 +48,7 @@ export default function HomeTab() {
   const renderDeskTabLayout = () => {
     return (
       <TableWrapper>
-        <Table
+        <TableCard
           data={sortedTransactions}
           handleEditTransaction={handleEditTransaction}
           handleDeleteTransaction={handleDeleteTransaction}

@@ -5,6 +5,6 @@ export const TableWrapper = styled('div')({
     paddingTop: '20px',
   },
   '@media (min-width: 1280px)': {
-    padding: '46px 0 0 69px',
+    padding: '1px 0 0 69px',
   },
 });

@@ -1,3 +1,5 @@
+import './chart.scss';
+import { ChartFilters } from './chartFilters';
 export const ChartTable = ({ data, income, colorPallete }) => {
   const expensesSum = data.reduce((acc, el) => {
     return (acc += el.y);
@@ -5,15 +7,18 @@ export const ChartTable = ({ data, income, colorPallete }) => {
 
   return (
     <>
-      <div>
-        <span>Category</span>
-        <span>Sum</span>
+      <ChartFilters />
+      <div className="tableHeaderStyle">
+        <ul className="tableHeader">
+          <li>Category</li>
+          <li>Sum</li>
+        </ul>
       </div>
-      <table>
-        <tbody>
+      <table className="tableStyle">
+        <tbody className="bodyStatsStyle">
           {data.map((el, index) => (
-            <tr key={el.label}>
-              <td>
+            <tr key={el.label} className="trStatsStyle">
+              <td className="columnStatsStyle">
                 <div
                   style={{
                     backgroundColor: colorPallete[index],
@@ -22,21 +27,24 @@ export const ChartTable = ({ data, income, colorPallete }) => {
                     height: '24px',
                   }}
                 ></div>
+                {el.label}
               </td>
-              <td>{el.label}</td>
-              <td>{el.y}</td>
+
+              <td className="columnStatsStyle">{el.y}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <ul>
-        <li>
-          Expenses:<span>{expensesSum}</span>
-        </li>
-        <li>
-          Income: <span>{income}</span>
-        </li>
-      </ul>
+      <div>
+        <ul className="tableFooter">
+          <li className="columnFooterStatsStyle">
+            Expenses:<span className="tableFooterCashBad">{expensesSum}</span>
+          </li>
+          <li className="columnFooterStatsStyle">
+            Income: <span className="tableFooterCash">{income}</span>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };

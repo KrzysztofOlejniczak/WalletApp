@@ -1,0 +1,15 @@
+@import '../../stylesheet/utils/breakpoints.scss';
+
+.selectContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-left: 0;
+  margin-right: auto;
+  padding-top: 30px;
+  @media (max-width: $MaxMobileWidth) {
+    flex-direction: column;
+    padding-top: 10px;
+    max-width: 280px;
+  }
+}
