@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { selectError } from '../../redux/finance/selectors';
 import { useSelector } from 'react-redux';
 
@@ -36,7 +37,11 @@ export const TableCard = ({
   handleEditTransaction,
   handleDeleteTransaction,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 10; // You can adjust the number of transactions per page here
   const isError = useSelector(selectError);
+  
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
@@ -47,7 +52,22 @@ export const TableCard = ({
     return `${day}.${month}.${year}`;
   };
 
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentTransactions = data.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
+  const totalPages = Math.ceil(data.length / transactionsPerPage);
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
@@ -59,7 +79,7 @@ export const TableCard = ({
             <>
               <div className="transactionListContainer">
                 <TransactionListHeader />
-                {data.map((el) => {
+                {currentTransactions.map((el) => {
                   return (
                     <div className="transactionList" key={el._id}>
                       <li className="transactionBox">
@@ -98,7 +118,7 @@ export const TableCard = ({
           {isMobile && (
             <>
               <div className="transactionListContainer">
-                {data.map((el) => {
+                {currentTransactions.map((el) => {
                   const borderColor =
                     el.isExpense === true ? 'redBorder' : 'greenBorder';
                   return (
@@ -171,6 +191,17 @@ export const TableCard = ({
           )}
         </>
       )}
+       <div className="pagination">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            className={currentPage === pageNumber ? 'active' : ''}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

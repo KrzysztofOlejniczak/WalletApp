@@ -16,6 +16,10 @@ import { deleteTransaction } from '../../redux/finance/operations.js';
 import { TableWrapper } from './homeTab.styles';
 
 export default function HomeTab() {
+
+
+
+
   const dispatch = useDispatch();
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -44,6 +48,8 @@ export default function HomeTab() {
   const sortedTransactions = [...transactions].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
+
+
 
   const renderDeskTabLayout = () => {
     return (
