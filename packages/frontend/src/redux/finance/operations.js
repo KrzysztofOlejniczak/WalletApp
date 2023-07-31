@@ -4,12 +4,36 @@ import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { closeModal } from '../../redux/global/operations';
 import { notifyError } from '../../utils/notifies';
 import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
+import { refreshAccessToken } from '../auth/operations';
+import { store } from '../store';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
+
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const res = await store.dispatch(refreshAccessToken());
+        const token = res.payload.token;
+        console.log('token ' + token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        originalRequest.headers['Authorization'] = `Bearer ${token}`;
+        return axios(originalRequest);
+      } catch (refreshError) {
+        throw refreshError;
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const fetchTransactions = createAsyncThunk(
   'finance/fetchTransactions',

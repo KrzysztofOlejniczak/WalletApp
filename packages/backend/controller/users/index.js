@@ -169,8 +169,7 @@ const refresh = async (req, res, next) => {
 
     const { token, refresh: newRefreshToken } = generateTokens(user._id);
 
-    RefreshToken.create({ refresh: newRefreshToken });
-
+    await RefreshToken.create({ refresh: newRefreshToken });
     user.setRefresh(newRefreshToken);
     await user.save();
 
@@ -179,6 +178,7 @@ const refresh = async (req, res, next) => {
       refresh: user.refresh,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

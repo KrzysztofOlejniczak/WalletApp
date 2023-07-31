@@ -5,7 +5,7 @@ const SECRET = process.env.SECRET;
 const REFRESH = process.env.REFRESH;
 
 const generateAccessToken = (id) => {
-  return jwt.sign({ id }, SECRET, { expiresIn: '1h' });
+  return jwt.sign({ id }, SECRET, { expiresIn: '15m' });
 };
 
 const generateRefreshToken = (id) => {
