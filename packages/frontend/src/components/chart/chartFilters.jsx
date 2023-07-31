@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
 import { selectStyles } from './chartFiltersStyles';
 import './chartFilters.scss';
+import { fetchMonthlyStats } from '../../redux/finance/operations';
 
 const currentMonth = new Date().getMonth() + 1;
 const months = Array.from({ length: 12 }, (item, i) => {
@@ -15,15 +17,23 @@ const monthOptions = Array(12)
 
 const currentYear = new Date().getFullYear();
 const years = [];
-for (let i = currentYear; i >= 1940; i--) {
+for (let i = currentYear; i >= 2020; i--) {
   years.push({ value: i, label: i.toString() });
 }
 
 export function ChartFilters() {
+  const dispatch = useDispatch();
+
   const [date, setDate] = useState({
     month: currentMonth,
     year: currentYear,
   });
+
+  const { year, month } = date;
+
+  useEffect(() => {
+    dispatch(fetchMonthlyStats({ year, month }));
+  }, [dispatch, year, month]);
 
   const updateDate = (name, value) => {
     setDate((prev) => ({ ...prev, [name]: value }));

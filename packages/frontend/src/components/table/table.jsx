@@ -1,92 +1,207 @@
-import * as React from 'react';
-import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-  IconButton,
-  SvgIcon,
-} from '@mui/material';
+import { useState } from 'react';
+import { selectError } from '../../redux/finance/selectors';
+import { useSelector } from 'react-redux';
 
-import { ReactComponent as Edit } from '../../images/edit.svg';
-import { StyledTableCell } from './table.styles';
+import { ReactComponent as EditIcon } from '../../images/svg/edit_icon.svg';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import TablePagination from '@mui/material/TablePagination';
 
-export default function TransactionsTable({
+import './table.scss';
+
+const TransactionListHeader = () => {
+  return (
+    <div className="transactionListHeader">
+      <div className="dateBox">
+        <span className="transactionDetailName">Date</span>
+      </div>
+      <div className="typeBox">
+        <span className="transactionDetailName">Type</span>
+      </div>
+      <div className="categoryBox">
+        <span className="transactionDetailName">Category</span>
+      </div>
+      <div className="commentBox">
+        <span className="transactionDetailName">Comment</span>
+      </div>
+      <div className="sumBox">
+        <span className="transactionDetailName">Sum</span>
+      </div>
+      <div className="dummyBox">
+        <span className="transactionDetailDummy"></span>
+      </div>
+    </div>
+  );
+};
+
+export const Table = ({
   data,
   handleEditTransaction,
   handleDeleteTransaction,
-}) {
-  const formatDate = (date) => {
-    const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
-    return new Date(date).toLocaleDateString('pl-PL', options);
+}) => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const isError = useSelector(selectError);
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = String(dateObj.getFullYear()).slice(-2);
+
+    return `${day}.${month}.${year}`;
   };
 
-  const formatAmount = (amount) => {
-    const formattedAmount = parseFloat(amount).toLocaleString('pl-PL', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      useGrouping: true,
-    });
+  const indexOfFirstTransaction = page * rowsPerPage;
+  const indexOfLastTransaction = page * rowsPerPage + rowsPerPage;
+  const currentTransactions = data.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
 
-    return formattedAmount.replace(',', '.');
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="left">Date</StyledTableCell>
-            <StyledTableCell align="left">Type</StyledTableCell>
-            <StyledTableCell align="left">Category</StyledTableCell>
-            <StyledTableCell align="left">Comment</StyledTableCell>
-            <StyledTableCell align="right">Sum</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((el) => (
-            <TableRow
-              key={el._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <StyledTableCell align="left">
-                {formatDate(el.date)}
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                {el.isExpense === true ? '-' : '+'}
-              </StyledTableCell>
-              <StyledTableCell align="left">{el.category}</StyledTableCell>
-              <StyledTableCell align="left">{el.comment}</StyledTableCell>
-              <StyledTableCell align="right">
-                {formatAmount(el.amount)}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                <IconButton
-                  aria-label="edit"
-                  onClick={() => handleEditTransaction(el)}
-                >
-                  <SvgIcon
-                    component={Edit}
-                    viewBox="0 0 14 14"
-                    sx={{ fill: 'none' }}
-                  />
-                </IconButton>
-                <Button
-                  variant="delete"
-                  type="button"
-                  onClick={() => handleDeleteTransaction(el._id)}
-                >
-                  Delete
-                </Button>
-              </StyledTableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      {isError ? (
+        <p>Something went wrong!</p>
+      ) : (
+        <>
+          {!isMobile && (
+            <>
+              <div className="transactionListContainer">
+                <TransactionListHeader />
+                {currentTransactions.map((el) => {
+                  return (
+                    <div className="transactionList" key={el._id}>
+                      <li className="transactionBox">
+                        <p className="dateBox">{formatDate(el.date)}</p>
+                        {el.isExpense === true ? (
+                          <p className="typeBox">-</p>
+                        ) : (
+                          <p className="typeBox">+</p>
+                        )}
+                        <p className="categoryBox">{el.category} </p>
+                        <p className="commentBox">{el.comment}</p>
+                        {el.isExpense === true ? (
+                          <p className="sumBox redSum">{el.amount}</p>
+                        ) : (
+                          <p className="sumBox greenSum">{el.amount}</p>
+                        )}
+                        <div className="editDeleteBox">
+                          <EditIcon
+                            className="editIcon"
+                            onClick={() => handleEditTransaction(el)}
+                          />
+                          <button
+                            className="deleteButton"
+                            onClick={() => handleDeleteTransaction(el._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </li>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+          {isMobile && (
+            <>
+              <div className="transactionListContainer">
+                {currentTransactions.map((el) => {
+                  const borderColor =
+                    el.isExpense === true ? 'redBorder' : 'greenBorder';
+                  return (
+                    <li
+                      className={`mobiletransactionBox ${borderColor}`}
+                      key={el._id}
+                    >
+                      <div>
+                        <div className="transactionSubBox">
+                          <span className="mobileTransactionDetailName">
+                            Date
+                          </span>
+                          <span className="transactionDetailValue">
+                            {formatDate(el.date)}
+                          </span>
+                        </div>
+                        <div className="transactionSubBox">
+                          <span className="transactionDetailName">Type</span>
+                          <span className="transactionDetailValue">
+                            {el.isExpense === true ? `-` : `+`}
+                          </span>
+                        </div>
+                        <div className="transactionSubBox">
+                          <span className="transactionDetailName">
+                            Category
+                          </span>
+                          <span className="transactionDetailValue">
+                            {el.category}
+                          </span>
+                        </div>
+                        <div className="transactionSubBox">
+                          <span className="transactionDetailName">Comment</span>
+                          <span className="transactionDetailValue">
+                            {el.comment}
+                          </span>
+                        </div>
+                        <div className="transactionSubBox">
+                          <span className="transactionDetailName">Sum</span>
+                          {el.isExpense === true ? (
+                            <span className="sumBox redSum">{el.amount}</span>
+                          ) : (
+                            <span className="sumBox greenSum">{el.amount}</span>
+                          )}
+                        </div>
+                        <div className="transactionSubBox">
+                          <button
+                            onClick={() => handleDeleteTransaction(el._id)}
+                            className="mobileDeleteButton"
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                          <div
+                            onClick={() => handleEditTransaction(el)}
+                            className="editBox"
+                          >
+                            <EditIcon
+                              className="editIcon"
+                              onClick={() => handleEditTransaction(el)}
+                            />
+                            <span className="editTransaction">Edit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </>
+      )}
+
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length} 
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage} 
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </div>
   );
-}
+};
