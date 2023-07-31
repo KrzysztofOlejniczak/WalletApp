@@ -4,8 +4,8 @@ import ellipsePurple from '../../images/ellipse-purple.svg';
 import ellipsePink from '../../images/ellipse-pink.svg';
 
 export const DashboardWrapper = styled('div')({
-  minWidth: '100vw',
-  minHeight: '100vh',
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
 
@@ -28,7 +28,8 @@ export const DashboardWrapper = styled('div')({
 
 export const ContainerWrapper = styled('div')({
   position: 'relative',
-  //width: '100vw',
+  minWidth: '100vw',
+  minHeight: '100vh',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
