@@ -50,6 +50,9 @@ const router = express.Router();
  *                  token:
  *                    type: string
  *                    description: JWT token
+ *                  refresh:
+ *                    type: string
+ *                    description: refresh token
  *                  user:
  *                    type: object
  *                    properties:
@@ -61,6 +64,7 @@ const router = express.Router();
  *                        description: name
  *                example:
  *                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                  refresh: eyhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzBkZDk4NmE5MGRkMTUyMDNmNzA3MSIsImlhdCI6MTY5MDc5ODEyNiwiZXhwIjoxNjkxNDAyOTI2fQ.t8_R7mnTnme7g9cHAX8PU-uTeQrMnjGkxEUjBud6uvc
  *                  user:
  *                    email: noreply@mail.com
  *                    name: John
@@ -108,6 +112,9 @@ router.post('/signup', ctrlUsers.signup);
  *                  token:
  *                    type: string
  *                    description: JWT token
+ *                  refresh:
+ *                    type: string
+ *                    description: refresh token
  *                  user:
  *                    type: object
  *                    properties:
@@ -119,6 +126,7 @@ router.post('/signup', ctrlUsers.signup);
  *                        description: name
  *                example:
  *                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                  refresh: eyhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzBkZDk4NmE5MGRkMTUyMDNmNzA3MSIsImlhdCI6MTY5MDc5ODEyNiwiZXhwIjoxNjkxNDAyOTI2fQ.t8_R7mnTnme7g9cHAX8PU-uTeQrMnjGkxEUjBud6uvc
  *                  user:
  *                    email: noreply@mail.com
  *                    name: John
@@ -201,5 +209,49 @@ router.post('/logout', checkBlacklist, auth, ctrlUsers.logout);
  */
 
 router.get('/current', checkBlacklist, auth, ctrlUsers.getCurrent);
+
+/**
+ * @swagger
+ * /api/users/refresh:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Refresh Access token by refresh token
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               refresh:
+ *                 type: string
+ *                 description: refresh token
+ *             example:
+ *               refresh: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzBkZDk4NmE5MGRkMTUyMDNmNzA3MSIsImlhdCI6MTY5MDc5ODEyNiwiZXhwIjoxNjkxNDAyOTI2fQ.t8_R7mnTnme7g9cHAX8PU-uTeQrMnjGkxEUjBud6uvc
+ *       required: true
+ *     responses:
+ *        '201':
+ *          description: Successful operation
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  token:
+ *                    type: string
+ *                    description: JWT token
+ *                  refresh:
+ *                    type: string
+ *                    description: refresh token
+ *                example:
+ *                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *                  refresh: eyhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzBkZDk4NmE5MGRkMTUyMDNmNzA3MSIsImlhdCI6MTY5MDc5ODEyNiwiZXhwIjoxNjkxNDAyOTI2fQ.t8_R7mnTnme7g9cHAX8PU-uTeQrMnjGkxEUjBud6uvc
+ *        '403':
+ *          description: Invalid refresh token
+ *        '500':
+ *          description: Internal server error
+ */
+
+router.post('/refresh', ctrlUsers.refresh);
 
 module.exports = router;

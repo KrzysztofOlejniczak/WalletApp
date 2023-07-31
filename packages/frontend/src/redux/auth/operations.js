@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { notifyError } from '../../utils/notifies';
 import { closeModal } from '../../redux/global/operations';
+import { store } from '../store';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,6 +16,27 @@ const setAuthHeader = (token) => {
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
+
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const res = await store.dispatch(refreshAccessToken());
+        const token = res.payload.token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        originalRequest.headers['Authorization'] = `Bearer ${token}`;
+        return axios(originalRequest);
+      } catch (refreshError) {
+        throw refreshError;
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 /*
  * POST @ /users/signup
@@ -105,7 +127,27 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get('/users/current');
       return res.data;
     } catch (error) {
-      notifyError(error.message);
+      // notifyError(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(finishAsyncRequest());
+    }
+  }
+);
+
+export const refreshAccessToken = createAsyncThunk(
+  'auth/refreshAccessToken',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const refreshToken = state.auth.refresh;
+    thunkAPI.dispatch(startAsyncRequest());
+    try {
+      const response = await axios.post('/users/refresh', {
+        refresh: refreshToken,
+      });
+      const { token, refresh } = response.data;
+      return { token, refresh };
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());

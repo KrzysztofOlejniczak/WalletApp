@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './operations';
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  refreshAccessToken,
+} from './operations';
 
 const initialState = {
   // email: null,
   name: null,
   token: null,
+  refresh: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -19,6 +26,7 @@ const authSlice = createSlice({
         // state.email = action.payload.user.email;
         state.name = action.payload.user.name;
         state.token = action.payload.token;
+        state.refresh = action.payload.refresh;
         state.isLoggedIn = true;
         state.error = null;
       })
@@ -26,6 +34,7 @@ const authSlice = createSlice({
         // state.email = action.payload.user.email;
         state.name = action.payload.user.name;
         state.token = action.payload.token;
+        state.refresh = action.payload.refresh;
         state.isLoggedIn = true;
         state.error = null;
       })
@@ -33,6 +42,7 @@ const authSlice = createSlice({
         // state.email = null;
         state.name = null;
         state.token = null;
+        state.refresh = null;
         state.isLoggedIn = false;
         state.error = null;
         // state.items = [];
@@ -43,6 +53,10 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = null;
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+        state.refresh = action.payload.refresh;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
