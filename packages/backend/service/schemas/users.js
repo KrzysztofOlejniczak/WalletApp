@@ -17,7 +17,11 @@ const users = new Schema({
     type: String,
     default: null,
   },
-  token: {
+  // token: {
+  //   type: String,
+  //   default: null,
+  // },
+  refresh: {
     type: String,
     default: null,
   },
@@ -33,6 +37,10 @@ users.methods.validPassword = function (password) {
 
 users.methods.setToken = function (token) {
   this.token = token;
+};
+
+users.methods.setRefresh = function (refresh) {
+  this.refresh = refresh;
 };
 
 const User = mongoose.model('user', users);
