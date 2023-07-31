@@ -19,8 +19,6 @@ export const LoginForm = () => {
   const initialValues = {
     email: '',
     password: '',
-    // confirmPassword: '',
-    // name: '',
   };
 
   const handleSubmit = (e) => {

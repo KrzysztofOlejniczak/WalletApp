@@ -1,6 +1,6 @@
 import { VictoryPie, VictoryLabel } from 'victory';
 import { ChartTable } from './chartTable';
-import { colorPallete } from '../../stylesheet/chartColors';
+import { colorPallete } from '../../stylesheet/utils/chartColors';
 import './chart.scss';
 
 export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
@@ -52,13 +52,4 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
   );
 };
 
-// #FED057 main expenses
-// #FFD8D0 products
-// #FD9498 car
-// #C5BAFF self care
-// #6E78E8 child care
-// #4A56E2 household products
-// #81E1FF education
-// #24CCA7 leisure
-// #00AD84 other expenses
-// #  entertainment
+
