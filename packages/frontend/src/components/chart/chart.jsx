@@ -35,7 +35,7 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
                 }}
                 x={140}
                 y={140}
-                text={balance}
+                text={`€ ${balance}`}
               />
             </svg>
           </div>
