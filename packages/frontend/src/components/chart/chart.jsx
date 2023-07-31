@@ -15,27 +15,29 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
         <div className="statsSheet">
           <h2 className="pieHeader">Statistics</h2>
           <div className="pieStyle">
-            <VictoryPie
-              innerRadius={100}
-              width={280}
-              height={280}
-              labelComponent={
-                <VictoryLabel
-                  textAnchor="middle"
-                  style={{
-                    fontSize: 18,
-                    fontFamily: 'Circe',
-                    fontWeight: '700',
-                  }}
-                  x={140}
-                  y={140}
-                  text={balance}
-                />
-              }
-              data={dataForPieChart}
-              padding={0}
-              colorScale={colorPallete}
-            ></VictoryPie>
+            <svg viewBox="0 0 280 280">
+              <VictoryPie
+                standalone={false}
+                innerRadius={100}
+                width={280}
+                height={280}
+                labelComponent={<></>}
+                data={dataForPieChart}
+                padding={0}
+                colorScale={colorPallete}
+              ></VictoryPie>
+              <VictoryLabel
+                textAnchor="middle"
+                style={{
+                  fontSize: 18,
+                  fontFamily: 'Circe',
+                  fontWeight: '700',
+                }}
+                x={140}
+                y={140}
+                text={balance}
+              />
+            </svg>
           </div>
         </div>
         <div className="chartStyle">
