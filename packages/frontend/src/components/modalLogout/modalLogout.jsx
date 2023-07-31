@@ -1,4 +1,4 @@
-import css from './modalLogout.module.css';
+import './modalLogout.scss';
 import { useEffect } from 'react';
 
 export const ModalLogout = ({ closeModal, handleLogout }) => {
@@ -14,16 +14,23 @@ export const ModalLogout = ({ closeModal, handleLogout }) => {
 
   return (
     <>
-      <div className={css.modalOverlay} onClick={closeModal}></div>
-      <div className={css.modalContainer}>
-        <div className={css.modalContent}>
-          <h2>Are you sure you want to log out?</h2>
-          <div className={css.confirmButtons}>
-            <button type="button" onClick={handleLogout}>
-              Yes
+      <div className="logoutModalOverlay" onClick={closeModal}></div>
+      <div className="logoutModalContainer">
+        <div className="logoutModalContent">
+          <h2>Confirm</h2>
+          <span className="logoutInfo">
+            You will be returned to the login screen.
+          </span>
+          <div className="confirmButtons">
+            <button className="cancelButton" type="button" onClick={closeModal}>
+              Cancel
             </button>
-            <button type="button" onClick={closeModal}>
-              No
+            <button
+              className="logoutButton"
+              type="button"
+              onClick={handleLogout}
+            >
+              Log out
             </button>
           </div>
         </div>
