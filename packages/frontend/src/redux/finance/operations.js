@@ -1,15 +1,9 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startAsyncRequest, finishAsyncRequest } from '../global/slice';
 import { closeModal } from '../../redux/global/operations';
 import { notifyError } from '../../utils/notifies';
 import { getCurrentYearAndMonth } from '../../utils/getCurrentYearAndMonth.js';
-
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
-
-const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+import { axiosAPI, setAuthHeader } from '../../utils/axios';
 
 export const fetchTransactions = createAsyncThunk(
   'finance/fetchTransactions',
@@ -24,7 +18,7 @@ export const fetchTransactions = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('/finance/transactions');
+      const res = await axiosAPI.get('/finance/transactions');
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -47,7 +41,7 @@ export const fetchMonthlyStats = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get(`/finance/transactions/${year}/${month}`);
+      const res = await axiosAPI.get(`/finance/transactions/${year}/${month}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -70,7 +64,7 @@ export const fetchBalance = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('/finance/balance');
+      const res = await axiosAPI.get('/finance/balance');
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -93,7 +87,7 @@ export const addTransaction = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.post('/finance/transactions', transactionData);
+      const res = await axiosAPI.post('/finance/transactions', transactionData);
       thunkAPI.dispatch(fetchBalance());
       const { year, month } = getCurrentYearAndMonth();
       thunkAPI.dispatch(fetchMonthlyStats({ year, month }));
@@ -121,7 +115,7 @@ export const deleteTransaction = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      await axios.delete(`/finance/transactions/${transactionId}`);
+      await axiosAPI.delete(`/finance/transactions/${transactionId}`);
       thunkAPI.dispatch(fetchBalance());
       const { year, month } = getCurrentYearAndMonth();
       thunkAPI.dispatch(fetchMonthlyStats({ year, month }));
@@ -146,7 +140,7 @@ export const editTransaction = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.put(
+      const res = await axiosAPI.put(
         `/finance/transactions/${transactionData._id}`,
         transactionData
       );
@@ -171,7 +165,7 @@ export const fetchCategories = createAsyncThunk(
     thunkAPI.dispatch(startAsyncRequest());
 
     try {
-      const res = await axios.get('/finance/categories');
+      const res = await axiosAPI.get('/finance/categories');
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

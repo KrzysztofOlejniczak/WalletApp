@@ -164,8 +164,6 @@ const removeTransaction = async (req, res, next) => {
   const owner = req.user._id;
   const { id } = req.params;
 
-  console.log(req.params);
-
   try {
     const result = await Transaction.findByIdAndRemove({ _id: id, owner });
     if (result) {
