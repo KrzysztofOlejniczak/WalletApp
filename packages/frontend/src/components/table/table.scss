@@ -14,7 +14,6 @@
   @media screen and (max-width: $MaxMobileWidth) {
     max-height: 75vh;
     overflow-y: auto;
-    padding-top: 20px;
   }
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
@@ -28,7 +27,6 @@
     grid-gap: 0.625rem;
     max-height: 80vh;
     overflow-y: auto;
-    padding-top: 20px;
   }
 }
 
