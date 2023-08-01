@@ -43,7 +43,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [dateValue, setDateValue] = useState(initialValues.date);
   const [selectedCategory, setSelectedCategory] = useState("Main expenses");
-  const [comment, setComment] = useState("none")
+  const [comment, setComment] = useState("")
   const [amount, setAmount] = useState("")
 
   const categories = useSelector(selectCategories);
