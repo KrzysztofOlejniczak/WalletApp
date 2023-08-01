@@ -4,7 +4,9 @@ const {
   validationYearAndMonth,
   validationTransactionSchema,
 } = require('../../validation');
-const { parseNumber } = require('../../utils/parseData');
+
+//It is not necessary if you can send a number in frontend form. Also this coused error during editing transaction
+/* const { parseNumber } = require('../../utils/parseData'); */
 
 const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
@@ -12,7 +14,7 @@ const createTransaction = async (req, res, next) => {
 
   const transaction = {
     isExpense,
-    amount: parseNumber(amount),
+    amount: amount,
     date,
     comment,
     category,
@@ -119,7 +121,7 @@ const updateTransaction = async (req, res, next) => {
 
   const transaction = {
     isExpense,
-    amount: parseNumber(amount),
+    amount: amount,
     date,
     comment,
     category,
@@ -136,7 +138,7 @@ const updateTransaction = async (req, res, next) => {
   try {
     const result = await Transaction.findByIdAndUpdate(
       { _id: id, owner },
-      { isExpense, amount: parseNumber(amount), date, comment, category }
+      { isExpense, amount: amount, date, comment, category }
     );
     if (result) {
       res.status(200).json({

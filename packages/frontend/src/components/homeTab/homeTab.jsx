@@ -77,6 +77,10 @@ export default function HomeTab() {
       <ButtonAddTransactions
         handleClick={() => {
           dispatch(openModal('isModalAddTransactionOpen'));
+          const scrollToTop = () => {
+            window.scrollTo(0, 0);
+          };
+          scrollToTop()
         }}
       />
       {isModalAddTransactionOpen && (

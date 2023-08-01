@@ -1,0 +1,198 @@
+:root {
+  --white: #ffffff;
+  --secondary-text-color: #fff;
+  --accent-red: #ff6596;
+  --pink-dark: #ff6596;
+  --accent-blue: #4a56e2;
+  --purple-dark: #4a56e2;
+  --black: #000000;
+  --primary-text-color: #000;
+  --disabled-text: #e0e0e0;
+  --gray-text-modal: #e0e0e0;
+  --placeholder-text: #bdbdbd;
+  --gray-text-header: #bdbdbd;
+  --gray-background: #e7eaf2;
+  --secondary-background-color: #e7eaf2;
+  --green-light: #24cca7;
+  --accent-green: #24cca7;
+  --color-transaction-border: #dcdcdf;
+  --gray-divider-horizontal: #dcdcdf;
+  --transactions-line: #e7e5f2;
+  --gray-divider-vertical: #e7e5f2;
+  --error-text: #ff001b;
+  --gray-text-balance: #a6a6a6;
+  --gray-progress-line: #e5f1ef;
+  --purple-light: #6e78e8;
+  --purple-lightest: #c5baff;
+  --green-dark: #00ad84;
+  --pink-light: #fd9498;
+  --pink-lightest: #ffd8d0;
+  --blue: #81e1ff;
+  --yellow: #fed057;
+}
+
+@font-face {
+  font-family: "CirceBold";
+  src: url("../../assets/fonts/circe/circe_bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Circe";
+  src: url("../../assets/fonts/circe/circe.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Bold.eot");
+  src: local("Poppins Bold"), local("Poppins-Bold"), url("../../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+body {
+  font-family: "Poppins", "Circe", "CirceBold", sans-serif;
+  text-decoration: none;
+  background-color: var(--primary-background-color);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background: none;
+}
+
+p {
+  margin: 0px;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 20px;
+}
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0px 70px;
+    width: 768px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}
+
+.visually-hiden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  display: none;
+}
+
+.is-hidden {
+  display: none;
+}
+
+img {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+img[data-src] {
+  opacity: 0;
+}
+
+.logoutModalOverlay {
+  opacity: 0.4;
+  background-color: var(--gray-text-modal);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  text-align: center;
+}
+
+.logoutModalContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 180px;
+  background-color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  border-radius: 14px;
+}
+.logoutModalContainer .logoutModalContent {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.logoutModalContainer .logoutModalContent .logoutInfo {
+  font-size: 16px;
+}
+.logoutModalContainer .logoutModalContent .confirmButtons {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  gap: 20px;
+}
+.logoutModalContainer .logoutModalContent .confirmButtons button {
+  padding: 10px;
+  border: 1px solid var(--white);
+  border-radius: 6px;
+}
+.logoutModalContainer .logoutModalContent .confirmButtons .cancelButton {
+  background-color: #3d4be9;
+  color: #ffffff;
+}
+.logoutModalContainer .logoutModalContent .confirmButtons .logoutButton {
+  background-color: #e2e2e2;
+}/*# sourceMappingURL=modalLogout.css.map */
