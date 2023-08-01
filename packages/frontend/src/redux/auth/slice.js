@@ -66,6 +66,13 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
       })
+      .addCase(refreshAccessToken.rejected, (state, action) => {
+        state.name = null;
+        state.token = null;
+        state.refresh = null;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
       .addCase((state) => {
         state.error = 'Error';
       });

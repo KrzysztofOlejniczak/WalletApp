@@ -24,9 +24,11 @@ axiosAPI.interceptors.response.use(
       try {
         const res = await store.dispatch(refreshAccessToken());
         const token = res.payload.token;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        originalRequest.headers['Authorization'] = `Bearer ${token}`;
-        return axios(originalRequest);
+        if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          originalRequest.headers['Authorization'] = `Bearer ${token}`;
+          return axios(originalRequest);
+        }
       } catch (refreshError) {
         throw refreshError;
       }
