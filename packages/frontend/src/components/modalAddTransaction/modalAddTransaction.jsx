@@ -1,21 +1,40 @@
 import { useEffect, useState } from 'react';
-import css from './modalAddTransaction.module.css';
+import './modalAddTransaction.scss'
 import { useSelector } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
-import addTransactionValidationSchema from '../../validations/validateAddTransaction';
+/* import addTransactionValidationSchema from '../../validations/validateAddTransaction'; */
 import { useDispatch } from 'react-redux';
 import { selectCategories } from '../../redux/finance/selectors';
 import {
   addTransaction,
   fetchCategories,
 } from '../../redux/finance/operations';
+import MainButton from '../mainButton/mainButton';
+import TextInput from '../textInput/textInput';
+import Select from 'react-select';
+import { selectStyles } from '../chart/chartFiltersStyles';
+
 
 export const ModalAddTransaction = ({ closeModal }) => {
+
+  useEffect(() => {
+    document.body.classList.add('modal-open');
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, []);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+
   const initialValues = {
-    amount: 0.0,
+    amount: "",
     category: '',
     date: new Date(),
     comment: '',
@@ -23,13 +42,18 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [dateValue, setDateValue] = useState(initialValues.date);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  const [selectedCategory, setSelectedCategory] = useState("Main expenses");
+  const [comment, setComment] = useState("none")
+  const [amount, setAmount] = useState("")
 
   const categories = useSelector(selectCategories);
+
+  const categoriesOptions = Object.values(categories)
+    .filter(({ name }) => name !== 'Income')
+    .map(({ id, name }) => ({
+      value: id,
+      label: name,
+    }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,10 +61,10 @@ export const ModalAddTransaction = ({ closeModal }) => {
     dispatch(
       addTransaction({
         isExpense: !isChecked,
-        amount: form.elements.amount.value,
+        amount: amount,
         date: dateValue,
-        category: isChecked ? 'Income' : form.elements.category.value,
-        comment: form.elements.comment.value,
+        category: isChecked ? 'Income' : selectedCategory,
+        comment: comment,
       })
     );
 
@@ -48,86 +72,96 @@ export const ModalAddTransaction = ({ closeModal }) => {
   };
 
   return (
-    <div className={css.overlay}>
-      <h1>Add transaction</h1>
+    <div>
+      <div className="backdrop" onClick={closeModal}></div>
+      <div className="overlay">
+        <h1>Add transaction</h1>
 
-      <div>
-        {/* Tu trzeba zrobić ładnego switcha */}
-        <span>Income</span>
+        <div className='switch'>
 
-        <input
-          type="checkbox"
-          id="transaction-type"
-          name="transaction-type"
-          defaultChecked={isChecked}
-          onClick={() => setIsChecked(!isChecked)}
-        />
-        <span>Expense</span>
-      </div>
-      <div>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={addTransactionValidationSchema}
-        >
-          {(props) => {
-            const { values } = props;
-            return (
-              <Form
-                onSubmit={(e) => handleSubmit(e)}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  rowGap: '10px',
-                }}
-              >
-                <Field
-                  type="text"
-                  id="amount"
-                  name="amount"
-                  placeholder="Amount"
-                  value={values.amount}
-                />
-                {isChecked ? null : (
-                  <Field as="select" id="category" name="category">
-                    {categories
-                      .filter((category) => category.name !== 'Income')
-                      .map((category) => (
-                        <option key={category.id} value={category.name}>
-                          {category.name}
-                        </option>
-                      ))}
-                  </Field>
-                )}
+          <label
+            htmlFor="check1"
+            className={`toggle-label ${isChecked ? 'income' : 'expense'}`}
+          >Expense</label>
+          <input type="checkbox" id="check1" className="toggle"
+            name="transaction-type" defaultChecked={isChecked}
+            onClick={() => setIsChecked(!isChecked)} />
+          <label
+            htmlFor="check1"
+            className={`toggle-label ${isChecked ? 'expense' : 'income'}`}
+          >Income</label>
+        </div>
+        <div>
+          <Formik
+            initialValues={initialValues}
+          /*           validationSchema={addTransactionValidationSchema} */
+          >
+                <Form
+                  onSubmit={(e) => handleSubmit(e)}
+                  className='form'
+                >
+                  <TextInput
+                    type="text"
+                    id="amount"
+                    name="amount"
+                    placeholder="0.0"
+                    value={amount}
+                    className="input"
+                    onChange={(e) => {
+                      const input = e.target.value;
+                      const regex = /^\d*$/;
 
-                <Datetime
-                  id="date"
-                  name="date"
-                  dateFormat="DD-MM-YYYY"
-                  timeFormat={false}
-                  value={dateValue}
-                  onChange={(newDate) => {
-                    setDateValue(newDate);
-                  }}
-                />
-                <Field
-                  id="comment"
-                  name="comment"
-                  value={values.comment}
-                  placeholder="Comment"
-                  as="textarea"
-                />
-                <ErrorMessage name="comment">
-                  {(error) => <p>{error}</p>}
-                </ErrorMessage>
-                <button type="submit">Add</button>
-              </Form>
-            );
-          }}
-        </Formik>
-        <button onClick={closeModal}>Cancel</button>
+                      if (regex.test(input)) {
+                        setAmount(input)
+                      }
+                    }}
+                  />
+                  {isChecked ? null : (
+                    <div>
+                      <Select
+                        styles={selectStyles}
+                        options={categoriesOptions}
+                        placeholder="Main expenses"
+                        id="category"
+                        name="category"
+                        onChange={(option) => {
+                          setSelectedCategory(option.label)
+                        }}
+                        isSearchable={false}
+                        defaultValue="Main expenses"
+                      />
+                    </div>
+                  )}
+                  <Datetime
+                    id="date"
+                    name="date"
+                    dateFormat="DD.MM.YYYY"
+                    timeFormat={false}
+                    value={dateValue}
+                    className="datetime"
+                    onChange={(newDate) => {
+                      setDateValue(newDate);
+                    }}
+                  />
+                  <label className="label">
+                    <textarea
+                      placeholder="Comment"
+                      className='textarea'
+                      rows={3}
+                      onChange={(comment) => {
+                        setComment(comment.target.value);
+                      }}
+                    />
+                  </label>
+                  <MainButton type="submit" text="ADD" className="logo_btn" />
+                </Form>
+          </Formik>
+          <button onClick={closeModal} className="main_btn">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
+
   );
 };
