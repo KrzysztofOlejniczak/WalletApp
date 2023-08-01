@@ -4,23 +4,23 @@
   padding: 12px 30px;
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
-    padding: 40px 0 28px;
+    padding: 40px 0 36px;
     max-width: 350px;
   }
 
   @media screen and (min-width: $DesktopWidth) {
-    padding-top: 20px;
+    padding: 40px 0 28px;
   }
 }
 .nav_list {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
   padding: 0;
   width: 100%;
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
     display: block;
+    margin: 0;
     padding: 0;
   }
 

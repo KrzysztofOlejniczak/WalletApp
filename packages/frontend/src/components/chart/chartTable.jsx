@@ -29,7 +29,6 @@ export const ChartTable = ({ data, income, colorPallete }) => {
                 ></div>
                 {el.label}
               </td>
-
               <td className="columnStatsStyle">{el.y}</td>
             </tr>
           ))}

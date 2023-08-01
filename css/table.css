@@ -58,8 +58,8 @@ body {
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -72,6 +72,12 @@ h4 {
 ul {
   margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
 a {
@@ -146,7 +152,7 @@ img[data-src] {
 
 .transactionList {
   list-style: none;
-  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .transactionListContainer {
@@ -154,7 +160,22 @@ img[data-src] {
 }
 @media screen and (max-width: 767px) {
   .transactionListContainer {
-    padding-top: 20px;
+    max-height: 73vh;
+    overflow-y: auto;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .transactionListContainer {
+    max-height: 55vh;
+    overflow-y: auto;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .transactionListContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-height: 75vh;
+    overflow-y: auto;
   }
 }
 
@@ -162,13 +183,14 @@ img[data-src] {
   background-color: var(--white);
   border-radius: 1.875rem;
   width: 704px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   padding: 0.875rem 1.25rem;
-  margin-top: 0.625rem;
 }
 @media screen and (min-width: 1280px) {
   .transactionListHeader {
+    margin-top: 46px;
     width: 715px;
   }
 }

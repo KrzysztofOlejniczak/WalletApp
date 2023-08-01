@@ -1,9 +1,8 @@
 @import '../../stylesheet/main.scss';
 .currency {
   position: relative;
-  height: 100%;
   margin: 0 auto;
-  margin-top: 1.938rem;
+  margin-top: 16px;
   border-radius: 1.875rem;
   color: var(--white);
   background-color: var(--accent-blue);
@@ -17,7 +16,7 @@
     background-image: url('../../images/svg/wave-tablet.svg');
   }
   @media (min-width: $TabletWidth) and (max-width: 1279px) {
-    width: 336px;
+    max-width: 336px;
     background-image: url('../../images/svg/wave-desktop.svg');
     background-size: contain;
   }
@@ -70,6 +69,7 @@
   padding-top: 0.625rem;
   font-size: 1rem;
 }
+
 .loader {
   position: relative;
   top: 50%;
@@ -81,7 +81,7 @@
 
 @media (min-width: $TabletWidth) {
   .currency {
-    margin-left: 0.625rem;
+    // margin-left: 0.625rem;
     width: 363px;
   }
   .loader {

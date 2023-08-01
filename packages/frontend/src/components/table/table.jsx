@@ -78,41 +78,43 @@ export const Table = ({
         <>
           {!isMobile && (
             <>
-              <div className="transactionListContainer">
+              <div>
                 <TransactionListHeader />
-                {currentTransactions.map((el) => {
-                  return (
-                    <div className="transactionList" key={el._id}>
-                      <li className="transactionBox">
-                        <p className="dateBox">{formatDate(el.date)}</p>
-                        {el.isExpense === true ? (
-                          <p className="typeBox">-</p>
-                        ) : (
-                          <p className="typeBox">+</p>
-                        )}
-                        <p className="categoryBox">{el.category} </p>
-                        <p className="commentBox">{el.comment}</p>
-                        {el.isExpense === true ? (
-                          <p className="sumBox redSum">{el.amount}</p>
-                        ) : (
-                          <p className="sumBox greenSum">{el.amount}</p>
-                        )}
-                        <div className="editDeleteBox">
-                          <EditIcon
-                            className="editIcon"
-                            onClick={() => handleEditTransaction(el)}
-                          />
-                          <button
-                            className="deleteButton"
-                            onClick={() => handleDeleteTransaction(el._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </li>
-                    </div>
-                  );
-                })}
+                <div className="transactionListContainer">
+                  {currentTransactions.map((el) => {
+                    return (
+                      <div className="transactionList" key={el._id}>
+                        <li className="transactionBox">
+                          <p className="dateBox">{formatDate(el.date)}</p>
+                          {el.isExpense === true ? (
+                            <p className="typeBox">-</p>
+                          ) : (
+                            <p className="typeBox">+</p>
+                          )}
+                          <p className="categoryBox">{el.category} </p>
+                          <p className="commentBox">{el.comment}</p>
+                          {el.isExpense === true ? (
+                            <p className="sumBox redSum">{el.amount}</p>
+                          ) : (
+                            <p className="sumBox greenSum">{el.amount}</p>
+                          )}
+                          <div className="editDeleteBox">
+                            <EditIcon
+                              className="editIcon"
+                              onClick={() => handleEditTransaction(el)}
+                            />
+                            <button
+                              className="deleteButton"
+                              onClick={() => handleDeleteTransaction(el._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </li>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </>
           )}
@@ -196,10 +198,10 @@ export const Table = ({
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={data.length} 
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage} 
+        onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </div>
