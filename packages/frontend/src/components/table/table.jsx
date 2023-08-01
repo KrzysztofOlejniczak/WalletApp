@@ -78,8 +78,8 @@ export const Table = ({
         <>
           {!isMobile && (
             <>
-              <div className='transactionTableWrapper' >
-                  <TransactionListHeader />
+              <div>
+                <TransactionListHeader />
                 <div className="transactionListContainer">
                   {currentTransactions.map((el) => {
                     return (
@@ -198,10 +198,10 @@ export const Table = ({
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={data.length} 
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage} 
+        onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </div>
