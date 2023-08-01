@@ -30,6 +30,8 @@ export const BackgroundContainer = styled('div')({
   position: 'relative',
   minWidth: '100vw',
   minHeight: '100vh',
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',

@@ -12,20 +12,19 @@
   width: 100%;
 
   @media screen and (max-width: $MaxMobileWidth) {
-    max-height: 75vh;
+    max-height: 73vh;
     overflow-y: auto;
   }
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
-    max-height: 40vh;
+    max-height: 55vh;
     overflow-y: auto;
   }
 
   @media screen and (min-width: $DesktopWidth) {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 0.625rem;
-    max-height: 80vh;
+    max-height: 75vh;
     overflow-y: auto;
   }
 }

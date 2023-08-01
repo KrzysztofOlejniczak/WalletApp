@@ -58,8 +58,8 @@ body {
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -72,6 +72,12 @@ h4 {
 ul {
   margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
 a {
@@ -149,8 +155,7 @@ img[data-src] {
     display: flex;
     flex-direction: row;
     width: 715px;
-    gap: 20px;
-    padding-left: 20px;
+    gap: 32px;
   }
 }
 
@@ -160,7 +165,7 @@ img[data-src] {
 }
 @media screen and (max-width: 767px) {
   .statsSheet {
-    padding-top: 40px;
+    padding-top: 28px;
     width: 280px;
     margin-left: auto;
     margin-right: auto;
@@ -175,6 +180,7 @@ img[data-src] {
 
 .chartStyle {
   max-width: 395px;
+  padding-bottom: 60px;
 }
 
 .pieHeader {
@@ -227,22 +233,6 @@ img[data-src] {
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.6);
   height: 51px;
-}
-
-.tableWrapper {
-  max-height: 30vh;
-  overflow-y: auto;
-}
-@media screen and (min-width: 768px) {
-  .tableWrapper {
-    max-height: 40vh;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .tableWrapper {
-    max-height: 100vh;
-    overflow-y: visible;
-  }
 }
 
 .tableStyle {

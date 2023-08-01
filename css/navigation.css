@@ -162,7 +162,6 @@ img[data-src] {
 .nav_list {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
   padding: 0;
   width: 100%;
 }
