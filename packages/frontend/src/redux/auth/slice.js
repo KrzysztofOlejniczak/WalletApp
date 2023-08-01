@@ -8,7 +8,6 @@ import {
 } from './operations';
 
 const initialState = {
-  // email: null,
   name: null,
   token: null,
   refresh: null,
@@ -23,7 +22,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        // state.email = action.payload.user.email;
         state.name = action.payload.user.name;
         state.token = action.payload.token;
         state.refresh = action.payload.refresh;
@@ -31,7 +29,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        // state.email = action.payload.user.email;
         state.name = action.payload.user.name;
         state.token = action.payload.token;
         state.refresh = action.payload.refresh;
@@ -39,16 +36,13 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
-        // state.email = null;
         state.name = null;
         state.token = null;
         state.refresh = null;
         state.isLoggedIn = false;
         state.error = null;
-        // state.items = [];
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        // state.email = action.payload.user.email;
         state.name = action.payload.user.name;
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -71,7 +65,13 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
-        // state.error = action.payload;
+      })
+      .addCase(refreshAccessToken.rejected, (state, action) => {
+        state.name = null;
+        state.token = null;
+        state.refresh = null;
+        state.isLoggedIn = false;
+        state.error = null;
       })
       .addCase((state) => {
         state.error = 'Error';
