@@ -6,15 +6,15 @@ const TextInput = ({ label, ...props }) => {
   const [field] = useField(props);
   return (
     <>
-      <ErrorMessage
-        component="div"
-        name={field.name}
-        style={{ color: '#FF6596' }}
-      />
       <label htmlFor={field.name} className="label">
         {label}
         <input {...field} {...props} autoComplete="off" />
       </label>
+      <ErrorMessage
+        component="div"
+        name={field.name}
+        style={{ color: '#FF6596', fontSize: '10px', marginBottom: '10px' }}
+      />
     </>
   );
 };
