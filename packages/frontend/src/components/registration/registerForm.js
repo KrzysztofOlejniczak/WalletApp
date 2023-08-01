@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
@@ -62,6 +62,9 @@ export const RegisterForm = () => {
                 className="input"
                 id="email"
               />
+              <ErrorMessage name="email">
+                {(msg) => <p className="error_message">{msg}</p>}
+              </ErrorMessage>
               <TextInput
                 label={<LockIcon width={16} height={21} />}
                 type="password"
@@ -71,6 +74,9 @@ export const RegisterForm = () => {
                 className="input"
                 id="password"
               />
+              <ErrorMessage name="password">
+                {(msg) => <p className="error_message">{msg}</p>}
+              </ErrorMessage>
               <TextInputConfirm
                 label={<LockIcon width={16} height={21} />}
                 type="password"
@@ -79,6 +85,9 @@ export const RegisterForm = () => {
                 placeholder="Confirm password"
                 className="input"
               />
+              <ErrorMessage name="confirmPassword">
+                {(msg) => <p className="error_message">{msg}</p>}
+              </ErrorMessage>
               <PasswordStrengthBar password={values.password} />
               <TextInput
                 label={<NameIcon width={18} height={18} />}
@@ -89,6 +98,9 @@ export const RegisterForm = () => {
                 className="input"
                 id="name"
               />
+              <ErrorMessage name="name">
+                {(msg) => <p className="error_message--password">{msg}</p>}
+              </ErrorMessage>
             </div>
             <div className="button_container">
               <MainButton type="submit" text="Register" className="logo_btn" />

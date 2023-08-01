@@ -1,5 +1,5 @@
-import getPasswordStrength from "strong-password-check";
-import css from "./passwordStrengthBar.module.css";
+import getPasswordStrength from 'strong-password-check';
+import css from './passwordStrengthBar.module.css';
 
 const config = {
   lowercase: true,
@@ -12,19 +12,19 @@ const config = {
 export const PasswordStrengthBar = ({ password }) => {
   const result = getPasswordStrength(password, config);
 
-  let barColor = "";
+  let barColor = '';
 
-  if (result.strength === "Strong") {
+  if (result.strength === 'Strong') {
     barColor = css.strengthBarStrong;
-  } else if (result.strength === "Moderate") {
+  } else if (result.strength === 'Moderate') {
     barColor = css.strengthBarModerate;
-  } else if (result.strength === "Weak" && password.length > 0) {
+  } else if (result.strength === 'Weak' && password.length > 0) {
     barColor = css.strengthBarWeek;
   }
 
   return (
-    <div className={css.strengthBar}>
-      <div className={barColor}></div>
-    </div>
+    <p className={css.strengthBar}>
+      <p className={barColor}></p>
+    </p>
   );
 };

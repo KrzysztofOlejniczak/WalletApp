@@ -1,6 +1,7 @@
 import { VictoryPie, VictoryLabel } from 'victory';
 import { ChartTable } from './chartTable';
 import { colorPallete } from '../../stylesheet/utils/chartColors';
+import '../../stylesheet/utils/breakpoints.scss';
 import './chart.scss';
 
 export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
@@ -15,12 +16,12 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
         <div className="statsSheet">
           <h2 className="pieHeader">Statistics</h2>
           <div className="pieStyle">
-            <svg viewBox="0 0 280 280">
+            <svg viewBox="0 0 288 288">
               <VictoryPie
                 standalone={false}
                 innerRadius={100}
-                width={280}
-                height={280}
+                width={288}
+                height={288}
                 labelComponent={<></>}
                 data={dataForPieChart}
                 padding={0}
@@ -51,5 +52,3 @@ export const Chart = ({ expenseByCategory, income, balance, expensesSum }) => {
     </>
   );
 };
-
-
