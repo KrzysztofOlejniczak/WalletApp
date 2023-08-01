@@ -197,8 +197,8 @@ export const Table = ({
       )}
 
       <CustomTablePagination
-        showFirstButton
-        showLastButton
+        showFirstButton={isMobile ? false : true}
+        showLastButton={isMobile ? false : true}
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={data.length}
