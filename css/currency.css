@@ -165,7 +165,7 @@ img[data-src] {
 }
 @media (min-width: 768px) and (max-width: 1279px) {
   .currency {
-    width: 336px;
+    max-width: 336px;
     background-image: url("../../images/svg/wave-desktop.svg");
     background-size: contain;
   }
@@ -231,7 +231,6 @@ img[data-src] {
 
 @media (min-width: 768px) {
   .currency {
-    margin-left: 0.625rem;
     width: 363px;
   }
   .loader {

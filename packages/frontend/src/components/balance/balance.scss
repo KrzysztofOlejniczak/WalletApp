@@ -11,11 +11,12 @@
   margin-left: auto;
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
+    width: 336px;
     padding: 10px 40px;
-    margin-right: 20px;
+    margin: 0;
   }
   @media screen and (min-width: $DesktopWidth) {
-    margin-bottom: 30px;
+    margin: 0;
   }
 }
 

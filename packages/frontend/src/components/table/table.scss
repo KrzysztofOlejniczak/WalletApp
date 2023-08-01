@@ -37,13 +37,14 @@
   margin-bottom: 16px;
 
   @media screen and (min-width: $DesktopWidth) {
+    margin-top: 46px;
     width: 715px;
   }
 
   display: flex;
   justify-content: space-between;
   padding: 0.875rem 1.25rem;
-  margin-top: 0.625rem;
+ 
 }
 
 .transactionDetailName {

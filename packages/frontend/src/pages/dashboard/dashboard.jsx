@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Grid, useMediaQuery } from '@mui/material';
+import { Box, Grid, Stack, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../components/header/header';
 import { Navigation } from '../../components/navigation/navigation';
@@ -46,9 +46,23 @@ export default function DashboardPage() {
         direction={isTablet ? 'column' : 'row'}
       >
         <NavGrid item>
-          <Navigation />
-          <Balance />
-          <Currency />
+          {isDesktop ? (
+            <>
+              <Navigation />
+              <Balance />
+              <Currency />
+            </>
+          ) : (
+            <Stack direction='row' spacing={4} >
+              <Stack sx={{ flexWrap: 'wrap', alignItems: 'stretch'}}>
+                <Navigation />
+                <Balance />
+              </Stack>
+              <Box>
+                <Currency />
+              </Box>
+            </Stack>
+          )}
         </NavGrid>
         {isDesktop && <Vector />}
         <Suspense>
