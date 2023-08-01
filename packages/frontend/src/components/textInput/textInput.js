@@ -13,7 +13,7 @@ const TextInput = ({ label, ...props }) => {
       <ErrorMessage
         component="div"
         name={field.name}
-        style={{ color: '#FF6596', fontSize: '10px', marginBottom: '10px' }}
+        style={{ color: '#FF6596', fontSize: '10px', marginBottom: '10px', textAlign:'left' }}
       />
     </>
   );
