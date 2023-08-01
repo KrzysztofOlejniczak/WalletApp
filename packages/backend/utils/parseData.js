@@ -5,7 +5,7 @@ const parseNumber = (input) => {
 
   input = input.replace(',', '.');
 
-  const number = parseFloat(input); // parseFloat(input) lub parseInt(input, 10);
+  const number = parseFloat(input);
 
   return number;
 };

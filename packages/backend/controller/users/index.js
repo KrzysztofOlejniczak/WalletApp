@@ -52,9 +52,8 @@ const signup = async (req, res, next) => {
         next(error);
       }
     }
-  } catch (e) {
-    console.error(e);
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -95,9 +94,8 @@ const login = async (req, res, next) => {
         },
       });
     }
-  } catch (e) {
-    console.error(e);
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -178,7 +176,6 @@ const refresh = async (req, res, next) => {
       refresh: user.refresh,
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
