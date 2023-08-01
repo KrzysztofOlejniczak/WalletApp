@@ -61,7 +61,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
     dispatch(
       addTransaction({
         isExpense: !isChecked,
-        amount: amount,
+        amount: Number(amount),
         date: dateValue,
         category: isChecked ? 'Income' : selectedCategory,
         comment: comment,
@@ -109,7 +109,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                     className="input"
                     onChange={(e) => {
                       const input = e.target.value;
-                      const regex = /^\d*$/;
+                      const regex = /^(\d+)?(\.\d{0,2})?$/;
 
                       if (regex.test(input)) {
                         setAmount(input)

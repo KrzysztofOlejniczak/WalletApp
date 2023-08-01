@@ -26,7 +26,6 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
 
   useEffect(() => {
     const scrollToTop = () => {
-      console.log("scrolluj")
       window.scrollTo(0, 0);
     };
     scrollToTop()
@@ -127,7 +126,7 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
                 className="input"
                 onChange={(e) => {
                   const input = e.target.value;
-                  const regex = /^\d*$/;
+                  const regex = /^(\d+)?(\.\d{0,2})?$/;
 
                   if (regex.test(input)) {
                     setAmount(input)
