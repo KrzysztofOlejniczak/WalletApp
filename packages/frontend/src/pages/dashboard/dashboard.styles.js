@@ -26,13 +26,19 @@ export const DashboardWrapper = styled('div')({
   },
 });
 
-export const ContainerWrapper = styled('div')({
+export const BackgroundContainer = styled('div')({
   position: 'relative',
+  // width: '100%',
+  // height: '100%',
   minWidth: '100vw',
   minHeight: '100vh',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
+  '@media (min-width: 1280px)': {
+    minWidth: '100vw',
+    minHeight: '100vh',
+  },
   '::before': {
     content: '""',
     position: 'absolute',
@@ -53,7 +59,7 @@ export const ContainerWrapper = styled('div')({
   },
 });
 
-export const StyledContainer = styled(Container)({
+export const AdaptiveContainer = styled(Container)({
   height: '100%',
 });
 

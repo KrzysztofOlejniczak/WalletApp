@@ -13,8 +13,8 @@ import {
 } from '../../redux/finance/operations';
 import {
   Vector,
-  ContainerWrapper,
-  StyledContainer,
+  BackgroundContainer,
+  AdaptiveContainer,
   DashboardWrapper,
   NavGrid,
   DataGrid,
@@ -78,11 +78,11 @@ export default function DashboardPage() {
   return (
     <DashboardWrapper>
       <Header />
-      <ContainerWrapper>
-        <StyledContainer fixed>
+      <BackgroundContainer>
+        <AdaptiveContainer fixed>
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
-        </StyledContainer>
-      </ContainerWrapper>
+        </AdaptiveContainer>
+      </BackgroundContainer>
     </DashboardWrapper>
   );
 }
