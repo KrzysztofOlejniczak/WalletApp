@@ -239,6 +239,7 @@ img[data-src] {
   line-height: 1.5;
   letter-spacing: 0em;
   text-align: center;
+  margin-left: 3px;
   padding: 0.25rem 0.75rem;
   background-color: var(--accent-green);
   border-radius: 1.125rem;
