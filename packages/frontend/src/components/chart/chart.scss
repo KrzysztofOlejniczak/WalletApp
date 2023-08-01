@@ -1,4 +1,5 @@
 @import '../../stylesheet/main.scss';
+
 .mainSheet {
   @media screen and (min-width: $TabletWidth) {
     display: flex;
@@ -8,9 +9,11 @@
     padding-left: 20px;
   }
 }
+
 .statsSheet {
   display: flex;
   flex-direction: column;
+
   @media screen and (max-width: $MaxMobileWidth) {
     padding-top: 40px;
     width: 280px;
@@ -23,9 +26,11 @@
     padding-top: 30px;
   }
 }
+
 .chartStyle {
   max-width: 395px;
 }
+
 .pieHeader {
   font-family: Poppins;
   font-size: 30px;
@@ -34,19 +39,23 @@
   line-height: 45px;
   letter-spacing: 0em;
   text-align: left;
+
   @media screen and (min-width: $DesktopWidth) {
     margin-left: 30px;
   }
 }
+
 .pieStyle {
   height: 280px;
   width: 288px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     margin-top: 10px;
     width: 280px;
     height: 280px;
     margin-bottom: 30px;
   }
+
   @media screen and (min-width: $TabletWidth) {
     margin-top: 20px;
     margin-right: auto;
@@ -55,10 +64,12 @@
     width: 320px;
     height: 320px;
   }
+
   @media screen and (min-width: $DesktopWidth) {
     margin-top: 40px;
   }
 }
+
 .columnStatsStyle {
   margin: 0;
   text-align: left;
@@ -68,10 +79,24 @@
   box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.6);
   height: 51px;
 }
+
+.tableWrapper {
+  max-height: 30vh;
+  overflow-y: auto;
+  @media screen and (min-width: $TabletWidth) {
+    max-height: 40vh;
+  }
+  @media screen and (min-width: $DesktopWidth) {
+    max-height: 100vh;
+    overflow-y: visible;
+  }
+}
+
 .tableStyle {
   border-spacing: 0;
   border-bottom: 1px solid #dcdcdf;
   width: 395px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     width: 280px;
   }
@@ -84,6 +109,7 @@
   gap: 15px;
   padding-top: 15px;
 }
+
 .columnFooterStatsStyle {
   display: flex;
   align-items: center;
@@ -98,20 +124,25 @@
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
+
   @media screen and (max-width: $MaxMobileWidth) {
     max-width: 280px;
   }
 }
+
 .tableFooterCash {
   color: var(--accent-green);
   padding-right: 20px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     padding-right: 10px;
   }
 }
+
 .tableFooterCashBad {
   color: var(--accent-red);
   padding-right: 20px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     padding-right: 10px;
   }
@@ -124,17 +155,21 @@
   text-align: left;
   padding-left: 15px;
 }
+
 .trStatsStyle .columnStatsStyle:last-child {
   padding-right: 20px;
 }
+
 .columnStatsStyle {
   padding-top: 9px;
   padding-bottom: 9px;
   text-align: right;
+
   @media screen and (min-width: $TabletWidth) {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+
   @media screen and (min-width: $DesktopWidth) {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -146,6 +181,7 @@
   margin-right: 16px;
   margin-left: 20px;
 }
+
 .columnStatsStyle:nth-child(even) span {
   display: none;
 }
@@ -160,16 +196,19 @@
   border-radius: 30px;
   margin-top: 20px;
   padding: 0px 20px 0px 20px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     margin-top: 10px;
     width: 280px;
   }
 }
+
 .tableHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .tableHeader:last-child {
   width: 100%;
   justify-self: right;
@@ -178,6 +217,7 @@
 .tableFooter {
   height: 39px;
 }
+
 .dateFilter {
   display: flex;
   justify-content: flex-start;
@@ -186,17 +226,20 @@
     display: block;
   }
 }
+
 .table {
   @media screen and (min-width: $TabletWidth) {
     width: 350px;
     margin-top: 35px;
     margin-left: 18px;
   }
+
   @media screen and (min-width: $DesktopWidth) {
     margin-left: 40px;
     margin-top: 95px;
   }
 }
+
 .dateInput {
   display: block;
   width: 166px;
@@ -210,14 +253,17 @@
   margin-bottom: 20px;
   margin-right: 19px;
   cursor: pointer;
+
   @media screen and (max-width: $MaxMobileWidth) {
     width: 280px;
   }
 }
+
 .dateInput:hover,
 .dateInput:focus {
   border: 1px solid #24cca7;
 }
+
 .dateInput::placeholder {
   font-family: Circe;
   font-style: normal;
@@ -226,12 +272,15 @@
   line-height: 24px;
   color: var(--primary-text-color);
 }
+
 .react-datepicker-wrapper:last-child {
   margin-right: 0px;
 }
+
 .dateInput:last-child {
   margin-right: 0px;
 }
+
 .arrow {
   background-image: url(../../images/svg/arrow.svg);
   display: block;

@@ -1,0 +1,463 @@
+:root {
+  --white: #ffffff;
+  --secondary-text-color: #fff;
+  --accent-red: #ff6596;
+  --pink-dark: #ff6596;
+  --accent-blue: #4a56e2;
+  --purple-dark: #4a56e2;
+  --black: #000000;
+  --primary-text-color: #000;
+  --disabled-text: #e0e0e0;
+  --gray-text-modal: #e0e0e0;
+  --placeholder-text: #bdbdbd;
+  --gray-text-header: #bdbdbd;
+  --gray-background: #e7eaf2;
+  --secondary-background-color: #e7eaf2;
+  --green-light: #24cca7;
+  --accent-green: #24cca7;
+  --color-transaction-border: #dcdcdf;
+  --gray-divider-horizontal: #dcdcdf;
+  --transactions-line: #e7e5f2;
+  --gray-divider-vertical: #e7e5f2;
+  --error-text: #ff001b;
+  --gray-text-balance: #a6a6a6;
+  --gray-progress-line: #e5f1ef;
+  --purple-light: #6e78e8;
+  --purple-lightest: #c5baff;
+  --green-dark: #00ad84;
+  --pink-light: #fd9498;
+  --pink-lightest: #ffd8d0;
+  --blue: #81e1ff;
+  --yellow: #fed057;
+}
+
+@font-face {
+  font-family: "CirceBold";
+  src: url("../../assets/fonts/circe/circe_bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Circe";
+  src: url("../../assets/fonts/circe/circe.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Bold.eot");
+  src: local("Poppins Bold"), local("Poppins-Bold"), url("../../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+body {
+  font-family: "Poppins", "Circe", "CirceBold", sans-serif;
+  text-decoration: none;
+  background-color: var(--primary-background-color);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background: none;
+}
+
+p {
+  margin: 0px;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 20px;
+}
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0px 70px;
+    width: 768px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}
+
+.visually-hiden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  display: none;
+}
+
+.is-hidden {
+  display: none;
+}
+
+img {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+img[data-src] {
+  opacity: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .mainSheet {
+    display: flex;
+    flex-direction: row;
+    width: 715px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+}
+
+.statsSheet {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 767px) {
+  .statsSheet {
+    padding-top: 40px;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .statsSheet {
+    display: flex;
+    padding-top: 30px;
+  }
+}
+
+.chartStyle {
+  max-width: 395px;
+}
+
+.pieHeader {
+  font-family: Poppins;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 45px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+@media screen and (min-width: 1280px) {
+  .pieHeader {
+    margin-left: 30px;
+  }
+}
+
+.pieStyle {
+  height: 280px;
+  width: 288px;
+}
+@media screen and (max-width: 767px) {
+  .pieStyle {
+    margin-top: 10px;
+    width: 280px;
+    height: 280px;
+    margin-bottom: 30px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pieStyle {
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 320px;
+    height: 320px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .pieStyle {
+    margin-top: 40px;
+  }
+}
+
+.columnStatsStyle {
+  margin: 0;
+  text-align: left;
+  justify-content: start;
+  padding: 0.5rem;
+  border-bottom: 1px solid #dcdcdf;
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.6);
+  height: 51px;
+}
+
+.tableWrapper {
+  max-height: 30vh;
+  overflow-y: auto;
+}
+@media screen and (min-width: 768px) {
+  .tableWrapper {
+    max-height: 40vh;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .tableWrapper {
+    max-height: 100vh;
+    overflow-y: visible;
+  }
+}
+
+.tableStyle {
+  border-spacing: 0;
+  border-bottom: 1px solid #dcdcdf;
+  width: 395px;
+}
+@media screen and (max-width: 767px) {
+  .tableStyle {
+    width: 280px;
+  }
+}
+
+.tableFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-top: 15px;
+}
+
+.columnFooterStatsStyle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 395px;
+  border-bottom: none;
+  box-shadow: none;
+  padding-left: 15px;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+}
+@media screen and (max-width: 767px) {
+  .columnFooterStatsStyle {
+    max-width: 280px;
+  }
+}
+
+.tableFooterCash {
+  color: var(--accent-green);
+  padding-right: 20px;
+}
+@media screen and (max-width: 767px) {
+  .tableFooterCash {
+    padding-right: 10px;
+  }
+}
+
+.tableFooterCashBad {
+  color: var(--accent-red);
+  padding-right: 20px;
+}
+@media screen and (max-width: 767px) {
+  .tableFooterCashBad {
+    padding-right: 10px;
+  }
+}
+
+.trStatsStyle .columnStatsStyle:first-child {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.trStatsStyle .columnStatsStyle:last-child {
+  padding-right: 20px;
+}
+
+.columnStatsStyle {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: right;
+}
+@media screen and (min-width: 768px) {
+  .columnStatsStyle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .columnStatsStyle {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+.rectangle {
+  float: left;
+  margin-right: 16px;
+  margin-left: 20px;
+}
+
+.columnStatsStyle:nth-child(even) span {
+  display: none;
+}
+
+.tableHeaderStyle {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  background-color: var(--white);
+  font-family: Circe;
+  font-weight: 700;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding: 0px 20px 0px 20px;
+}
+@media screen and (max-width: 767px) {
+  .tableHeaderStyle {
+    margin-top: 10px;
+    width: 280px;
+  }
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tableHeader:last-child {
+  width: 100%;
+  justify-self: right;
+}
+
+.tableFooter {
+  height: 39px;
+}
+
+.dateFilter {
+  display: flex;
+  justify-content: flex-start;
+}
+@media screen and (max-width: 767px) {
+  .dateFilter {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .table {
+    width: 350px;
+    margin-top: 35px;
+    margin-left: 18px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .table {
+    margin-left: 40px;
+    margin-top: 95px;
+  }
+}
+
+.dateInput {
+  display: block;
+  width: 166px;
+  height: 50px;
+  border: 1px solid var(--primary-text-color);
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: Circe;
+  padding-left: 21px;
+  margin-bottom: 20px;
+  margin-right: 19px;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .dateInput {
+    width: 280px;
+  }
+}
+
+.dateInput:hover,
+.dateInput:focus {
+  border: 1px solid #24cca7;
+}
+
+.dateInput::-moz-placeholder {
+  font-family: Circe;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary-text-color);
+}
+
+.dateInput::placeholder {
+  font-family: Circe;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary-text-color);
+}
+
+.react-datepicker-wrapper:last-child {
+  margin-right: 0px;
+}
+
+.dateInput:last-child {
+  margin-right: 0px;
+}
+
+.arrow {
+  background-image: url(../../images/svg/arrow.svg);
+  display: block;
+  content: "";
+  contain: content;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+}/*# sourceMappingURL=chart.css.map */

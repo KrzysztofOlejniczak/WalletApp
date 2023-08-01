@@ -1,6 +1,14 @@
 @import '../../stylesheet/main.scss';
 
 .transactionList {
+  // max-height: 40vh;
+  // overflow-y: auto;
+
+  // @media screen and (min-width: $DesktopWidth) {
+  //   max-height: 100vh;
+  //   overflow-y: visible;
+  // }
+
   list-style: none;
   margin-top: 1.25rem;
 }
@@ -9,6 +17,23 @@
   width: 100%;
 
   @media screen and (max-width: $MaxMobileWidth) {
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-top: 20px;
+  }
+
+  @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
+    max-height: 40vh;
+    overflow-y: auto;
+    // padding-top: 20px;
+  }
+
+  @media screen and (min-width: $DesktopWidth) {
+    display: grid; /* Zmieniamy na grid */
+    grid-template-columns: 1fr; /* Jedna kolumna */
+    grid-gap: 0.625rem; /* Odstęp między elementami .transactionList */
+    max-height: 80vh;
+    overflow-y: auto; /* Ustawiamy pasek przewijania */
     padding-top: 20px;
   }
 }

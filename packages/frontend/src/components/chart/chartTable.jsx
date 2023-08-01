@@ -14,36 +14,37 @@ export const ChartTable = ({ data, income, colorPallete }) => {
           <li>Sum</li>
         </ul>
       </div>
-      <table className="tableStyle">
-        <tbody className="bodyStatsStyle">
-          {data.map((el, index) => (
-            <tr key={el.label} className="trStatsStyle">
-              <td className="columnStatsStyle">
-                <div
-                  style={{
-                    backgroundColor: colorPallete[index],
-                    borderRadius: '2px',
-                    width: '24px',
-                    height: '24px',
-                  }}
-                ></div>
-                {el.label}
-              </td>
-
-              <td className="columnStatsStyle">{el.y}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        <ul className="tableFooter">
-          <li className="columnFooterStatsStyle">
-            Expenses:<span className="tableFooterCashBad">{expensesSum}</span>
-          </li>
-          <li className="columnFooterStatsStyle">
-            Income: <span className="tableFooterCash">{income}</span>
-          </li>
-        </ul>
+      <div className='tableWrapper'>
+        <table className="tableStyle">
+          <tbody className="bodyStatsStyle">
+            {data.map((el, index) => (
+              <tr key={el.label} className="trStatsStyle">
+                <td className="columnStatsStyle">
+                  <div
+                    style={{
+                      backgroundColor: colorPallete[index],
+                      borderRadius: '2px',
+                      width: '24px',
+                      height: '24px',
+                    }}
+                  ></div>
+                  {el.label}
+                </td>
+                <td className="columnStatsStyle">{el.y}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div>
+          <ul className="tableFooter">
+            <li className="columnFooterStatsStyle">
+              Expenses:<span className="tableFooterCashBad">{expensesSum}</span>
+            </li>
+            <li className="columnFooterStatsStyle">
+              Income: <span className="tableFooterCash">{income}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );
