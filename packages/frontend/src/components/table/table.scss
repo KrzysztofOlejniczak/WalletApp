@@ -2,8 +2,11 @@
 
 .transactionList {
   list-style: none;
-  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+
+ 
 }
+
 
 .transactionListContainer {
   width: 100%;
@@ -33,6 +36,7 @@
   background-color: var(--white);
   border-radius: 1.875rem;
   width: 704px;
+  margin-bottom: 16px;
 
   @media screen and (min-width: $DesktopWidth) {
     width: 715px;
