@@ -140,7 +140,6 @@ export const editTransaction = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      console.log(transactionData);
       const res = await axiosAPI.put(
         `/finance/transactions/${transactionData._id}`,
         transactionData

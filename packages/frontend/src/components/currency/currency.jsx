@@ -21,9 +21,6 @@ export default function Currency() {
           localStorage.getItem('lastRequestTime');
         const currentTime = new Date().getTime();
 
-        // const minus = currentTime - lastCurrenciesRequestTime
-        // console.log(minus)
-
         // Check if less than an hour has passed since the last request
         if (
           lastCurrenciesRequestTime &&
