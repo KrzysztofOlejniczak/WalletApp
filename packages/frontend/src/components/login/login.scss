@@ -60,6 +60,16 @@
     padding-right: 45px;
   }
 }
+.container_input div {
+  display: none;
+}
+.error_message {
+  color: var(--accent-red);
+}
+.error_message--password {
+  padding-bottom: 20px;
+  color: var(--accent-red);
+}
 .input {
   border: none;
   outline-style: none;

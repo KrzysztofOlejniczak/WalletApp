@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
@@ -38,7 +38,6 @@ export const LoginForm = () => {
     <Formik initialValues={initialValues} validationSchema={validationSchema}>
       {(props) => {
         const { values } = props;
-
         return (
           <div>
             <Form className="form-login" onSubmit={(e) => handleSubmit(e)}>
@@ -55,7 +54,9 @@ export const LoginForm = () => {
                   placeholder="E-mail"
                   className="input"
                 />
-
+                <ErrorMessage name="email">
+                  {(msg) => <p className="error_message">{msg}</p>}
+                </ErrorMessage>
                 <TextInput
                   label={<LockIcon width={16} height={21} />}
                   type="password"
@@ -64,6 +65,9 @@ export const LoginForm = () => {
                   placeholder="Password"
                   className="input"
                 />
+                <ErrorMessage name="password">
+                  {(msg) => <p className="error_message--password">{msg}</p>}
+                </ErrorMessage>
               </div>
               <div className="button_container">
                 <MainButton type="submit" text="Login" className="logo_btn" />
