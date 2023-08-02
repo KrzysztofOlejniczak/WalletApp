@@ -15,6 +15,7 @@ import './header.scss';
 import Logo from '../logo/logo';
 import sprite from '../../images/svg/symbol-defs.svg';
 import { Link } from 'react-router-dom';
+import Container from '@mui/material/Container';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -26,32 +27,34 @@ export const Header = () => {
 
   return (
     <header className="Header">
-      <Link to="/home" className="Header__link">
-        <Logo />
-        <h1 className="Header__logo--text">Wallet</h1>
-      </Link>
-      <div className="Header__logout">
-        <div className="user-info-container">
-          <span className="Header__username">{user}</span>
+      <Container fixed sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0,}}>
+        <Link to="/home" className="Header__link">
+          <Logo />
+          <h1 className="Header__logo--text">Wallet</h1>
+        </Link>
+        <div className="Header__logout">
+          <div className="user-info-container">
+            <span className="Header__username">{user}</span>
+          </div>
+          <button
+            type="button"
+            className="Header__button"
+            onClick={() => dispatch(openModal('isModalLogoutOpen'))}
+          >
+            <svg className="Header__button--icon" width="18px" height="18px">
+              <use href={`${sprite}#icon-logout`}></use>
+            </svg>
+            <span className="Header__logout-text">Exit</span>
+          </button>
         </div>
-        <button
-          type="button"
-          className="Header__button"
-          onClick={() => dispatch(openModal('isModalLogoutOpen'))}
-        >
-          <svg className="Header__button--icon" width="18px" height="18px">
-            <use href={`${sprite}#icon-logout`}></use>
-          </svg>
-          <span className="Header__logout-text">Exit</span>
-        </button>
-      </div>
-      {isModalLogoutOpen ? (
-        <ModalLogout
-          closeModal={() => dispatch(closeModal('isModalLogoutOpen'))}
-          handleLogout={() => dispatch(logOut())}
-        />
-      ) : null}
-      {shouldShowError ? <NotifyError error={error} /> : null}
+        {isModalLogoutOpen ? (
+          <ModalLogout
+            closeModal={() => dispatch(closeModal('isModalLogoutOpen'))}
+            handleLogout={() => dispatch(logOut())}
+          />
+        ) : null}
+        {shouldShowError ? <NotifyError error={error} /> : null}
+      </Container>
     </header>
   );
 };

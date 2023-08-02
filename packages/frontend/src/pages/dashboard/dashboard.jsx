@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Box, Grid, Stack, useMediaQuery } from '@mui/material';
+import {Container, Box, Grid, Stack, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../components/header/header';
 import { Navigation } from '../../components/navigation/navigation';
@@ -91,7 +91,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardWrapper>
-      <Header />
+        <Header />
       <BackgroundContainer>
         <AdaptiveContainer fixed>
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
