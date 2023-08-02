@@ -15,7 +15,7 @@ export const CustomTablePagination = styled(TablePagination)({
   },
   '@media (max-width: 767px)': {
     '& .MuiToolbar-root': {
-      paddingLeft: '15px',
+      paddingLeft: '14.295px',
     },
     '& .MuiTablePagination-selectLabel': {
         display: 'none',
