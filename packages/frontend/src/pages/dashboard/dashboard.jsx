@@ -1,4 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 import { Box, Grid, Stack, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -91,6 +92,9 @@ export default function DashboardPage() {
 
   return (
     <DashboardWrapper>
+      <Helmet>
+        <title>Wallet</title>
+      </Helmet>
       <Header />
       <BackgroundContainer>
         <AdaptiveContainer fixed>
