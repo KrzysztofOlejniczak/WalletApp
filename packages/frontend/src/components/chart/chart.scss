@@ -23,11 +23,16 @@
     display: flex;
     padding-top: 30px;
   }
+
+  @media screen and (min-width: $DesktopWidth) {
+    margin-left: 69px;
+  }
 }
 
 .chartStyle {
   width: 395px;
   padding-bottom: 60px;
+
   @media screen and (max-width: $DesktopWidth) {
     width: 336px;
   }
@@ -85,23 +90,28 @@
   border-spacing: 0;
   border-bottom: 1px solid #dcdcdf;
   width: 395px;
+
   @media screen and (max-width: $DesktopWidth) {
     width: 336px;
   }
+
   @media screen and (max-width: $MaxMobileWidth) {
     width: 280px;
   }
 }
+
 .tableFooter {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   padding-top: 15px;
+
   @media screen and (max-width: $MaxMobileWidth) {
     align-items: stretch;
   }
 }
+
 .columnFooterStatsStyle {
   display: flex;
 
@@ -120,6 +130,7 @@
   @media screen and (max-width: $MaxMobileWidth) {
     width: 280px;
   }
+
   @media screen and (max-width: $DesktopWidth) {
     max-width: 336px;
   }
