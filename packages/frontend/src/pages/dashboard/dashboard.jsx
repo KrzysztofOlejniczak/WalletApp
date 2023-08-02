@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import {Container, Box, Grid, Stack, useMediaQuery } from '@mui/material';
+import { Box, Grid, Stack, useMediaQuery } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../components/header/header';
 import { Navigation } from '../../components/navigation/navigation';
@@ -53,12 +53,12 @@ export default function DashboardPage() {
               <Currency />
             </>
           ) : (
-            <Stack direction='row' spacing={4} >
-              <Stack sx={{ flexWrap: 'wrap', alignItems: 'stretch'}}>
+            <Stack direction="row" spacing={4}>
+              <Stack sx={{ flexWrap: 'wrap', alignItems: 'stretch' }}>
                 <Navigation />
                 <Balance />
               </Stack>
-              <Box sx={{display: 'flex'}}>
+              <Box sx={{ display: 'flex' }}>
                 <Currency />
               </Box>
             </Stack>
@@ -91,7 +91,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardWrapper>
-        <Header />
+      <Header />
       <BackgroundContainer>
         <AdaptiveContainer fixed>
           {isMobile ? renderMobileLayout() : renderDeskTabLayout()}
