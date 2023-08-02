@@ -5,9 +5,6 @@ const {
   validationTransactionSchema,
 } = require('../../validation');
 
-//It is not necessary if you can send a number in frontend form. Also this coused error during editing transaction
-/* const { parseNumber } = require('../../utils/parseData'); */
-
 const createTransaction = async (req, res, next) => {
   const { isExpense, amount, date, comment, category } = req.body;
   const owner = req.user._id;
