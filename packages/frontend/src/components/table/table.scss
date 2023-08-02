@@ -78,7 +78,8 @@
 .transactionBox {
   display: flex;
   padding: 0.5625rem 1.25rem;
-  border-bottom: 0.0625rem solid var(--transactions-line);
+  border-bottom: 0.0625rem solid var(--color-transaction-border);
+  box-shadow: rgba(255, 255, 255, 0.60) 0px 1px 0px;
   font-family: 'Circe';
   font-size: 1rem;
   font-weight: 400;
