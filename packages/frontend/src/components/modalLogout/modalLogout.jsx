@@ -1,6 +1,5 @@
 import './modalLogout.scss';
 import { useEffect } from 'react';
-import MainButton from '../mainButton/mainButton';
 
 export const ModalLogout = ({ closeModal, handleLogout }) => {
   useEffect(() => {
