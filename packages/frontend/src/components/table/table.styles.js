@@ -18,7 +18,7 @@ export const CustomTablePagination = styled(TablePagination)({
       paddingLeft: '14.295px',
     },
     '& .MuiTablePagination-selectLabel': {
-        display: 'none',
-      },
+      display: 'none',
+    },
   },
 });

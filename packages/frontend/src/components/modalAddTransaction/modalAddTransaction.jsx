@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import './modalAddTransaction.scss'
-import { useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 import Datetime from 'react-datetime';
+import Select from 'react-select';
+import { Formik, Form } from 'formik';
+import './modalAddTransaction.scss'
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
-/* import addTransactionValidationSchema from '../../validations/validateAddTransaction'; */
-import { useDispatch } from 'react-redux';
 import { selectCategories } from '../../redux/finance/selectors';
 import {
   addTransaction,
@@ -14,7 +13,6 @@ import {
 } from '../../redux/finance/operations';
 import MainButton from '../mainButton/mainButton';
 import TextInput from '../textInput/textInput';
-import Select from 'react-select';
 import { selectStyles } from '../chart/chartFiltersStyles';
 
 
@@ -94,7 +92,6 @@ export const ModalAddTransaction = ({ closeModal }) => {
         <div>
           <Formik
             initialValues={initialValues}
-          /*           validationSchema={addTransactionValidationSchema} */
           >
             <Form
               onSubmit={(e) => handleSubmit(e)}

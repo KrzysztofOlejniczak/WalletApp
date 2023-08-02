@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { ReactComponent as HomeIcon } from '../../images/svg/home.svg';
-import { ReactComponent as DiagramIcon } from '../../images/svg/diagram.svg';
-import { ReactComponent as CurrencyIcon } from '../../images/svg/currency.svg';
+import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg';
+import { ReactComponent as DiagramIcon } from '../../assets/icons/diagram.svg';
+import { ReactComponent as CurrencyIcon } from '../../assets/icons/currency.svg';
 import './navigation.scss';
 
 export const Navigation = () => {

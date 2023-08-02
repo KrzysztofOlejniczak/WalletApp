@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 import { ReactComponent as EditIcon } from '../../images/svg/edit_icon.svg';
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import TablePagination from '@mui/material/TablePagination';
 import { CustomTablePagination } from './table.styles.js';
 
 import './table.scss';

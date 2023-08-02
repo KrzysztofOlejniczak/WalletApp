@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { useMediaQuery } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '../table/table';
 import { Balance } from '../balance/balance';
 import { ButtonAddTransactions } from '../../components/buttonAddTransactions/buttonAddTransactions';
 import { ModalAddTransaction } from '../../components/modalAddTransaction/modalAddTransaction';
 import { ModalEditTransaction } from '../modalEditTransaction/modalEditTransaction';
 import { closeModal, openModal } from '../../redux/global/operations';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   selectIsModalAddTransactionOpen,
   selectIsModalEditTransactionOpen,
 } from '../../redux/global/selectors';
 import { selectTransactions } from '../../redux/finance/selectors.js';
 import { deleteTransaction } from '../../redux/finance/operations.js';
+import { useMediaQuery } from '@mui/material';
 import { TableWrapper } from './homeTab.styles';
 
 export default function HomeTab() {
@@ -80,7 +80,7 @@ export default function HomeTab() {
           const scrollToTop = () => {
             window.scrollTo(0, 0);
           };
-          scrollToTop()
+          scrollToTop();
         }}
       />
       {isModalAddTransactionOpen && (

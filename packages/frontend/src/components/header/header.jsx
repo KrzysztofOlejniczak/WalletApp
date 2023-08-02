@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/auth/operations';
 import useAuth from '../../hooks/useAuth';
-//import { Wallet } from '../wallet/wallet';
-//import css from './header.module.css';
-//import icons from '../../images/icons.svg';
 
 import { ModalLogout } from '../modalLogout/modalLogout';
 import { selectError } from '../../redux/auth/selectors';
@@ -11,11 +8,11 @@ import { NotifyError } from '../errNotifications/errNotify';
 import { closeModal, openModal } from '../../redux/global/operations';
 import { selectIsModalLogoutOpen } from '../../redux/global/selectors';
 
-import './header.scss';
 import Logo from '../logo/logo';
-import sprite from '../../images/svg/symbol-defs.svg';
+import sprite from '../../assets/icons/sprite.svg';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
+import './header.scss';
 
 export const Header = () => {
   const dispatch = useDispatch();
