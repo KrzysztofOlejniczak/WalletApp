@@ -65,9 +65,20 @@
 }
 .error_message {
   color: var(--accent-red);
+  font-size: 10px;
+  margin-bottom: 10px;
+  align-self: flex-start;
 }
+
+.label2 + .error_message {
+  margin-top: 10px;
+}
+
 .error_message--password {
   padding-bottom: 20px;
+  font-size: 10px;
+  margin-bottom: 10px;
+  align-self: flex-start;
   color: var(--accent-red);
 }
 .input {
