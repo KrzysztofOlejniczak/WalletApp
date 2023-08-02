@@ -4,29 +4,7 @@
   list-style: none;
   margin-bottom: 1.25rem;
 
- 
-}
 
-
-.transactionListContainer {
-  width: 100%;
-
-  @media screen and (max-width: $MaxMobileWidth) {
-    max-height: 73vh;
-    overflow-y: auto;
-  }
-
-  @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
-    max-height: 55vh;
-    overflow-y: auto;
-  }
-
-  @media screen and (min-width: $DesktopWidth) {
-    display: grid;
-    grid-template-columns: 1fr;
-    max-height: 75vh;
-    overflow-y: auto;
-  }
 }
 
 .transactionListHeader {
@@ -43,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0.875rem 1.25rem;
- 
+
 }
 
 .transactionDetailName {
@@ -100,7 +78,8 @@
 .transactionBox {
   display: flex;
   padding: 0.5625rem 1.25rem;
-  border-bottom: 0.0625rem solid var(--transactions-line);
+  border-bottom: 0.0625rem solid var(--color-transaction-border);
+  box-shadow: rgba(255, 255, 255, 0.60) 0px 1px 0px;
   font-family: 'Circe';
   font-size: 1rem;
   font-weight: 400;
@@ -116,6 +95,7 @@
   line-height: 1.5;
   letter-spacing: 0em;
   text-align: center;
+  margin-left: 3px;
   padding: 0.25rem 0.75rem;
   background-color: var(--accent-green);
   border-radius: 1.125rem;

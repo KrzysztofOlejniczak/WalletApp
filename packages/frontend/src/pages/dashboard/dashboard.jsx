@@ -53,12 +53,12 @@ export default function DashboardPage() {
               <Currency />
             </>
           ) : (
-            <Stack direction='row' spacing={4} >
-              <Stack sx={{ flexWrap: 'wrap', alignItems: 'stretch'}}>
+            <Stack direction="row" spacing={4}>
+              <Stack sx={{ flexWrap: 'wrap', alignItems: 'stretch' }}>
                 <Navigation />
                 <Balance />
               </Stack>
-              <Box>
+              <Box sx={{ display: 'flex' }}>
                 <Currency />
               </Box>
             </Stack>

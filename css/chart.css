@@ -167,8 +167,7 @@ img[data-src] {
   .statsSheet {
     padding-top: 28px;
     width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
   }
 }
 @media screen and (min-width: 768px) {
@@ -177,10 +176,20 @@ img[data-src] {
     padding-top: 30px;
   }
 }
+@media screen and (min-width: 1280px) {
+  .statsSheet {
+    margin-left: 69px;
+  }
+}
 
 .chartStyle {
-  max-width: 395px;
+  width: 395px;
   padding-bottom: 60px;
+}
+@media screen and (max-width: 1280px) {
+  .chartStyle {
+    width: 336px;
+  }
 }
 
 .pieHeader {
@@ -198,10 +207,6 @@ img[data-src] {
   }
 }
 
-.pieStyle {
-  height: 280px;
-  width: 288px;
-}
 @media screen and (max-width: 767px) {
   .pieStyle {
     margin-top: 10px;
@@ -215,13 +220,15 @@ img[data-src] {
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
-    width: 320px;
-    height: 320px;
+    width: 336px;
+    height: 336px;
   }
 }
 @media screen and (min-width: 1280px) {
   .pieStyle {
     margin-top: 40px;
+    width: 288px;
+    height: 288px;
   }
 }
 
@@ -240,6 +247,11 @@ img[data-src] {
   border-bottom: 1px solid #dcdcdf;
   width: 395px;
 }
+@media screen and (max-width: 1280px) {
+  .tableStyle {
+    width: 336px;
+  }
+}
 @media screen and (max-width: 767px) {
   .tableStyle {
     width: 280px;
@@ -253,10 +265,14 @@ img[data-src] {
   gap: 15px;
   padding-top: 15px;
 }
+@media screen and (max-width: 767px) {
+  .tableFooter {
+    align-items: stretch;
+  }
+}
 
 .columnFooterStatsStyle {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 395px;
   border-bottom: none;
@@ -271,7 +287,12 @@ img[data-src] {
 }
 @media screen and (max-width: 767px) {
   .columnFooterStatsStyle {
-    max-width: 280px;
+    width: 280px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .columnFooterStatsStyle {
+    max-width: 336px;
   }
 }
 

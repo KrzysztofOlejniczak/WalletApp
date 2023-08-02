@@ -5,26 +5,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: var(--white);
 
   @media screen and (min-width: $TabletWidth) {
     height: 80px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
-  @media screen and (min-width: $DesktopWidth) {
-    padding-left: 85px;
-    padding-right: 85px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
 }
 
 .Header__link {
@@ -67,6 +57,7 @@
     display: none;
   }
 }
+
 .Header__username {
   margin-right: 10px;
   font-family: 'Circe';

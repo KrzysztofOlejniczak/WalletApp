@@ -9,4 +9,8 @@ export const theme = createTheme({
       lg: 1280,
     },
   },
+  typography: {
+    fontFamily: `'Circe', sans-serif`,
+    fontSize: '16px',
+  },
 });

@@ -1,7 +1,8 @@
 @import '../../stylesheet/main.scss';
 
 .nav_container {
-  padding: 12px 30px;
+  max-width: 280px;
+  padding: 12px 44px 12px;
 
   @media screen and (min-width: $TabletWidth) and (max-width: $DesktopWidth) {
     padding: 40px 0 36px;
@@ -12,6 +13,7 @@
     padding: 40px 0 28px;
   }
 }
+
 .nav_list {
   display: flex;
   justify-content: space-between;
@@ -32,6 +34,7 @@
 
 .nav_list li {
   height: 100%;
+
   // display: flex;
   // justify-content: center;
   // align-items: center;
