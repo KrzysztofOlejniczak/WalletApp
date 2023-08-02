@@ -150,36 +150,36 @@ img[data-src] {
   opacity: 0;
 }
 
-.page_reg {
+.page {
   position: relative;
   background-color: var(--secondary-background-color);
 }
 @media screen and (min-width: 768px) {
-  .page_reg {
+  .page {
     width: 768px;
     height: 1024px;
-    background-image: url(../../images/bg-tablet/ellipse-down.png), url(../../images/bg-tablet/ellipse-up.png), url(../../images/registration/register-tablet.png);
+    background-image: url(../../assets/images/bg-tablet/ellipse-down.png), url(../../assets/images/bg-tablet/ellipse-up.png), url(../../assets/images/login/login-tablet.png);
     background-repeat: no-repeat;
     background-position: bottom 0 left 0, top 0 right 0, top 60px left 114px;
   }
 }
-@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
-  .page_reg .page_reg {
-    background-image: url(../../images/bg-tablet/ellipse-down@2x.png), url(../../images/bg-tablet/ellipse-up@2x.png), url(../../images/registration/register-tablet@2x.png);
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
+  .page .page {
+    background-image: url(../../assets/images/bg-tablet/ellipse-down@2x.png), url(../../assets/images/bg-tablet/ellipse-up@2x.png), url(../../assets/images/login/login-tablet@2x.png);
   }
 }
 @media screen and (min-width: 1280px) {
-  .page_reg {
+  .page {
     width: 1280px;
     height: 720px;
-    background-image: url(../../images/registration/register-desktop.png), url(../../images/bg-desktop/ellipse.png), url(../../images/bg-desktop/rectangle.png);
+    background-image: url(../../assets/images/login/login-desktop.png), url(../../assets/images/bg-desktop/ellipse.png), url(../../assets/images/bg-desktop/rectangle.png);
     background-repeat: no-repeat;
     background-position: top 153px left 66px, bottom 0 left 0, top 0 right 0;
   }
 }
-@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
-  .page_reg .page_reg {
-    background-image: url(../../images/registration/register-desktop@2x.png), url(../../images/bg-desktop/ellipse@2x.png), url(../../images/bg-desktop/rectangle@2x.png);
+@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
+  .page .page {
+    background-image: url(../../assets/images/login/login-desktop@2x.png), url(../../assets/images/bg-desktop/ellipse@2x.png), url(../../assets/images/bg-desktop/rectangle@2x.png);
   }
 }
 
@@ -212,4 +212,4 @@ img[data-src] {
 .page_center {
   display: flex;
   justify-content: center;
-}/*# sourceMappingURL=registrationPage.css.map */
+}/*# sourceMappingURL=loginPage.css.map */
