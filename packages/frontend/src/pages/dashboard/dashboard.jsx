@@ -58,7 +58,7 @@ export default function DashboardPage() {
                 <Navigation />
                 <Balance />
               </Stack>
-              <Box>
+              <Box sx={{display: 'flex'}}>
                 <Currency />
               </Box>
             </Stack>
