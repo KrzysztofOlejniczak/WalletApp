@@ -22,7 +22,11 @@ export const ModalLogout = ({ closeModal, handleLogout }) => {
             You will be returned to the login screen.
           </span>
           <div className="confirmButtons">
-            <button className="cancelButton" type="button" onClick={closeModal}>
+            <button type="button" text="LOGOUT" className="logo_btn logout_button" onClick={handleLogout}> Confirm </button>
+            <button onClick={closeModal} type="button" className="main_btn">
+              Cancel
+            </button>
+            {/*             <button className="cancelButton" type="button" onClick={closeModal}>
               Cancel
             </button>
             <button
@@ -31,7 +35,7 @@ export const ModalLogout = ({ closeModal, handleLogout }) => {
               onClick={handleLogout}
             >
               Log out
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -58,8 +58,8 @@ body {
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -72,6 +72,12 @@ h4 {
 ul {
   margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
 a {
@@ -146,29 +152,21 @@ img[data-src] {
 
 .transactionList {
   list-style: none;
-  margin-top: 1.25rem;
-}
-
-.transactionListContainer {
-  width: 100%;
-}
-@media screen and (max-width: 767px) {
-  .transactionListContainer {
-    padding-top: 20px;
-  }
+  margin-bottom: 1.25rem;
 }
 
 .transactionListHeader {
   background-color: var(--white);
   border-radius: 1.875rem;
   width: 704px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   padding: 0.875rem 1.25rem;
-  margin-top: 0.625rem;
 }
 @media screen and (min-width: 1280px) {
   .transactionListHeader {
+    margin-top: 46px;
     width: 715px;
   }
 }
@@ -225,7 +223,8 @@ img[data-src] {
 .transactionBox {
   display: flex;
   padding: 0.5625rem 1.25rem;
-  border-bottom: 0.0625rem solid var(--transactions-line);
+  border-bottom: 0.0625rem solid var(--color-transaction-border);
+  box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px;
   font-family: "Circe";
   font-size: 1rem;
   font-weight: 400;
@@ -241,6 +240,7 @@ img[data-src] {
   line-height: 1.5;
   letter-spacing: 0em;
   text-align: center;
+  margin-left: 3px;
   padding: 0.25rem 0.75rem;
   background-color: var(--accent-green);
   border-radius: 1.125rem;
