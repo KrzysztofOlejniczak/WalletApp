@@ -11,6 +11,6 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: `'Circe', sans-serif`,
-    fontSize: '16px',
+    fontSize: 16,
   },
 });
