@@ -165,7 +165,7 @@ img[data-src] {
 }
 @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
   .page_reg .page_reg {
-    background-image: url(../../images/bg-tablet/ellipse-down@2x.png), url(../../assets/images/bg-tablet/ellipse-up@2x.png), url(../../assets/images/registration/register-tablet@2x.png);
+    background-image: url(../../assets/images/bg-tablet/ellipse-down@2x.png), url(../../assets/images/bg-tablet/ellipse-up@2x.png), url(../../assets/images/registration/register-tablet@2x.png);
   }
 }
 @media screen and (min-width: 1280px) {
