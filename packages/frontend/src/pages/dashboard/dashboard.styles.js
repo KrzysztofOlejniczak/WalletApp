@@ -1,7 +1,7 @@
 import { Box, Container, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ellipsePurple from '../../images/ellipse-purple.svg';
-import ellipsePink from '../../images/ellipse-pink.svg';
+import ellipsePurple from '../../assets/icons/ellipse-purple.svg';
+import ellipsePink from '../../assets/icons/ellipse-pink.svg';
 
 export const DashboardWrapper = styled('div')({
   width: '100%',

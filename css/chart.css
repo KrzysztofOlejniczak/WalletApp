@@ -467,7 +467,7 @@ img[data-src] {
 }
 
 .arrow {
-  background-image: url(../../images/svg/arrow.svg);
+  background-image: url(../../assets/icons/arrow.svg);
   display: block;
   content: "";
   contain: content;

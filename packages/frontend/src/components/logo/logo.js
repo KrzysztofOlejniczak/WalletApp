@@ -1,5 +1,5 @@
 import React from 'react';
-import sprite from '../../images/svg/symbol-defs.svg';
+import sprite from '../../assets/icons/symbol-defs.svg';
 import './logo.scss';
 
 const Logo = () => {
