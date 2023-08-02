@@ -5,13 +5,12 @@ import {
   finishAsyncRequest,
 } from '../../redux/global/slice';
 
-import './currency.scss';
 import Loader from '../loader/loader';
+import './currency.scss';
 
 export default function Currency() {
   const dispatch = useDispatch();
   const [currencies, setCurrencies] = useState([]);
-  // const [filter, setFilter] = useState(['USD', 'EUR', "CHF", "GBP"]);
   const filter = ['USD', 'EUR', 'CHF', 'GBP'];
 
   useEffect(() => {
@@ -20,8 +19,6 @@ export default function Currency() {
         const lastCurrenciesRequestTime =
           localStorage.getItem('lastRequestTime');
         const currentTime = new Date().getTime();
-
-        // Check if less than an hour has passed since the last request
         if (
           lastCurrenciesRequestTime &&
           currentTime - lastCurrenciesRequestTime < 60 * 60 * 1000
@@ -40,7 +37,6 @@ export default function Currency() {
         const data = await response.json();
         const fetchedCurrencies = data[0].rates;
 
-        // Store last request time and response in localStorage
         localStorage.setItem('lastCurrenciesRequestTime', currentTime);
         localStorage.setItem('currencies', JSON.stringify(fetchedCurrencies));
 
@@ -67,27 +63,6 @@ export default function Currency() {
   }, []);
 
   return (
-    /*<div>
-      <h2>Currency</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Currency</th>
-            <th>Purchase</th>
-            <th>Sale</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currencies.map((currency) => (
-            <tr key={currency.code}>
-              <td>{currency.code}</td>
-              <td>{currency.bid}</td>
-              <td>{currency.ask}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>*/
     <div className="currency">
       {currencies.length === 0 ? (
         <div className="loader">

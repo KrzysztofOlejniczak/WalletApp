@@ -21,7 +21,6 @@ const middleware = {
   },
 };
 
-// Persisting token field from authSlice to localstorage
 const authPersistConfig = {
   key: 'auth',
   storage,

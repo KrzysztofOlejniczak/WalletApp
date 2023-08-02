@@ -150,113 +150,66 @@ img[data-src] {
   opacity: 0;
 }
 
-.currency {
+.page {
   position: relative;
-  margin: 0 auto;
-  margin-top: 16px;
-  border-radius: 1.875rem;
-  color: var(--white);
-  background-color: var(--accent-blue);
-  background-image: url("../../assets/icons/wave-mobile.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom;
+  background-color: var(--secondary-background-color);
 }
-@media (min-width: 500px) and (max-width: 767px) {
-  .currency {
-    width: 100%;
-    background-size: contain;
-    background-image: url("../../assets/icons/wave-tablet.svg");
+@media screen and (min-width: 768px) {
+  .page {
+    width: 768px;
+    height: 1024px;
+    background-image: url(../../assets/images/bg-tablet/ellipse-down.png), url(../../assets/images/bg-tablet/ellipse-up.png), url(../../assets/images/login/login-tablet.png);
+    background-repeat: no-repeat;
+    background-position: bottom 0 left 0, top 0 right 0, top 60px left 114px;
   }
 }
-@media (min-width: 768px) and (max-width: 1279px) {
-  .currency {
-    max-width: 336px;
-    background-image: url("../../assets/icons/wave-desktop.svg");
-    background-size: contain;
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
+  .page .page {
+    background-image: url(../../assets/images/bg-tablet/ellipse-down@2x.png), url(../../assets/images/bg-tablet/ellipse-up@2x.png), url(../../assets/images/login/login-tablet@2x.png);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .page {
+    width: 1280px;
+    height: 720px;
+    background-image: url(../../assets/images/login/login-desktop.png), url(../../assets/images/bg-desktop/ellipse.png), url(../../assets/images/bg-desktop/rectangle.png);
+    background-repeat: no-repeat;
+    background-position: top 153px left 66px, bottom 0 left 0, top 0 right 0;
+  }
+}
+@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
+  .page .page {
+    background-image: url(../../assets/images/login/login-desktop@2x.png), url(../../assets/images/bg-desktop/ellipse@2x.png), url(../../assets/images/bg-desktop/rectangle@2x.png);
   }
 }
 
-.currency * {
-  color: var(--white);
+@media screen and (min-width: 320px) {
+  .page_text {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  .page_text {
+    position: absolute;
+    top: 163px;
+    right: 153px;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 45px;
+    display: inline-block;
+    color: var(--primary-text-color);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .page_text {
+    position: absolute;
+    top: 597px;
+    left: 200px;
+  }
 }
 
-.currency td,
-.currency th,
-.currency thead {
-  color: var(--white);
-}
-
-.currency table {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-  font-family: "Circe";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.125rem;
-  line-height: 1.688rem;
-  border-spacing: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.currency thead {
-  font-size: 1.125rem;
-  font-weight: bold;
-  height: 3.125rem;
-}
-
-.currency thead td:nth-child(1) {
-  border-top-left-radius: 1.875rem;
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency thead td:nth-child(2) {
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency thead td:nth-child(3) {
-  border-top-right-radius: 1.875rem;
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency td {
-  padding-top: 0.625rem;
-  font-size: 1rem;
-}
-
-.loader {
-  position: relative;
-  top: 50%;
-  left: 50%;
+.page_center {
   display: flex;
   justify-content: center;
-  transform: translate(-50%, -50%);
-}
-
-@media (min-width: 768px) {
-  .currency {
-    width: 363px;
-  }
-  .loader {
-    top: 50%;
-  }
-}
-@media (min-width: 1280px) {
-  .currency {
-    width: 393px;
-    height: 331px;
-    margin-top: 2rem;
-    margin-left: 0rem;
-  }
-  .currency thead {
-    height: 3.75rem;
-  }
-  .currency thead td {
-    padding: 1.063rem 0 1rem;
-  }
-  .currency td {
-    padding-top: 1.438rem;
-  }
-}/*# sourceMappingURL=currency.css.map */
+}/*# sourceMappingURL=loginPage.css.map */

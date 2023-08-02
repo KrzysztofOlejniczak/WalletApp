@@ -1,4 +1,4 @@
-import btnAddTransactions from "./btnOpenModal.svg";
+import btnAddTransactions from "../../assets/icons/btnOpenModal.svg";
 import css from "./btnAddTransactions.module.css";
 
 export const ButtonAddTransactions = ({ handleClick }) => {

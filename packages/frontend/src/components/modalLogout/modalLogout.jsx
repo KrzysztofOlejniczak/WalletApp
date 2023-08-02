@@ -1,5 +1,5 @@
-import './modalLogout.scss';
 import { useEffect } from 'react';
+import './modalLogout.scss';
 
 export const ModalLogout = ({ closeModal, handleLogout }) => {
   useEffect(() => {
@@ -22,20 +22,18 @@ export const ModalLogout = ({ closeModal, handleLogout }) => {
             You will be returned to the login screen.
           </span>
           <div className="confirmButtons">
-            <button type="button" text="LOGOUT" className="logo_btn logout_button" onClick={handleLogout}> Confirm </button>
+            <button
+              type="button"
+              text="LOGOUT"
+              className="logo_btn logout_button"
+              onClick={handleLogout}
+            >
+              {' '}
+              Confirm{' '}
+            </button>
             <button onClick={closeModal} type="button" className="main_btn">
               Cancel
             </button>
-            {/*             <button className="cancelButton" type="button" onClick={closeModal}>
-              Cancel
-            </button>
-            <button
-              className="logoutButton"
-              type="button"
-              onClick={handleLogout}
-            >
-              Log out
-            </button> */}
           </div>
         </div>
       </div>

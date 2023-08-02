@@ -5,9 +5,9 @@ import { register } from '../../redux/auth/operations';
 import validationSchema from '../../validations/validateForm';
 import { PasswordStrengthBar } from '../passwordSecureBar/passwordStrengthBar';
 
-import { ReactComponent as EmailIcon } from '../../images/icons/email.svg';
-import { ReactComponent as LockIcon } from '../../images/icons/lock.svg';
-import { ReactComponent as NameIcon } from '../../images/icons/name.svg';
+import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
+import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
+import { ReactComponent as NameIcon } from '../../assets/icons/name.svg';
 
 import Logo from '../logo/logo';
 import TextInput from '../textInput/textInput';

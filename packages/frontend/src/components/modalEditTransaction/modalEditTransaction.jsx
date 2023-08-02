@@ -1,34 +1,34 @@
-import { Formik, Form } from 'formik';
-import Datetime from 'react-datetime';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MainButton from '../mainButton/mainButton';
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select';
+import { Formik, Form } from 'formik';
 import {
   editTransaction,
   fetchCategories,
 } from '../../redux/finance/operations';
-import { useEffect, useState } from 'react';
-// import { ToastContainer, toast } from 'react-toastify';
-import 'react-datetime/css/react-datetime.css';
-import 'react-toastify/dist/ReactToastify.css';
-import editValidationSchema from '../../validations/validateEditTransaction';
 import { selectCategories } from '../../redux/finance/selectors';
+import editValidationSchema from '../../validations/validateEditTransaction';
+import MainButton from '../mainButton/mainButton';
 import TextInput from '../textInput/textInput';
-import Select from 'react-select';
 import { selectStyles } from '../chart/chartFiltersStyles';
 
 export const ModalEditTransaction = ({ closeModal, transaction }) => {
-
   const [isChecked, setIsChecked] = useState(transaction.isExpense);
-  const [amount, setAmount] = useState(transaction.amount)
-  const [selectedCategory, setSelectedCategory] = useState(transaction.category);
-  const [comment, setComment] = useState(transaction.comment)
+  const [amount, setAmount] = useState(transaction.amount);
+  const [selectedCategory, setSelectedCategory] = useState(
+    transaction.category
+  );
+  const [comment, setComment] = useState(transaction.comment);
   const [dateValue, setDateValue] = useState(transaction.date);
 
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo(0, 0);
     };
-    scrollToTop()
+    scrollToTop();
     document.body.classList.add('modal-open');
     return () => {
       document.body.classList.remove('modal-open');
@@ -68,7 +68,6 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
       label: name,
     }));
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -88,36 +87,40 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
   return (
     <div>
       <div className="backdrop" onClick={closeModal}></div>
-      <div className='overlay edit-modal'>
+      <div className="overlay edit-modal">
         <h1>Edit transaction</h1>
 
-        <div className='switch'>
-
+        <div className="switch">
           <label
             htmlFor="check1"
             className={`toggle-label ${!isChecked ? 'income' : 'expense'}`}
-          >Expense</label>
-          <input type="checkbox" id="check1" className="toggle"
-            name="transaction-type" defaultChecked={!isChecked}
+          >
+            Expense
+          </label>
+          <input
+            type="checkbox"
+            id="check1"
+            className="toggle"
+            name="transaction-type"
+            defaultChecked={!isChecked}
             onClick={() => {
-              setIsChecked(!isChecked)
-              setSelectedCategory("Main Expense")
-            }} />
+              setIsChecked(!isChecked);
+              setSelectedCategory('Main Expense');
+            }}
+          />
           <label
             htmlFor="check1"
             className={`toggle-label ${!isChecked ? 'expense' : 'income'}`}
-          >Income</label>
+          >
+            Income
+          </label>
         </div>
         <div>
           <Formik
             initialValues={initialValues}
             validationSchema={editValidationSchema}
           >
-            <Form
-              onSubmit={(e) => handleSubmit(e)}
-              className='form'
-            >
-
+            <Form onSubmit={(e) => handleSubmit(e)} className="form">
               <TextInput
                 type="text"
                 id="amount"
@@ -129,7 +132,7 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
                   const regex = /^(\d+)?(\.\d{0,2})?$/;
 
                   if (regex.test(input)) {
-                    setAmount(input)
+                    setAmount(input);
                   }
                 }}
               />
@@ -142,7 +145,7 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
                     id="category"
                     name="category"
                     onChange={(option) => {
-                      setSelectedCategory(option.label)
+                      setSelectedCategory(option.label);
                     }}
                     isSearchable={false}
                     defaultValue={initialValues.category}
@@ -158,13 +161,13 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
                 className="datetime"
                 onChange={(newDate) => {
                   const isoDate = new Date(newDate._d).toISOString();
-                  setDateValue(isoDate)
+                  setDateValue(isoDate);
                 }}
               />
               <label className="label">
                 <textarea
                   placeholder="Comment"
-                  className='textarea'
+                  className="textarea"
                   rows={3}
                   value={comment}
                   onChange={(comment) => {

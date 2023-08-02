@@ -30,5 +30,4 @@ const globalSlice = createSlice({
 export const { setModalOpen, startAsyncRequest, finishAsyncRequest } =
   globalSlice.actions;
 
-// export const financeReducer = financeSlice.reducer;
 export const globalReducer = globalSlice.reducer;

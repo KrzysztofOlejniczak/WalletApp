@@ -8,17 +8,17 @@
     width: 768px;
     height: 1024px;
 
-    background-image: url(../../images/bg-tablet/ellipse-down.png),
-      url(../../images/bg-tablet/ellipse-up.png),
-      url(../../images/registration/register-tablet.png);
+    background-image: url(../../assets/images/bg-tablet/ellipse-down.png),
+      url(../../assets/images/bg-tablet/ellipse-up.png),
+      url(../../assets/images/registration/register-tablet.png);
 
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
       .page_reg {
-        background-image: url(../../images/bg-tablet/ellipse-down@2x.png),
-          url(../../images/bg-tablet/ellipse-up@2x.png),
-          url(../../images/registration/register-tablet@2x.png);
+        background-image: url(../../assets/images/bg-tablet/ellipse-down@2x.png),
+          url(../../assets/images/bg-tablet/ellipse-up@2x.png),
+          url(../../assets/images/registration/register-tablet@2x.png);
       }
     }
     background-repeat: no-repeat;
@@ -28,17 +28,17 @@
   @media screen and (min-width: $DesktopWidth) {
     width: 1280px;
     height: 720px;
-    background-image: url(../../images/registration/register-desktop.png),
-      url(../../images/bg-desktop/ellipse.png),
-      url(../../images/bg-desktop/rectangle.png);
+    background-image: url(../../assets/images/registration/register-desktop.png),
+      url(../../assets/images/bg-desktop/ellipse.png),
+      url(../../assets/images/bg-desktop/rectangle.png);
 
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
       .page_reg {
-        background-image: url(../../images/registration/register-desktop@2x.png),
-          url(../../images/bg-desktop/ellipse@2x.png),
-          url(../../images/bg-desktop/rectangle@2x.png);
+        background-image: url(../../assets/images/registration/register-desktop@2x.png),
+          url(../../assets/images/bg-desktop/ellipse@2x.png),
+          url(../../assets/images/bg-desktop/rectangle@2x.png);
       }
     }
     background-repeat: no-repeat;

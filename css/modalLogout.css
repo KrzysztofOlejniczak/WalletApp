@@ -150,113 +150,45 @@ img[data-src] {
   opacity: 0;
 }
 
-.currency {
-  position: relative;
-  margin: 0 auto;
-  margin-top: 16px;
-  border-radius: 1.875rem;
+.Button, .main_btn, .logo_btn, .register_btn {
+  display: inline-block;
+  height: 50px;
+  width: 280px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  border-radius: 20px;
+  text-align: center;
+  transition: 100ms linear, color 100ms linear, border-color 100ms linear;
+}
+
+.register_btn {
+  background-color: var(--accent-green);
+  border: transparent;
+}
+.register_btn:hover {
+  background-color: #05bd95;
+}
+
+.logo_btn {
+  background-color: var(--accent-green);
+  border: transparent;
+  margin-bottom: 20px;
+}
+.logo_btn:hover {
+  background-color: #05bd95;
+}
+
+.main_btn {
+  color: var(--accent-blue);
+  background-color: var(--white);
+  border: 2px solid var(--accent-blue);
+}
+.main_btn:hover {
   color: var(--white);
   background-color: var(--accent-blue);
-  background-image: url("../../assets/icons/wave-mobile.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom;
-}
-@media (min-width: 500px) and (max-width: 767px) {
-  .currency {
-    width: 100%;
-    background-size: contain;
-    background-image: url("../../assets/icons/wave-tablet.svg");
-  }
-}
-@media (min-width: 768px) and (max-width: 1279px) {
-  .currency {
-    max-width: 336px;
-    background-image: url("../../assets/icons/wave-desktop.svg");
-    background-size: contain;
-  }
-}
-
-.currency * {
-  color: var(--white);
-}
-
-.currency td,
-.currency th,
-.currency thead {
-  color: var(--white);
-}
-
-.currency table {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-  font-family: "Circe";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.125rem;
-  line-height: 1.688rem;
-  border-spacing: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.currency thead {
-  font-size: 1.125rem;
-  font-weight: bold;
-  height: 3.125rem;
-}
-
-.currency thead td:nth-child(1) {
-  border-top-left-radius: 1.875rem;
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency thead td:nth-child(2) {
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency thead td:nth-child(3) {
-  border-top-right-radius: 1.875rem;
-  background-color: rgba(255, 255, 255, 0.3019607843);
-}
-
-.currency td {
-  padding-top: 0.625rem;
-  font-size: 1rem;
-}
-
-.loader {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-}
-
-@media (min-width: 768px) {
-  .currency {
-    width: 363px;
-  }
-  .loader {
-    top: 50%;
-  }
-}
-@media (min-width: 1280px) {
-  .currency {
-    width: 393px;
-    height: 331px;
-    margin-top: 2rem;
-    margin-left: 0rem;
-  }
-  .currency thead {
-    height: 3.75rem;
-  }
-  .currency thead td {
-    padding: 1.063rem 0 1rem;
-  }
-  .currency td {
-    padding-top: 1.438rem;
-  }
-}/*# sourceMappingURL=currency.css.map */
+}/*# sourceMappingURL=mainButton.css.map */

@@ -31,14 +31,35 @@
   --yellow: #fed057;
 }
 
+@font-face {
+  font-family: "CirceBold";
+  src: url("../../assets/fonts/circe/circe_bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Circe";
+  src: url("../../assets/fonts/circe/circe.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins/Poppins-Bold.eot");
+  src: local("Poppins Bold"), local("Poppins-Bold"), url("../../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
 body {
   font-family: "Poppins", "Circe", "CirceBold", sans-serif;
   text-decoration: none;
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -51,6 +72,12 @@ h4 {
 ul {
   margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
 a {
@@ -121,26 +148,4 @@ img {
 
 img[data-src] {
   opacity: 0;
-}
-
-@font-face {
-  font-family: "CirceBold";
-  src: url("../../assets/fonts/circe/circe_bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Circe";
-  src: url("../../assets/fonts/circe/circe.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins";
-  src: url("../../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins";
-  src: url("../../assets/fonts/Poppins/Poppins-Bold.eot");
-  src: local("Poppins Bold"), local("Poppins-Bold"), url("../../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
 }/*# sourceMappingURL=main.css.map */
