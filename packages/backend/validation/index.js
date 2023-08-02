@@ -32,7 +32,7 @@ const validationYearAndMonth = Joi.object({
 
 const validationTransactionSchema = Joi.object({
   isExpense: Joi.bool().required(),
-  amount: Joi.number().precision(2).options({ convert: false }).required(),
+  amount: Joi.number().positive().greater(0).precision(2).options({ convert: false }).required(),
   date: Joi.date().required(),
   comment: Joi.string().allow(''),
   category: Joi.string().required(),
