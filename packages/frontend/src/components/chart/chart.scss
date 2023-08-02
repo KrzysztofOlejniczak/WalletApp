@@ -16,8 +16,7 @@
   @media screen and (max-width: $MaxMobileWidth) {
     padding-top: 28px;
     width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0,
   }
 
   @media screen and (min-width: $TabletWidth) {
