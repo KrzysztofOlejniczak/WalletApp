@@ -7,7 +7,7 @@ export const CustomTablePagination = styled(TablePagination)({
   },
   '& .MuiToolbar-root': {
     display: 'inline-flex',
-    paddingLeft: '120px',
+    paddingLeft: '143.7px',
   },
   '& .MuiSvgIcon-root': {
     width: '20px',
