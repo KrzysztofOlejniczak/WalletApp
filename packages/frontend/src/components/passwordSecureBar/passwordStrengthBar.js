@@ -24,7 +24,7 @@ export const PasswordStrengthBar = ({ password }) => {
 
   return (
     <p className={css.strengthBar}>
-      <p className={barColor}></p>
+      <span className={barColor}></span>
     </p>
   );
 };

@@ -32,28 +32,29 @@
 }
 
 @font-face {
-  font-family: "CirceBold";
-  src: url("../../assets/fonts/circe/circe_bold.ttf") format("truetype");
+  font-family: 'CirceBold';
+  src: url('../../assets/fonts/circe/circe_bold.ttf') format('truetype');
 }
 @font-face {
-  font-family: "Circe";
-  src: url("../../assets/fonts/circe/circe.ttf") format("truetype");
+  font-family: 'Circe';
+  src: url('../../assets/fonts/circe/circe.ttf') format('truetype');
 }
 @font-face {
-  font-family: "Poppins";
-  src: url("../../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-family: 'Poppins';
+  src: url('../../assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Poppins";
-  src: url("../../assets/fonts/Poppins/Poppins-Bold.eot");
-  src: local("Poppins Bold"), local("Poppins-Bold"), url("../../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-family: 'Poppins';
+  src: url('../../assets/fonts/Poppins/Poppins-Bold.eot');
+  src: local('Poppins Bold'), local('Poppins-Bold'),
+    url('../../assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 body {
-  font-family: "Poppins", "Circe", "CirceBold", sans-serif;
+  font-family: 'Poppins', 'Circe', 'CirceBold', sans-serif;
   text-decoration: none;
   background-color: var(--primary-background-color);
   display: flex;
@@ -150,7 +151,10 @@ img[data-src] {
   opacity: 0;
 }
 
-.Button, .main_btn, .logo_btn, .register_btn {
+.Button,
+.main_btn,
+.logo_btn,
+.register_btn {
   display: inline-block;
   height: 50px;
   width: 280px;
@@ -178,6 +182,7 @@ img[data-src] {
   background-color: var(--accent-green);
   border: transparent;
   margin-bottom: 20px;
+
 }
 .logo_btn:hover {
   background-color: #05bd95;
@@ -187,8 +192,9 @@ img[data-src] {
   color: var(--accent-blue);
   background-color: var(--white);
   border: 2px solid var(--accent-blue);
+
 }
 .main_btn:hover {
   color: var(--white);
   background-color: var(--accent-blue);
-}/*# sourceMappingURL=mainButton.css.map */
+}
