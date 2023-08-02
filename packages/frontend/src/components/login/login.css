@@ -58,8 +58,8 @@ body {
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -72,6 +72,12 @@ h4 {
 ul {
   margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
 a {
@@ -213,6 +219,29 @@ img[data-src] {
     padding-left: 45px;
     padding-right: 45px;
   }
+}
+
+.container_input div {
+  display: none;
+}
+
+.error_message {
+  color: var(--accent-red);
+  font-size: 10px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.label2 + .error_message {
+  margin-top: 10px;
+}
+
+.error_message--password {
+  padding-bottom: 20px;
+  font-size: 10px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  color: var(--accent-red);
 }
 
 .input {

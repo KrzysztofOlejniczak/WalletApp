@@ -43,7 +43,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [dateValue, setDateValue] = useState(initialValues.date);
   const [selectedCategory, setSelectedCategory] = useState("Main expenses");
-  const [comment, setComment] = useState("")
+  const [comment, setComment] = useState("-")
   const [amount, setAmount] = useState("")
 
   const categories = useSelector(selectCategories);
@@ -96,65 +96,65 @@ export const ModalAddTransaction = ({ closeModal }) => {
             initialValues={initialValues}
           /*           validationSchema={addTransactionValidationSchema} */
           >
-                <Form
-                  onSubmit={(e) => handleSubmit(e)}
-                  className='form'
-                >
-                  <TextInput
-                    type="text"
-                    id="amount"
-                    name="amount"
-                    placeholder="0.0"
-                    value={amount}
-                    className="input"
-                    onChange={(e) => {
-                      const input = e.target.value;
-                      const regex = /^(\d+)?(\.\d{0,2})?$/;
+            <Form
+              onSubmit={(e) => handleSubmit(e)}
+              className='form'
+            >
+              <TextInput
+                type="text"
+                id="amount"
+                name="amount"
+                placeholder="0.0"
+                value={amount}
+                className="input"
+                onChange={(e) => {
+                  const input = e.target.value;
+                  const regex = /^(\d+)?(\.\d{0,2})?$/;
 
-                      if (regex.test(input)) {
-                        setAmount(input)
-                      }
+                  if (regex.test(input)) {
+                    setAmount(input)
+                  }
+                }}
+              />
+              {isChecked ? null : (
+                <div>
+                  <Select
+                    styles={selectStyles}
+                    options={categoriesOptions}
+                    placeholder="Main expenses"
+                    id="category"
+                    name="category"
+                    onChange={(option) => {
+                      setSelectedCategory(option.label)
                     }}
+                    isSearchable={false}
+                    defaultValue="Main expenses"
                   />
-                  {isChecked ? null : (
-                    <div>
-                      <Select
-                        styles={selectStyles}
-                        options={categoriesOptions}
-                        placeholder="Main expenses"
-                        id="category"
-                        name="category"
-                        onChange={(option) => {
-                          setSelectedCategory(option.label)
-                        }}
-                        isSearchable={false}
-                        defaultValue="Main expenses"
-                      />
-                    </div>
-                  )}
-                  <Datetime
-                    id="date"
-                    name="date"
-                    dateFormat="DD.MM.YYYY"
-                    timeFormat={false}
-                    value={dateValue}
-                    className="datetime"
-                    onChange={(newDate) => {
-                      setDateValue(newDate);
-                    }}
-                  />
-                  <label className="label">
-                    <textarea
-                      placeholder="Comment"
-                      className='textarea'
-                      rows={3}
-                      onChange={(comment) => {
-                        setComment(comment.target.value);
-                      }}
-                    />
-                  </label>
-                  <MainButton type="submit" text="ADD" className="logo_btn" />
-                </Form>
+                </div>
+              )}
+              <Datetime
+                id="date"
+                name="date"
+                dateFormat="DD.MM.YYYY"
+                timeFormat={false}
+                value={dateValue}
+                className="datetime"
+                onChange={(newDate) => {
+                  setDateValue(newDate);
+                }}
+              />
+              <label className="label">
+                <textarea
+                  placeholder="Comment"
+                  className='textarea'
+                  rows={3}
+                  onChange={(comment) => {
+                    setComment(comment.target.value);
+                  }}
+                />
+              </label>
+              <MainButton type="submit" text="ADD" className="logo_btn" />
+            </Form>
           </Formik>
           <button onClick={closeModal} className="main_btn">
             Cancel

@@ -1,1 +1,1 @@
-.selectContainer{display:flex;gap:20px;margin-bottom:20px;margin-left:0;margin-right:auto;padding-top:30px}@media(max-width: 767px){.selectContainer{flex-direction:column;padding-top:10px;max-width:280px}}/*# sourceMappingURL=chartFilters.min.css.map */
+.selectContainer{display:flex;gap:16px;margin-bottom:20px;margin-left:0;margin-right:auto;padding-top:30px}@media(max-width: 767px){.selectContainer{flex-direction:column;padding-top:10px;max-width:280px}}/*# sourceMappingURL=chartFilters.min.css.map */
