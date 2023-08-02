@@ -20,7 +20,11 @@ export const register = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      notifyError(error.message);
+      if (error.response.status === 409) {
+        notifyError('Email is already in use !');
+      } else {
+        notifyError(error.message);
+      }
 
       return thunkAPI.rejectWithValue(error.message);
     } finally {
@@ -43,7 +47,11 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      notifyError(error.message);
+      if (error.response.status === 400) {
+        notifyError('Email or password is incorect !');
+      } else {
+        notifyError(error.message);
+      }
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(finishAsyncRequest());
