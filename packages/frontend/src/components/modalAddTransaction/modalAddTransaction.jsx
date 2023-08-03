@@ -14,7 +14,7 @@ import {
 import MainButton from '../mainButton/mainButton';
 import TextInput from '../textInput/textInput';
 import { selectStyles } from '../chart/chartFiltersStyles';
-import { isPreviousDay } from '../../validations/validateDate';
+// import { isPreviousDay } from '../../validations/validateDate';
 
 export const ModalAddTransaction = ({ closeModal }) => {
   useEffect(() => {
@@ -135,7 +135,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                 name="date"
                 dateFormat="DD.MM.YYYY"
                 timeFormat={false}
-                isValidDate={ isPreviousDay() }
+                // isValidDate={ isPreviousDay() }
                 value={dateValue}
                 className="datetime"
                 onChange={(newDate) => {
