@@ -158,28 +158,16 @@ img[data-src] {
   .page {
     width: 768px;
     height: 1024px;
-    background-image: url(../../assets/images/bg-tablet/ellipse-down.png), url(../../assets/images/bg-tablet/ellipse-up.png), url(../../assets/images/login/login-tablet.png);
     background-repeat: no-repeat;
     background-position: bottom 0 left 0, top 0 right 0, top 60px left 114px;
-  }
-}
-@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
-  .page .page {
-    background-image: url(../../assets/images/bg-tablet/ellipse-down@2x.png), url(../../assets/images/bg-tablet/ellipse-up@2x.png), url(../../assets/images/login/login-tablet@2x.png);
   }
 }
 @media screen and (min-width: 1280px) {
   .page {
     width: 1280px;
     height: 720px;
-    background-image: url(../../assets/images/login/login-desktop.png), url(../../assets/images/bg-desktop/ellipse.png), url(../../assets/images/bg-desktop/rectangle.png);
     background-repeat: no-repeat;
     background-position: top 153px left 66px, bottom 0 left 0, top 0 right 0;
-  }
-}
-@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
-  .page .page {
-    background-image: url(../../assets/images/login/login-desktop@2x.png), url(../../assets/images/bg-desktop/ellipse@2x.png), url(../../assets/images/bg-desktop/rectangle@2x.png);
   }
 }
 
@@ -190,22 +178,17 @@ img[data-src] {
 }
 @media screen and (min-width: 768px) {
   .page_text {
-    position: absolute;
-    top: 163px;
-    right: 153px;
     font-family: Poppins;
     font-weight: 400;
     font-size: 30px;
     line-height: 45px;
-    display: inline-block;
+    display: flex;
     color: var(--primary-text-color);
   }
 }
 @media screen and (min-width: 1280px) {
   .page_text {
-    position: absolute;
-    top: 597px;
-    left: 200px;
+    display: flex;
   }
 }
 

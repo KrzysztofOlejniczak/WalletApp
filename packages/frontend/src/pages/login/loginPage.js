@@ -1,17 +1,26 @@
 import { LoginForm } from '../../components/login/login';
-import './loginPage.scss';
+// import './loginPage.scss';
 import { Helmet } from 'react-helmet-async';
+import {
+  AdaptiveContainer,
+  BackgroundContainer,
+  Wrapper,
+} from './loginPage.styles.js';
+import Typography from '@mui/material/Typography';
+import Box  from '@mui/material/Box';
 
 export default function LoginPage() {
   return (
-    <div className="page_center">
+    <Wrapper>
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <div className="page">
-        <p className="page_text">Finance App</p>
-        <LoginForm />
-      </div>
-    </div>
+      <BackgroundContainer>
+        <AdaptiveContainer fixed>
+          <Typography variant='h4'align='justify' component='h2' >Finance App</Typography>
+          <LoginForm />
+        </AdaptiveContainer>
+      </BackgroundContainer>
+    </Wrapper>
   );
 }
