@@ -158,7 +158,7 @@ export const ModalEditTransaction = ({ closeModal, transaction }) => {
                 name="date"
                 dateFormat="DD.MM.YYYY"
                 timeFormat={false}
-                isValidDate={isPreviousDay()}
+                // isValidDate={isPreviousDay()}
                 value={formatDate(dateValue)}
                 className="datetime"
                 onChange={(newDate) => {
