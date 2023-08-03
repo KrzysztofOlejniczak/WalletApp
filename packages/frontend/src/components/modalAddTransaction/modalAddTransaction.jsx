@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Datetime from 'react-datetime';
 import Select from 'react-select';
 import { Formik, Form } from 'formik';
-import './modalAddTransaction.scss'
+import './modalAddTransaction.scss';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { selectCategories } from '../../redux/finance/selectors';
@@ -14,10 +14,9 @@ import {
 import MainButton from '../mainButton/mainButton';
 import TextInput from '../textInput/textInput';
 import { selectStyles } from '../chart/chartFiltersStyles';
-
+import { isPreviousDay } from '../../validations/validateDate';
 
 export const ModalAddTransaction = ({ closeModal }) => {
-
   useEffect(() => {
     document.body.classList.add('modal-open');
     return () => {
@@ -30,9 +29,8 @@ export const ModalAddTransaction = ({ closeModal }) => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-
   const initialValues = {
-    amount: "",
+    amount: '',
     category: '',
     date: new Date(),
     comment: '',
@@ -40,9 +38,9 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [dateValue, setDateValue] = useState(initialValues.date);
-  const [selectedCategory, setSelectedCategory] = useState("Main expenses");
-  const [comment, setComment] = useState("-")
-  const [amount, setAmount] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState('Main expenses');
+  const [comment, setComment] = useState('-');
+  const [amount, setAmount] = useState('');
 
   const categories = useSelector(selectCategories);
 
@@ -75,28 +73,31 @@ export const ModalAddTransaction = ({ closeModal }) => {
       <div className="overlay">
         <h1>Add transaction</h1>
 
-        <div className='switch'>
-
+        <div className="switch">
           <label
             htmlFor="check1"
             className={`toggle-label ${isChecked ? 'income' : 'expense'}`}
-          >Expense</label>
-          <input type="checkbox" id="check1" className="toggle"
-            name="transaction-type" defaultChecked={isChecked}
-            onClick={() => setIsChecked(!isChecked)} />
+          >
+            Expense
+          </label>
+          <input
+            type="checkbox"
+            id="check1"
+            className="toggle"
+            name="transaction-type"
+            defaultChecked={isChecked}
+            onClick={() => setIsChecked(!isChecked)}
+          />
           <label
             htmlFor="check1"
             className={`toggle-label ${isChecked ? 'expense' : 'income'}`}
-          >Income</label>
+          >
+            Income
+          </label>
         </div>
         <div>
-          <Formik
-            initialValues={initialValues}
-          >
-            <Form
-              onSubmit={(e) => handleSubmit(e)}
-              className='form'
-            >
+          <Formik initialValues={initialValues}>
+            <Form onSubmit={(e) => handleSubmit(e)} className="form">
               <TextInput
                 type="text"
                 id="amount"
@@ -109,7 +110,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                   const regex = /^(\d+)?(\.\d{0,2})?$/;
 
                   if (regex.test(input)) {
-                    setAmount(input)
+                    setAmount(input);
                   }
                 }}
               />
@@ -122,7 +123,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                     id="category"
                     name="category"
                     onChange={(option) => {
-                      setSelectedCategory(option.label)
+                      setSelectedCategory(option.label);
                     }}
                     isSearchable={false}
                     defaultValue="Main expenses"
@@ -134,6 +135,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                 name="date"
                 dateFormat="DD.MM.YYYY"
                 timeFormat={false}
+                isValidDate={ isPreviousDay() }
                 value={dateValue}
                 className="datetime"
                 onChange={(newDate) => {
@@ -143,7 +145,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
               <label className="label">
                 <textarea
                   placeholder="Comment"
-                  className='textarea'
+                  className="textarea"
                   rows={3}
                   onChange={(comment) => {
                     setComment(comment.target.value);
@@ -159,6 +161,5 @@ export const ModalAddTransaction = ({ closeModal }) => {
         </div>
       </div>
     </div>
-
   );
 };
