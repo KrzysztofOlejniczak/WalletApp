@@ -14,7 +14,7 @@ import editValidationSchema from '../../validations/validateEditTransaction';
 import MainButton from '../mainButton/mainButton';
 import TextInput from '../textInput/textInput';
 import { selectStyles } from '../chart/chartFiltersStyles';
-import { isPreviousDay } from '../../validations/validateDate';
+// import { isPreviousDay } from '../../validations/validateDate';
 
 export const ModalEditTransaction = ({ closeModal, transaction }) => {
   const [isChecked, setIsChecked] = useState(transaction.isExpense);
