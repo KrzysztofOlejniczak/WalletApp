@@ -195,7 +195,7 @@ export const Table = ({
           )}
         </>
       )}
-      {data.length > 0 ? (
+      {data.length > 5 && (
         <CustomTablePagination
           showFirstButton={isMobile ? false : true}
           showLastButton={isMobile ? false : true}
@@ -207,9 +207,12 @@ export const Table = ({
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      ) : (
-        <Typography align='center' >You have not added any transactions yet.</Typography>
       )}
+      {
+        data.length < 1 && (
+          <Typography align='center' >You have not added any transactions yet.</Typography>
+        )
+      }
     </div>
   );
 };
