@@ -194,7 +194,7 @@ export const Table = ({
           )}
         </>
       )}
-      {data.length > 5 && (
+      {data.length > 5 && !isError && (
         <CustomTablePagination
           showFirstButton={isMobile ? false : true}
           showLastButton={isMobile ? false : true}
