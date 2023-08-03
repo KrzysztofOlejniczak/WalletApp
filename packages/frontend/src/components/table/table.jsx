@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { ReactComponent as EditIcon } from '../../assets/icons/edit_icon.svg';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
 import { CustomTablePagination } from './table.styles.js';
 
 import './table.scss';
@@ -194,18 +195,21 @@ export const Table = ({
           )}
         </>
       )}
-
-      <CustomTablePagination
-        showFirstButton={isMobile ? false : true}
-        showLastButton={isMobile ? false : true}
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {data.length > 0 ? (
+        <CustomTablePagination
+          showFirstButton={isMobile ? false : true}
+          showLastButton={isMobile ? false : true}
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      ) : (
+        <Typography align='center' >You have not added any transactions yet.</Typography>
+      )}
     </div>
   );
 };
