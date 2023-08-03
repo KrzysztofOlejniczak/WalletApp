@@ -162,7 +162,7 @@ img[data-src] {
   background-repeat: no-repeat;
   background-position: bottom;
 }
-@media (min-width: 500px) and (max-width: 767px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .currency {
     width: 100%;
     background-size: contain;

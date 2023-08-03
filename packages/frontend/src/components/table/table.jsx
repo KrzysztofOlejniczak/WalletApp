@@ -194,18 +194,19 @@ export const Table = ({
           )}
         </>
       )}
-
-      <CustomTablePagination
-        showFirstButton={isMobile ? false : true}
-        showLastButton={isMobile ? false : true}
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {data.length > 5 && (
+        <CustomTablePagination
+          showFirstButton={isMobile ? false : true}
+          showLastButton={isMobile ? false : true}
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
     </div>
   );
 };
